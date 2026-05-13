@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ChroniclesoftheAbyssTower.ViewModels"
+             x:Class="ChroniclesoftheAbyssTower.Views.IntroStoryPage"
+             x:DataType="vm:IntroStoryViewModel"
+             Shell.NavBarIsVisible="False"
+             Background="{StaticResource AbyssBackgroundGradient}">
+
+    <Grid Padding="24,40,24,28" RowDefinitions="Auto,*,Auto,Auto" RowSpacing="16">
+
+        <!-- ============== Header ============== -->
+        <VerticalStackLayout Grid.Row="0" Spacing="8" HorizontalOptions="Fill">
+            <Border Stroke="{StaticResource AbyssBorder}"
+                    StrokeThickness="1"
+                    BackgroundColor="{StaticResource AbyssSurface}"
+                    HeightRequest="170"
+                    HorizontalOptions="Fill">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14"/>
+                </Border.StrokeShape>
+                <Image Source="{Binding CurrentPageImage}"
+                       Aspect="AspectFill"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill"/>
+            </Border>
+            <Label Text="{Binding PageIndicator}"
+                   Style="{StaticResource AbyssCaption}"
+                   HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+
+        <!-- ============== Story Card ============== -->
+        <Border Grid.Row="1" Style="{StaticResource AbyssStoryCard}" VerticalOptions="Center">
+            <ScrollView>
+                <Label Text="{Binding CurrentPageText}"
+                       Style="{StaticResource AbyssStoryText}"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       LineHeight="1.7"/>
+            </ScrollView>
+        </Border>
+
+        <!-- ============== Skip Link ============== -->
+        <Label Grid.Row="2"
+               Text="ข้าม Intro Story"
+               Style="{StaticResource AbyssCaption}"
+               TextColor="{StaticResource AbyssGold}"
+               HorizontalOptions="Center"
+               TextDecorations="Underline">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SkipCommand}"/>
+            </Label.GestureRecognizers>
+        </Label>
+
+        <!-- ============== Nav Buttons ============== -->
+        <Grid Grid.Row="3" ColumnDefinitions="Auto,*">
+            <Button Grid.Column="0"
+                    Text="โ เธเนเธญเธเธซเธเนเธฒ"
+                    Style="{StaticResource OutlineButton}"
+                    Command="{Binding PreviousCommand}"
+                    IsVisible="{Binding CurrentPageIndex, Converter={StaticResource StringNotEmptyConverter}}"
+                    IsEnabled="{Binding CurrentPageIndex}"
+                    Margin="0,0,8,0"
+                    FontSize="13"/>
+
+            <Button Grid.Column="1"
+                    Text="{Binding NextButtonText}"
+                    Style="{StaticResource GoldButton}"
+                    Command="{Binding NextCommand}"
+                    HeightRequest="52"/>
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

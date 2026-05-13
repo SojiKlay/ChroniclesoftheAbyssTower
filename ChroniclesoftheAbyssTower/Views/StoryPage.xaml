@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ChroniclesoftheAbyssTower.ViewModels"
+             x:Class="ChroniclesoftheAbyssTower.Views.StoryPage"
+             x:Name="StoryRoot"
+             x:DataType="vm:StoryViewModel"
+             Shell.NavBarIsVisible="False"
+             Background="{StaticResource AbyssBackgroundGradient}">
+
+    <Grid RowDefinitions="Auto,*" Padding="0">
+
+        <!-- ============== Top Stats Bar ============== -->
+        <Border Grid.Row="0"
+                BackgroundColor="{StaticResource AbyssSurface}"
+                Stroke="{StaticResource AbyssBorder}"
+                StrokeThickness="0,0,0,1"
+                Padding="16,12">
+            <Grid RowDefinitions="Auto,Auto" RowSpacing="6">
+
+                <!-- Row 1: Player + Floor + Quick Buttons -->
+                <Grid Grid.Row="0" ColumnDefinitions="*,Auto,Auto,Auto,Auto">
+                    <VerticalStackLayout Grid.Column="0" Spacing="0">
+                        <Label Text="{Binding PlayerName}"
+                               TextColor="{StaticResource AbyssGold}"
+                               FontAttributes="Bold"
+                               FontSize="14"/>
+                        <Label Text="{Binding FloorDisplay}"
+                               Style="{StaticResource AbyssCaption}"/>
+                    </VerticalStackLayout>
+
+                    <!-- Gold -->
+                    <HorizontalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center" Margin="0,0,12,0">
+                        <Label Text="💰" FontSize="14" VerticalOptions="Center"/>
+                        <Label Text="{Binding Gold}"
+                               TextColor="{StaticResource GoldColor}"
+                               FontAttributes="Bold"
+                               FontSize="13"
+                               VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Inventory Button -->
+                    <Button Grid.Column="2"
+                            Text="🎒"
+                            Command="{Binding GoToInventoryCommand}"
+                            BackgroundColor="Transparent"
+                            BorderWidth="0"
+                            Padding="6,2"
+                            FontSize="20"
+                            MinimumWidthRequest="36"
+                            HeightRequest="36"
+                            VerticalOptions="Center"/>
+
+                    <!-- Journal Button -->
+                    <Button Grid.Column="3"
+                            Text="📖"
+                            Command="{Binding GoToJournalCommand}"
+                            BackgroundColor="Transparent"
+                            BorderWidth="0"
+                            Padding="6,2"
+                            FontSize="20"
+                            MinimumWidthRequest="36"
+                            HeightRequest="36"
+                            VerticalOptions="Center"/>
+
+                    <!-- Menu Button -->
+                    <Button Grid.Column="4"
+                            Text="≡"
+                            Command="{Binding BackToMenuCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource TextSecondary}"
+                            BorderWidth="0"
+                            Padding="6,2"
+                            FontSize="22"
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="36"
+                            HeightRequest="36"
+                            VerticalOptions="Center"/>
+                </Grid>
+
+                <!-- Row 2: HP Bar -->
+                <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                    <Label Grid.Column="0"
+                           Text="❤️"
+                           FontSize="13"
+                           VerticalOptions="Center"/>
+                    <ProgressBar Grid.Column="1"
+                                 Progress="{Binding HpRatio}"
+                                 Style="{StaticResource HpProgressBar}"
+                                 VerticalOptions="Center"/>
+                    <Label Grid.Column="2"
+                           Text="{Binding HpDisplay}"
+                           FontSize="12"
+                           TextColor="{StaticResource HpColor}"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"/>
+                </Grid>
+
+            </Grid>
+        </Border>
+
+        <!-- ============== Scrollable Content (Narrative + Choices) ============== -->
+        <ScrollView Grid.Row="1" Padding="20,16,20,24">
+            <VerticalStackLayout Spacing="16">
+
+                <!-- Floor Header -->
+                <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                    <Label Text="{Binding FloorIcon}"
+                           FontSize="48"
+                           HorizontalOptions="Center"/>
+                    <Label Text="{Binding FloorTitle}"
+                           Style="{StaticResource AbyssSectionHeader}"
+                           FontSize="20"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="{Binding EventType}"
+                           Style="{StaticResource AbyssCaption}"
+                           HorizontalOptions="Center"/>
+                    <BoxView HeightRequest="1"
+                             Color="{StaticResource AbyssGold}"
+                             WidthRequest="60"
+                             Opacity="0.5"
+                             HorizontalOptions="Center"
+                             Margin="0,4"/>
+                </VerticalStackLayout>
+
+                <!-- Narrative Card -->
+                <Border Style="{StaticResource AbyssStoryCard}">
+                    <Label Text="{Binding Narrative}"
+                           Style="{StaticResource AbyssStoryText}"
+                           LineHeight="1.7"/>
+                </Border>
+
+                <!-- Error display -->
+                <Label Text="{Binding ErrorMessage}"
+                       Style="{StaticResource AbyssError}"
+                       IsVisible="{Binding HasError}"
+                       HorizontalTextAlignment="Center"/>
+
+                <!-- Choices Section Header -->
+                <Label Text="⚡ เลือกการตัดสินใจ"
+                       Style="{StaticResource AbyssSectionHeader}"
+                       FontSize="15"
+                       HorizontalTextAlignment="Center"
+                       Margin="0,8,0,0"/>
+
+                <!-- Choices (disable ทั้งหมดเมื่อ IsBusy เพื่อกัน double-tap) -->
+                <VerticalStackLayout Spacing="10"
+                                     BindableLayout.ItemsSource="{Binding Choices}"
+                                     IsEnabled="{Binding IsNotBusy}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="vm:ChoiceItemVm">
+                            <VerticalStackLayout Spacing="3">
+                                <Button Text="{Binding Text}"
+                                        Style="{StaticResource ChoiceButton}"
+                                        IsEnabled="{Binding IsEnabled}"
+                                        Command="{Binding BindingContext.SelectChoiceCommand, Source={x:Reference StoryRoot}}"
+                                        CommandParameter="{Binding .}"/>
+                                <Label Text="{Binding LockReason}"
+                                       Style="{StaticResource AbyssCaption}"
+                                       TextColor="{StaticResource DangerColor}"
+                                       IsVisible="{Binding ShowLockReason}"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="11"/>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- ============== Loading Overlay ============== -->
+        <Grid Grid.RowSpan="2"
+              BackgroundColor="#80000000"
+              IsVisible="{Binding IsBusy}">
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               Style="{StaticResource AbyssActivityIndicator}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"/>
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

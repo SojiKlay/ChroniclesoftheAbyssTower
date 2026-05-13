@@ -1,0 +1,316 @@
+============================================================
+Chronicles of the Abyss Tower - Development Progress
+============================================================
+Plan file: C:\Users\User\.windsurf\plans\development-plan-db9be2.md
+Last update: 2026-05-12 (Phase 5-8 COMPLETE — เหลือ Phase 9 user build/submit)
+
+============================================================
+STATUS BY PHASE
+============================================================
+
+[X] Phase 0 - Foundation (DONE)
+    - NuGet packages: CommunityToolkit.Maui, Plugin.Maui.Audio,
+      SkiaSharp.Extended.UI.Maui, Newtonsoft.Json, Google.Apis.Drive.v3+Auth
+    - Folder structure: Models, ViewModels/Base, Views, Services,
+      Helpers/Converters, Data, Resources/Raw/Audio, Resources/Animations
+    - Resources/Styles/Colors.xaml -> Dark Fantasy palette (Abyss* keys)
+    - Resources/Styles/Styles.xaml -> Abyss styles (Button, Label, Card,
+      Entry, ChoiceButton, GoldButton, DangerButton, OutlineButton,
+      ProgressBar, Shell)
+    - App.xaml -> UserAppTheme="Dark" + global converters
+    - App.xaml.cs -> Global ExceptionHandler + IServiceProvider injected
+    - MauiProgram.cs -> CommunityToolkit + SkiaSharp + AudioManager DI
+    - MauiProgram.Registrations.cs (partial)
+    - Platforms/Android/AndroidManifest.xml -> permissions + app label
+
+[X] Phase 1 - Database + Models + Seed (DONE)
+    - Models/User, Player, Item, InventoryItem, Journal, SaveData,
+      StoryProgress, StoryEvent (POCO), StoryChoice (POCO),
+      StoryJournalSeed (POCO), BackupData
+    - Helpers/AppConstants, PasswordHasher (PBKDF2), SessionManager
+    - Helpers/Converters: InverseBool, StringNotEmpty, HpToColor
+    - Services/ValidationService, DatabaseService, SeedDataService
+    - ViewModels/Base/BaseViewModel
+    - Resources/Raw/items.json (12 items)
+    - Resources/Raw/story_journals.json (11 journals)
+    - Resources/Raw/floors.json (ALL 30 FLOORS with choices/effects)
+    - DI registered
+
+[X] Phase 2 - Auth + Navigation (DONE)
+    - Services/AuthService.cs (Register/Login/Logout, PBKDF2 verify)
+    - ViewModels/LoginViewModel, RegisterViewModel
+    - Views/LoginPage(.xaml/.cs), RegisterPage(.xaml/.cs)
+    - AppShell.xaml: ShellContent for login/register/main (absolute)
+    - AppShell.xaml.cs: RegisterRoutes() + InitializeAppAsync (seed +
+      auto-login redirect to //main if session exists)
+    - Cleaned BaseViewModel (removed duplicate properties)
+    - DI registered
+
+[X] Phase 3 - Main Menu + Character + Settings (DONE)
+    - Services/PlayerService.cs (CRUD + ApplyHpDelta + AddExperience +
+      AdvanceFloor + CompleteGame)
+    - Services/SettingsService.cs (BGM/SFX prefs)
+    - ViewModels/MainMenuViewModel (full: NewGame/Continue/Character/
+      Backup/Settings/Logout/Exit + SafeNavigateAsync helper)
+    - ViewModels/CharacterViewModel (full: stats, EnterTower, navigation)
+    - ViewModels/SettingsViewModel (BGM/SFX volume/toggle, About,
+      ResetDefaults)
+    - Views/MainMenuPage.xaml (full UI: header, greeting card, menu
+      buttons with HasSavedGame visibility, footer Logout+Exit)
+    - Views/CharacterPage.xaml (Avatar, HP/Floor/EXP bars, 6-stat grid,
+      Lore card, action buttons)
+    - Views/SettingsPage.xaml (Audio toggles+sliders, About card)
+    - Routes registered: character, settings (relative)
+    - DI registered
+
+[X] Phase 4 - Story System + 30 Floors + Choice Engine (DONE)
+    - Services/InventoryService.cs (CRUD + AddItem stack/Search/Filter/
+      Consume + HasItem check for choice gating)
+    - Services/JournalService.cs (CRUD Player Journal + auto-unlock
+      Story Journal from seed key)
+    - Services/StoryService.cs (CHOICE ENGINE: ChoiceOutcome record,
+      CanSelectChoiceAsync, ApplyChoiceAsync with HP/Gold/EXP/Item/
+      Journal/Progress/Death/Ending logic, GetCurrentFloorEvent)
+    - ViewModels/IntroStoryViewModel (6 narrative pages from STORY.md +
+      Next/Previous/Skip commands)
+    - Views/IntroStoryPage(.xaml/.cs)
+    - ViewModels/StoryViewModel (load floor, ChoiceItemVm collection,
+      SelectChoiceAsync -> outcome dialog -> reload/ending,
+      navigation to character/inventory/journal/menu)
+    - Views/StoryPage(.xaml/.cs) - top stats bar (HP/Gold/Floor/Player +
+      quick buttons), narrative card, BindableLayout choice buttons with
+      lock reason for missing items, loading overlay
+    - ViewModels/EndingViewModel (QueryProperty type=Good|Bad|TrueGood,
+      ending content per type, stats summary, NewGame/BackToMenu)
+    - Views/EndingPage(.xaml/.cs) - cinematic ending with icon, title,
+      narrative, stats, action buttons
+    - Helpers/SessionManager.ClearActivePlayer() helper added
+    - Hook MainMenuViewModel.NewGame -> RouteIntroStory
+    - Hook MainMenuViewModel.ContinueGame -> RouteStory
+    - Hook CharacterViewModel.EnterTower -> RouteStory
+    - Routes registered: introStory, story, ending (relative)
+    - DI: InventoryService, JournalService, StoryService,
+      IntroStoryViewModel/Page, StoryViewModel/Page, EndingViewModel/Page
+
+[X] Phase 5 - Inventory + Journal CRUD + Search (DONE)
+    - ViewModels/InventoryViewModel (load/filter/search/use/discard)
+    - Views/InventoryPage (top bar with gold, SearchBar, 5 filter chips,
+      2-column CollectionView grid, empty state, item detail dialog
+      with Use button for Healing items)
+    - ViewModels/JournalViewModel (Story/Player tabs, search,
+      open/add/delete commands)
+    - Views/JournalPage (tab bar with active indicator BoxView,
+      SearchBar, list of journals with floor badges, FAB-like
+      add button for Player tab)
+    - ViewModels/JournalEditorViewModel (QueryProperty id/floor,
+      Save/Delete/Cancel commands, char count validation)
+    - Views/JournalEditorPage (title field, content editor,
+      tips card, error display, action buttons)
+    - Resources/Styles/Styles.xaml: ChipButton, TabButton,
+      TabButtonActive styles
+    - Routes: inventory, journal, journalEditor (relative)
+    - DI: InventoryViewModel/Page, JournalViewModel/Page,
+      JournalEditorViewModel/Page
+    - Hooked: CharacterVM.GoToInventory/Journal,
+      StoryVM.GoToInventory/Journal (removed SafeNavigate)
+
+[X] Phase 6 - Save/Load + JSON Backup (DONE)
+    Note: Google Drive cloud backup ถูกเลื่อนไป Phase 7+ เพราะ
+    Google.Apis packages ถูกตัดออกชั่วคราว
+    - Services/SaveLoadService (3 save slots per user with
+      JSON snapshot of Player/Inventory/Journals/Progress;
+      Save = overwrite slot, Load = create new player from snapshot)
+    - Helpers/SessionManager.ClearActivePlayer() added
+    - ViewModels/SaveLoadViewModel + SaveSlotVm
+      (3 slots collection, Save/Load/Delete commands)
+    - Views/SaveLoadPage (active player info card,
+      3 slot cards with empty/filled states, 3-button action grid)
+    - Services/BackupService (Export to JSON file in
+      FileSystem.AppDataDirectory/AbyssTowerBackups/,
+      Import via FilePicker, Restore = delete old + insert new,
+      Share via Share.Default.RequestAsync)
+    - ViewModels/BackupViewModel + BackupFileVm
+      (Export/Import/Restore/Delete/Share commands)
+    - Views/BackupPage (folder path display, export/import buttons,
+      backup files list with size + date + 3-button actions)
+    - Routes: saveLoad, backup (relative)
+    - DI: SaveLoadService, BackupService (Singleton),
+      SaveLoadViewModel/Page, BackupViewModel/Page
+    - Hooked: MainMenuVM.GoToBackup, GoToSaveLoad
+    - MainMenuPage: added "เซฟ / โหลดเกม" button (visible when HasSavedGame)
+
+[X] Phase 7 - Animation Helper + UI Polish (DONE - minimal)
+    Note: Audio + Lottie animations skipped because packages were
+    removed (Plugin.Maui.Audio, SkiaSharp.Extended.UI.Maui).
+    Will be added back when MAUI 10 compatible versions exist.
+    - Helpers/AnimationHelper.cs - extension methods on VisualElement:
+      FadeInAsync, FadeInSlideUpAsync, ScaleInAsync,
+      PulseAsync, ShakeAsync
+    - Helper utility ready - pages can opt-in by calling
+      e.g. await Content.FadeInSlideUpAsync() in OnAppearing
+
+[X] Phase 8 - QA + Q&A 10 (DONE)
+    - QA.md - 10 questions + bonus answers covering project overview,
+      tech stack, CRUD systems, MVVM, DB design, pages list,
+      Choice System, Save/Load, security, phase summary
+
+[~] Phase 9 - Play Store Submission (USER ACTION REQUIRED)
+    - BUILD_GUIDE.md created with complete instructions:
+      * Keystore creation
+      * csproj versioning
+      * Build AAB (VS + CLI methods)
+      * Test AAB with bundletool
+      * Play Store assets checklist
+      * Sample descriptions (TH)
+      * Play Console submit flow
+      * Troubleshooting
+      * Future package re-additions
+
+============================================================
+WHAT IS RUNNABLE RIGHT NOW
+============================================================
+
+Build SHOULD pass. Complete end-to-end flow:
+
+1. Splash -> Login Page (default)
+2. Register -> auto-login -> Main Menu
+3. Main Menu: greeting + 6 menu options
+   (New Game / Continue / Character / Save Load / Backup / Settings)
+4. New Game -> name prompt -> IntroStory (6 narrative pages) -> Floor 1
+5. StoryPage gameplay:
+   - top bar HP/Gold/Floor + Inventory/Journal/Menu quick buttons
+   - narrative card with floor title + event text
+   - 3 choice buttons with item gating (locked if missing item)
+   - tap choice -> outcome dialog -> next floor
+   - HP=0 -> Bad Ending, Floor 30 -> Good/TrueGood Ending
+6. Inventory Page:
+   - 2-column grid of items
+   - filter chips: All/Healing/Key/Story/Consumable
+   - SearchBar
+   - tap item -> detail dialog with Use button for Healing items
+7. Journal Page:
+   - Story tab (read-only) / Player tab (CRUD)
+   - SearchBar + floor badges
+   - "Add" FAB visible only on Player tab
+8. Journal Editor:
+   - Title (50 chars) + Content (500 chars) + char counter
+   - Save/Delete/Cancel
+9. Save/Load Page:
+   - 3 slots with PlayerName/Floor/HP/Level/Date display
+   - Save/Load/Delete buttons per slot
+   - Load creates new player + sets active
+10. Backup Page:
+    - Export to JSON file in app folder
+    - Import from external file (FilePicker)
+    - Restore replaces user's data
+    - Share via OS share sheet
+11. Ending Page:
+    - 3 endings (Good/Bad/TrueGood) with different text+colors
+    - Stats summary (level/floor/choices/gold)
+    - New Game (delete player) / Back to Menu
+12. Settings Page:
+    - BGM/SFX toggle + volume sliders (persists prefs;
+      actual audio playback skipped pending package)
+    - About card
+13. Logout -> back to Login
+14. Re-open app -> auto-redirect to Main Menu (session persists)
+
+NOT YET WIRED (optional future work):
+- Audio playback (Plugin.Maui.Audio - waiting for MAUI 10 support)
+- Lottie animations (SkiaSharp.Extended.UI.Maui - waiting for MAUI 10)
+- Google Drive cloud backup (Google.Apis - waiting for review)
+- CommunityToolkit.Maui Popups (waiting for MAUI 10)
+
+============================================================
+NEXT STEPS - USER ACTION REQUIRED
+============================================================
+
+1. Build + Test ใน Visual Studio:
+   - Clean Solution
+   - Rebuild Solution
+   - Run on Pixel 7 emulator
+   - Verify full flow: Register -> New Game -> Floor 30 -> Ending
+   - Test Save/Load (save then delete player then load)
+   - Test Backup (export + share + delete + restore)
+
+2. Prepare Play Store submission:
+   - อ่าน BUILD_GUIDE.md
+   - สร้าง keystore (1 ครั้ง)
+   - Build AAB (Release config)
+   - เตรียม screenshots + descriptions
+   - Submit ผ่าน Play Console
+
+3. ทบทวน QA.md ก่อนนำเสนออาจารย์
+   - 10 คำถามครอบคลุม project overview, MVVM, DB, CRUD,
+     security, phase summary
+   - มี bonus Q&A ที่อาจารย์อาจถาม
+
+4. (Optional) เพิ่ม packages กลับเมื่อ MAUI 10 ecosystem พร้อม:
+   - Plugin.Maui.Audio -> implement AudioService + BGM/SFX
+   - SkiaSharp.Extended.UI.Maui -> Lottie endings
+   - Google.Apis.Drive.v3 -> cloud backup integration
+
+============================================================
+ARCHITECTURE NOTES (don't break these)
+============================================================
+
+- .NET 10 + MAUI 10.0.60 + SDK 10.0.203
+- TargetFrameworks: net10.0-android, net10.0-windows10.0.19041.0
+- DI: Services=Singleton, ViewModels=Transient, Pages=Transient
+- DB: FileSystem.AppDataDirectory/abyss_tower.db3
+- Comments TH for complex logic, XML doc EN on public API
+- Windsurf writes code only; user runs/builds in Visual Studio 2026
+- 30 floors total. Final floor (30) has 3 endings (Good/Bad/TrueGood)
+- HP starts 100. Boss HP: Floor 10=60, Floor 20=100, Floor 30=200
+- Routes: //login //register //main are absolute (ShellContent)
+  All others (character, settings, story, etc.) are relative push
+- SafeNavigateAsync helper in MainMenuVM + CharacterVM catches missing
+  routes during phased build
+
+============================================================
+KEY DESIGN DECISIONS
+============================================================
+
+- Password: PBKDF2-SHA256, 100k iterations, 16-byte salt, 32-byte hash
+- Session in SecureStorage (keys: abyss_user_id, abyss_username,
+  abyss_active_player_id)
+- BackupData = User + Players + Inventory + Journals + SaveData +
+  StoryProgress, SchemaVersion=1.0 for future migration
+- StoryEvent/StoryChoice are POCOs (JSON, NOT in DB)
+- Item is master data, InventoryItem is per-player instance with
+  ItemData [Ignore] populated by InventoryService.GetByPlayerAsync
+- Journal types: Story (auto-unlock, read-only) and Player (CRUD)
+- ChoiceOutcome reports: Success/Reject/HpDelta/GoldDelta/ExpDelta/
+  ItemAcquired/ItemConsumed/LeveledUp/PlayerDied/GameCompleted/
+  EndingType/ShouldAdvanceFloor/StoryJournalUnlocked
+
+============================================================
+DELIVERABLES (Phase 0-8 complete)
+============================================================
+
+Code:
+- 9 Services (Database, Auth, Player, Settings, Inventory, Journal,
+  Story, SaveLoad, Backup)
+- 11 ViewModels (Login, Register, MainMenu, Character, Settings,
+  IntroStory, Story, Ending, Inventory, Journal, JournalEditor,
+  SaveLoad, Backup)
+- 14 Pages
+- 11 Models (User, Player, Item, InventoryItem, Journal, SaveData,
+  StoryProgress, StoryEvent/Choice/JournalSeed POCO, BackupData)
+- 3 JSON seed files (items, story_journals, floors)
+- Animation helper utility
+
+Documentation:
+- progress.txt (this file)
+- QA.md (10 questions for thesis defense)
+- BUILD_GUIDE.md (AAB build + Play Store submission)
+- AGENTS.md (project rules)
+- STORY.md, ITEM_SYSTEM.md, GAME_FLOW.md (game design docs)
+
+============================================================
+REMAINING - PURELY USER WORK
+============================================================
+1. Build + smoke test (see NEXT STEPS above)
+2. Generate keystore + AAB (BUILD_GUIDE.md step 1-3)
+3. Create screenshots + Play Store assets
+4. Submit Play Console

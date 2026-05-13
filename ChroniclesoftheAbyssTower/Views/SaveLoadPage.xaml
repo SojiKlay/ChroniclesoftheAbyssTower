@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ChroniclesoftheAbyssTower.ViewModels"
+             x:Class="ChroniclesoftheAbyssTower.Views.SaveLoadPage"
+             x:Name="SaveLoadRoot"
+             x:DataType="vm:SaveLoadViewModel"
+             Title="เซฟ / โหลด"
+             Background="{StaticResource AbyssBackgroundGradient}">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="True"/>
+    </Shell.BackButtonBehavior>
+
+    <ScrollView>
+        <Grid Padding="20,16,20,24" RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="14">
+
+            <!-- ============== Top Back Button ============== -->
+            <Button Grid.Row="0"
+                    Text="← กลับ"
+                    Command="{Binding BackCommand}"
+                    Style="{StaticResource ChipButton}"
+                    WidthRequest="72"
+                    HeightRequest="34"
+                    Padding="8,0"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"/>
+
+            <!-- ============== Header ============== -->
+            <VerticalStackLayout Grid.Row="1" Spacing="4" HorizontalOptions="Center">
+                <Label Text="💾"
+                       FontSize="48"
+                       HorizontalOptions="Center"/>
+                <Label Text="เซฟ / โหลดเกม"
+                       Style="{StaticResource AbyssSectionHeader}"
+                       FontSize="20"
+                       HorizontalTextAlignment="Center"/>
+                <Label Text="3 slot สำหรับบันทึกการผจญภัย"
+                       Style="{StaticResource AbyssCaption}"
+                       FontSize="12"/>
+            </VerticalStackLayout>
+
+            <!-- ============== Active Player Info ============== -->
+            <Border Grid.Row="2" Style="{StaticResource AbyssCard}" Padding="14">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="ตัวละครที่กำลังเล่นอยู่"
+                           Style="{StaticResource AbyssCaption}"
+                           FontSize="11"/>
+                    <Label Text="{Binding ActivePlayerInfo}"
+                           TextColor="{StaticResource AbyssGold}"
+                           FontAttributes="Bold"
+                           FontSize="13"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ============== Save Slots ============== -->
+            <VerticalStackLayout Grid.Row="3" Spacing="12" BindableLayout.ItemsSource="{Binding Slots}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="vm:SaveSlotVm">
+                        <Border Style="{StaticResource AbyssCard}" Padding="14">
+                            <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="8">
+
+                                <!-- Slot Header -->
+                                <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto">
+                                    <Label Grid.Column="0"
+                                           Text="{Binding SlotLabel}"
+                                           TextColor="{StaticResource AbyssGold}"
+                                           FontAttributes="Bold"
+                                           FontSize="14"/>
+                                    <Label Grid.Column="2"
+                                           Text="{Binding DateDisplay}"
+                                           Style="{StaticResource AbyssCaption}"
+                                           FontSize="10"
+                                           IsVisible="{Binding IsNotEmpty}"/>
+                                </Grid>
+
+                                <!-- Empty State -->
+                                <VerticalStackLayout Grid.Row="1"
+                                                     IsVisible="{Binding IsEmpty}"
+                                                     Spacing="2"
+                                                     Padding="0,8">
+                                    <Label Text="📭 Slot ว่างเปล่า"
+                                           Style="{StaticResource AbyssCaption}"
+                                           FontSize="13"
+                                           HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+
+                                <!-- Filled State -->
+                                <VerticalStackLayout Grid.Row="1"
+                                                     IsVisible="{Binding IsNotEmpty}"
+                                                     Spacing="2">
+                                    <Label Text="{Binding SaveName}"
+                                           TextColor="{StaticResource TextPrimary}"
+                                           FontAttributes="Bold"
+                                           FontSize="13"
+                                           MaxLines="1"
+                                           LineBreakMode="TailTruncation"/>
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Text="{Binding FloorDisplay}"
+                                               TextColor="{StaticResource AbyssGold}"
+                                               FontSize="11"/>
+                                        <Label Text="{Binding HpDisplay}"
+                                               TextColor="{StaticResource HpColor}"
+                                               FontSize="11"/>
+                                        <Label Text="{Binding LevelDisplay}"
+                                               TextColor="{StaticResource LevelColor}"
+                                               FontSize="11"/>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+
+                                <!-- Action Buttons -->
+                                <Grid Grid.Row="2" ColumnDefinitions="*,*,*" ColumnSpacing="6">
+
+                                    <Button Grid.Column="0"
+                                            Text="💾 บันทึก"
+                                            Style="{StaticResource ChipButton}"
+                                            FontSize="11"
+                                            HeightRequest="40"
+                                            Command="{Binding BindingContext.SaveToSlotCommand, Source={x:Reference SaveLoadRoot}}"
+                                            CommandParameter="{Binding .}"/>
+
+                                    <Button Grid.Column="1"
+                                            Text="📂 โหลด"
+                                            Style="{StaticResource ChipButton}"
+                                            FontSize="11"
+                                            HeightRequest="40"
+                                            IsEnabled="{Binding IsNotEmpty}"
+                                            Command="{Binding BindingContext.LoadFromSlotCommand, Source={x:Reference SaveLoadRoot}}"
+                                            CommandParameter="{Binding .}"/>
+
+                                    <Button Grid.Column="2"
+                                            Text="🗑️ ลบ"
+                                            Style="{StaticResource ChipButton}"
+                                            FontSize="11"
+                                            HeightRequest="40"
+                                            TextColor="{StaticResource DangerColor}"
+                                            IsEnabled="{Binding IsNotEmpty}"
+                                            Command="{Binding BindingContext.DeleteSlotCommand, Source={x:Reference SaveLoadRoot}}"
+                                            CommandParameter="{Binding .}"/>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+
+            <!-- ============== Error ============== -->
+            <Label Grid.Row="4"
+                   Text="{Binding ErrorMessage}"
+                   Style="{StaticResource AbyssError}"
+                   IsVisible="{Binding HasError}"
+                   HorizontalTextAlignment="Center"/>
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ChroniclesoftheAbyssTower.ViewModels"
+             xmlns:models="clr-namespace:ChroniclesoftheAbyssTower.Models"
+             x:Class="ChroniclesoftheAbyssTower.Views.InventoryPage"
+             x:Name="InventoryRoot"
+             x:DataType="vm:InventoryViewModel"
+             Title="กระเป๋า"
+             Background="{StaticResource AbyssBackgroundGradient}">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="True"/>
+    </Shell.BackButtonBehavior>
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*">
+
+        <Image Source="inventory_background.jpg"
+               Grid.RowSpan="4"
+               Aspect="AspectFill"
+               Opacity="0.46"/>
+
+        <BoxView Grid.RowSpan="4"
+                 Color="#0E071A"
+                 Opacity="0.68"/>
+
+        <!-- ============== Top Info Bar ============== -->
+        <Border Grid.Row="0"
+                BackgroundColor="{StaticResource AbyssSurface}"
+                Stroke="{StaticResource AbyssBorder}"
+                StrokeThickness="0,0,0,1"
+                Padding="16,12">
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                <Button Grid.Column="0"
+                        Text="← กลับ"
+                        Command="{Binding BackCommand}"
+                        Style="{StaticResource ChipButton}"
+                        WidthRequest="72"
+                        HeightRequest="34"
+                        Padding="8,0"
+                        SemanticProperties.Description="Back to character page"
+                        VerticalOptions="Center"/>
+
+                <VerticalStackLayout Grid.Column="1" Spacing="0">
+                    <Label Text="{Binding PlayerName}"
+                           TextColor="{StaticResource AbyssGold}"
+                           FontAttributes="Bold"
+                           FontSize="14"/>
+                    <Label Text="{Binding ItemCountDisplay, StringFormat='Item {0}'}"
+                           Style="{StaticResource AbyssCaption}"/>
+                </VerticalStackLayout>
+                <HorizontalStackLayout Grid.Column="2" Spacing="2" VerticalOptions="Center">
+                    <Label Text="💰" FontSize="14" VerticalOptions="Center"/>
+                    <Label Text="{Binding Gold}"
+                           TextColor="{StaticResource GoldColor}"
+                           FontAttributes="Bold"
+                           FontSize="13"
+                           VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </Grid>
+        </Border>
+
+        <!-- ============== Search ============== -->
+        <Border Grid.Row="1"
+                Style="{StaticResource AbyssEntry}"
+                Margin="16,12,16,4">
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="6">
+                <Label Grid.Column="0" Text="🔍" FontSize="16" VerticalOptions="Center"/>
+                <Entry Grid.Column="1"
+                       Text="{Binding SearchText, Mode=TwoWay}"
+                       Placeholder="ค้นหา item..."
+                       ClearButtonVisibility="WhileEditing"/>
+            </Grid>
+        </Border>
+
+        <!-- ============== Filter Chips ============== -->
+        <ScrollView Grid.Row="2" Orientation="Horizontal" HorizontalScrollBarVisibility="Never" Padding="16,4,16,8">
+            <HorizontalStackLayout Spacing="6">
+                <Button Text="ทั้งหมด"
+                        Command="{Binding SetFilterCommand}"
+                        CommandParameter="All"
+                        Style="{StaticResource ChipButton}"/>
+                <Button Text="❤️ ฟื้นพลัง"
+                        Command="{Binding SetFilterCommand}"
+                        CommandParameter="Healing"
+                        Style="{StaticResource ChipButton}"/>
+                <Button Text="🗝️ กุญแจ"
+                        Command="{Binding SetFilterCommand}"
+                        CommandParameter="Key"
+                        Style="{StaticResource ChipButton}"/>
+                <Button Text="📜 เนื้อเรื่อง"
+                        Command="{Binding SetFilterCommand}"
+                        CommandParameter="Story"
+                        Style="{StaticResource ChipButton}"/>
+                <Button Text="🧪 อื่นๆ"
+                        Command="{Binding SetFilterCommand}"
+                        CommandParameter="Consumable"
+                        Style="{StaticResource ChipButton}"/>
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <!-- ============== Items List ============== -->
+        <Grid Grid.Row="3">
+
+            <!-- Loading -->
+            <ActivityIndicator IsVisible="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               Style="{StaticResource AbyssActivityIndicator}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"/>
+
+            <!-- Empty State -->
+            <VerticalStackLayout IsVisible="{Binding HasNoItems}"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Spacing="8">
+                <Label Text="กระเป๋าว่างเปล่า"
+                       Style="{StaticResource AbyssSectionHeader}"
+                       FontSize="16"
+                       HorizontalTextAlignment="Center"/>
+                <Label Text="ค้นหา item ในระหว่างผจญภัยในหอคอย"
+                       Style="{StaticResource AbyssCaption}"
+                       HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+
+            <!-- Item Grid -->
+            <CollectionView ItemsSource="{Binding Items}"
+                            Margin="12,0,12,16"
+                            SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="2"
+                                     HorizontalItemSpacing="10"
+                                     VerticalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:InventoryItem">
+                        <Border Style="{StaticResource AbyssCard}" Padding="12">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding BindingContext.ShowItemDetailCommand, Source={x:Reference InventoryRoot}}"
+                                    CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="4">
+                                <Grid Grid.Row="0"
+                                      HeightRequest="48"
+                                      HorizontalOptions="Center">
+                                    <Image Source="{Binding DisplayImage}"
+                                           IsVisible="{Binding HasDisplayImage}"
+                                           Aspect="AspectFit"
+                                           HeightRequest="48"
+                                           WidthRequest="48"/>
+                                    <Label Text="{Binding DisplayIcon}"
+                                           IsVisible="{Binding HasNoDisplayImage}"
+                                           FontSize="36"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                                </Grid>
+                                <Label Grid.Row="1"
+                                       Text="{Binding DisplayName}"
+                                       TextColor="{StaticResource AbyssGold}"
+                                       FontAttributes="Bold"
+                                       FontSize="13"
+                                       HorizontalTextAlignment="Center"
+                                       MaxLines="1"
+                                       LineBreakMode="TailTruncation"/>
+                                <Label Grid.Row="2"
+                                       Text="{Binding DisplayDescription}"
+                                       Style="{StaticResource AbyssCaption}"
+                                       FontSize="11"
+                                       HorizontalTextAlignment="Center"
+                                       MaxLines="2"
+                                       LineBreakMode="TailTruncation"/>
+                                <Label Grid.Row="3"
+                                       Text="{Binding Quantity, StringFormat='x{0}'}"
+                                       TextColor="{StaticResource AbyssPurpleLight}"
+                                       FontAttributes="Bold"
+                                       FontSize="12"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="0,2,0,0"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

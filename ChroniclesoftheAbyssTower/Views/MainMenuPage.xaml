@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ChroniclesoftheAbyssTower.ViewModels"
+             x:Class="ChroniclesoftheAbyssTower.Views.MainMenuPage"
+             x:DataType="vm:MainMenuViewModel"
+             Shell.NavBarIsVisible="False"
+             Background="{StaticResource AbyssBackgroundGradient}">
+
+    <Grid>
+        <Image Source="main_menu_background.jpg"
+               Aspect="AspectFill"
+               Opacity="0.76"/>
+        <BoxView Color="#10051D"
+                 Opacity="0.54"/>
+
+        <ScrollView>
+        <Grid Padding="24,40,24,32" RowDefinitions="Auto,Auto,*,Auto" RowSpacing="20">
+
+            <!-- ============== Header ============== -->
+            <VerticalStackLayout Grid.Row="0" Spacing="6" HorizontalOptions="Center">
+                <Label Text="Chronicles of the"
+                       Style="{StaticResource AbyssSubtitle}"
+                       FontSize="13"/>
+                <Label Text="ABYSS TOWER"
+                       Style="{StaticResource AbyssTitle}"
+                       FontSize="26"
+                       Margin="0,-4,0,0"/>
+                <BoxView HeightRequest="2"
+                         Color="{StaticResource AbyssGold}"
+                         WidthRequest="80"
+                         HorizontalOptions="Center"
+                         Margin="0,4"/>
+            </VerticalStackLayout>
+
+            <!-- ============== Greeting Card ============== -->
+            <Border Grid.Row="1" Style="{StaticResource AbyssCard}" Padding="16">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="{Binding Username}"
+                           TextColor="{StaticResource AbyssGold}"
+                           FontAttributes="Bold"
+                           FontSize="14"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="{Binding GreetingText}"
+                           HorizontalTextAlignment="Center"
+                           Style="{StaticResource AbyssBody}"
+                           FontSize="13"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ============== Menu Buttons ============== -->
+            <VerticalStackLayout Grid.Row="2" Spacing="12" VerticalOptions="Start">
+
+                <!-- Continue Game (แสดงเมื่อมี save) -->
+                <Border Style="{StaticResource AbyssCardGlow}"
+                        Padding="0"
+                        IsVisible="{Binding HasSavedGame}">
+                    <VerticalStackLayout Spacing="0">
+                        <Button Text="เล่นต่อ"
+                                Style="{StaticResource GoldButton}"
+                                Command="{Binding ContinueGameCommand}"
+                                CornerRadius="12"
+                                HeightRequest="56"/>
+                        <Label Text="{Binding ContinueInfo}"
+                               Style="{StaticResource AbyssCaption}"
+                               HorizontalTextAlignment="Center"
+                               Padding="12,6"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- New Game -->
+                <Button Text="เริ่มเกมใหม่"
+                        Command="{Binding NewGameCommand}"
+                        IsEnabled="{Binding IsNotBusy}"
+                        HeightRequest="52"/>
+
+                <!-- Character (แสดงเมื่อมี save) -->
+                <Button Text="ดูตัวละคร"
+                        Style="{StaticResource OutlineButton}"
+                        Command="{Binding GoToCharacterCommand}"
+                        IsVisible="{Binding HasSavedGame}"
+                        HeightRequest="48"/>
+
+                <!-- Save/Load (แสดงเมื่อมี save) -->
+                <Button Text="เซฟ / โหลดเกม"
+                        Style="{StaticResource OutlineButton}"
+                        Command="{Binding GoToSaveLoadCommand}"
+                        IsVisible="{Binding HasSavedGame}"
+                        HeightRequest="48"/>
+
+                <!-- Backup/Restore -->
+                <Button Text="สำรองข้อมูล / กู้คืน"
+                        Style="{StaticResource OutlineButton}"
+                        Command="{Binding GoToBackupCommand}"
+                        HeightRequest="48"/>
+
+                <!-- Settings -->
+                <Button Text="ตั้งค่า"
+                        Style="{StaticResource OutlineButton}"
+                        Command="{Binding GoToSettingsCommand}"
+                        HeightRequest="48"/>
+
+            </VerticalStackLayout>
+
+            <!-- ============== Footer (Logout + Exit) ============== -->
+            <VerticalStackLayout Grid.Row="3" Spacing="8" Margin="0,16,0,0">
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                    <Button Grid.Column="0"
+                            Text="ออกจากระบบ"
+                            Style="{StaticResource OutlineButton}"
+                            Command="{Binding LogoutCommand}"
+                            HeightRequest="44"
+                            FontSize="13"/>
+                    <Button Grid.Column="1"
+                            Text="ปิดแอป"
+                            Style="{StaticResource DangerButton}"
+                            Command="{Binding ExitCommand}"
+                            HeightRequest="44"
+                            FontSize="13"/>
+                </Grid>
+                <Label Text="v1.0 · Dark Fantasy Text RPG"
+                       Style="{StaticResource AbyssCaption}"
+                       HorizontalOptions="Center"
+                       Margin="0,8,0,0"/>
+            </VerticalStackLayout>
+
+        </Grid>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

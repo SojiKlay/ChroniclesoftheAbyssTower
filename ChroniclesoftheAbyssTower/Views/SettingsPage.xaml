@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ChroniclesoftheAbyssTower.ViewModels"
+             x:Class="ChroniclesoftheAbyssTower.Views.SettingsPage"
+             x:DataType="vm:SettingsViewModel"
+             Title="ตั้งค่า"
+             Background="{StaticResource AbyssBackgroundGradient}">
+
+    <ScrollView>
+        <Grid Padding="20,16,20,24" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="16">
+
+            <!-- ============== Top Back Button ============== -->
+            <Button Grid.Row="0"
+                    Text="← กลับ"
+                    Command="{Binding BackCommand}"
+                    Style="{StaticResource ChipButton}"
+                    WidthRequest="72"
+                    HeightRequest="34"
+                    Padding="8,0"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"/>
+
+            <!-- ============== Header ============== -->
+            <VerticalStackLayout Grid.Row="1" Spacing="4" HorizontalOptions="Center" Margin="0,8,0,8">
+                <Label Text="⚙️"
+                       FontSize="56"
+                       HorizontalOptions="Center"/>
+                <Label Text="ตั้งค่า"
+                       Style="{StaticResource AbyssSectionHeader}"
+                       FontSize="22"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <!-- ============== Audio Settings ============== -->
+            <Border Grid.Row="2" Style="{StaticResource AbyssCard}">
+                <VerticalStackLayout Spacing="20">
+
+                    <Label Text="เสียง"
+                           Style="{StaticResource AbyssSectionHeader}"
+                           FontSize="16"/>
+
+                    <!-- BGM Toggle + Volume -->
+                    <VerticalStackLayout Spacing="10">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                <Label Text="🎵 เพลงประกอบ (BGM)"
+                                       FontSize="15"
+                                       TextColor="{StaticResource TextPrimary}"
+                                       FontAttributes="Bold"/>
+                                <Label Text="เพลงในเกมและเมนูหลัก"
+                                       Style="{StaticResource AbyssCaption}"/>
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1"
+                                    IsToggled="{Binding IsBgmEnabled}"
+                                    OnColor="{StaticResource AbyssGold}"
+                                    ThumbColor="{StaticResource TextPrimary}"
+                                    VerticalOptions="Center"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding IsBgmEnabled}">
+                            <Slider Grid.Column="0"
+                                    Value="{Binding BgmVolume}"
+                                    Minimum="0"
+                                    Maximum="1"
+                                    MinimumTrackColor="{StaticResource AbyssGold}"
+                                    MaximumTrackColor="{StaticResource AbyssBorder}"
+                                    ThumbColor="{StaticResource AbyssGold}"
+                                    VerticalOptions="Center"/>
+                            <Label Grid.Column="1"
+                                   Text="{Binding BgmVolumeDisplay}"
+                                   TextColor="{StaticResource AbyssGold}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   WidthRequest="48"
+                                   HorizontalTextAlignment="End"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                    </VerticalStackLayout>
+
+                    <BoxView HeightRequest="1" Color="{StaticResource AbyssBorder}"/>
+
+                    <!-- SFX Toggle + Volume -->
+                    <VerticalStackLayout Spacing="10">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                <Label Text="🔊 เสียงเอฟเฟกต์ (SFX)"
+                                       FontSize="15"
+                                       TextColor="{StaticResource TextPrimary}"
+                                       FontAttributes="Bold"/>
+                                <Label Text="เสียงปุ่ม การโจมตี การเลือก"
+                                       Style="{StaticResource AbyssCaption}"/>
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1"
+                                    IsToggled="{Binding IsSfxEnabled}"
+                                    OnColor="{StaticResource AbyssGold}"
+                                    ThumbColor="{StaticResource TextPrimary}"
+                                    VerticalOptions="Center"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding IsSfxEnabled}">
+                            <Slider Grid.Column="0"
+                                    Value="{Binding SfxVolume}"
+                                    Minimum="0"
+                                    Maximum="1"
+                                    MinimumTrackColor="{StaticResource AbyssGold}"
+                                    MaximumTrackColor="{StaticResource AbyssBorder}"
+                                    ThumbColor="{StaticResource AbyssGold}"
+                                    VerticalOptions="Center"/>
+                            <Label Grid.Column="1"
+                                   Text="{Binding SfxVolumeDisplay}"
+                                   TextColor="{StaticResource AbyssGold}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   WidthRequest="48"
+                                   HorizontalTextAlignment="End"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                    </VerticalStackLayout>
+
+                    <Button Text="คืนค่าเริ่มต้น"
+                            Style="{StaticResource OutlineButton}"
+                            Command="{Binding ResetDefaultsCommand}"
+                            FontSize="13"
+                            HeightRequest="42"/>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ============== About ============== -->
+            <Border Grid.Row="3" Style="{StaticResource AbyssCard}">
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="เกี่ยวกับ"
+                           Style="{StaticResource AbyssSectionHeader}"
+                           FontSize="16"/>
+
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="ชื่อแอป" Style="{StaticResource AbyssCaption}"/>
+                        <Label Grid.Column="1" Text="{Binding AppName}" FontSize="13" TextColor="{StaticResource TextPrimary}"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="เวอร์ชัน" Style="{StaticResource AbyssCaption}"/>
+                        <Label Grid.Column="1" Text="{Binding AppVersion}" FontSize="13" TextColor="{StaticResource TextPrimary}"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="ประเภท" Style="{StaticResource AbyssCaption}"/>
+                        <Label Grid.Column="1" Text="Text-based RPG" FontSize="13" TextColor="{StaticResource TextPrimary}"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="แพลตฟอร์ม" Style="{StaticResource AbyssCaption}"/>
+                        <Label Grid.Column="1" Text=".NET MAUI" FontSize="13" TextColor="{StaticResource TextPrimary}"/>
+                    </Grid>
+
+                    <BoxView HeightRequest="1" Color="{StaticResource AbyssBorder}" Margin="0,4"/>
+
+                    <Label Text="พัฒนาด้วย .NET MAUI + SQLite + MVVM\nGenre: Dark Fantasy Decision-based Adventure"
+                           Style="{StaticResource AbyssCaption}"
+                           HorizontalTextAlignment="Center"
+                           LineHeight="1.5"/>
+
+                </VerticalStackLayout>
+            </Border>
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

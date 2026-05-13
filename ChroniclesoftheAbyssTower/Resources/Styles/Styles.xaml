@@ -1,0 +1,706 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style TargetType="ActivityIndicator">
+        <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+    </Style>
+
+    <Style TargetType="IndicatorView">
+        <Setter Property="IndicatorColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}"/>
+        <Setter Property="SelectedIndicatorColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray100}}"/>
+    </Style>
+
+    <Style TargetType="Border">
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
+        <Setter Property="StrokeShape" Value="Rectangle"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+    </Style>
+
+    <Style TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+    </Style>
+
+    <!-- Default Button style ถูกย้ายไปอยู่ในส่วน Abyss Custom Styles ด้านล่าง (เพื่อหลีกเลี่ยง duplicate key error) -->
+
+    <Style TargetType="CheckBox">
+        <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest" Value="44"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="DatePicker">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest" Value="44"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- Default Editor / Entry styles ถูกย้ายไปอยู่ในส่วน Abyss Custom Styles ด้านล่าง -->
+
+    <Style TargetType="ImageButton">
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="BorderColor" Value="Transparent"/>
+        <Setter Property="BorderWidth" Value="0"/>
+        <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest" Value="44"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="0.5" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver" />
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- Default Label style ถูกย้ายไปอยู่ในส่วน Abyss Custom Styles ด้านล่าง -->
+
+    <Style TargetType="Label" x:Key="Headline">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MidnightBlue}, Dark={StaticResource White}}" />
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="SubHeadline">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MidnightBlue}, Dark={StaticResource White}}" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="Picker">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
+        <Setter Property="TitleColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest" Value="44"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                            <Setter Property="TitleColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ProgressBar">
+        <Setter Property="ProgressColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="ProgressColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="RadioButton">
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest" Value="44"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="RefreshView">
+        <Setter Property="RefreshColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
+    </Style>
+
+    <!-- Default SearchBar style ถูกย้ายไปอยู่ในส่วน Abyss Custom Styles ด้านล่าง -->
+
+    <Style TargetType="SearchHandler">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource Gray500}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="OpenSansRegular" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                            <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Shadow">
+        <Setter Property="Radius" Value="15" />
+        <Setter Property="Opacity" Value="0.5" />
+        <Setter Property="Brush" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
+        <Setter Property="Offset" Value="10,10" />
+    </Style>
+
+    <Style TargetType="Slider">
+        <Setter Property="MinimumTrackColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+        <Setter Property="MaximumTrackColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" />
+        <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="MinimumTrackColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}"/>
+                            <Setter Property="MaximumTrackColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}"/>
+                            <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="SwipeItem">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
+    </Style>
+
+    <Style TargetType="Switch">
+        <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+        <Setter Property="ThumbColor" Value="{StaticResource White}" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                            <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="On">
+                        <VisualState.Setters>
+                            <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray200}}" />
+                            <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Off">
+                        <VisualState.Setters>
+                            <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="TimePicker">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest" Value="44"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+  
+    <!-- TitleBar style (Windows-only) ถูกลบออกเพราะแอปนี้ใช้บน Android -->
+
+    <Style TargetType="NavigationPage">
+        <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+        <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource White}}" />
+        <Setter Property="IconColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource White}}" />
+    </Style>
+
+    <Style TargetType="TabbedPage">
+        <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
+        <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
+        <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
+        <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+    </Style>
+
+    <!--
+        ============================================================
+        Chronicles of the Abyss Tower - Custom Styles
+        ============================================================
+        เปลี่ยน default styles ให้เป็นโทน Dark Fantasy
+        ============================================================
+    -->
+
+    <!-- Default ContentPage: ใช้พื้นหลังดำม่วงทุกหน้า -->
+    <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{StaticResource AbyssBackground}"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+
+    <!-- Default Label: ใช้สีครีมทอง อ่านง่ายบนพื้นดำ -->
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <!-- Default Button: ม่วงเวทมนตร์ -->
+    <Style TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource TextOnPrimary}"/>
+        <Setter Property="BackgroundColor" Value="#5D3EB4"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="BorderColor" Value="#7C5CE0"/>
+        <Setter Property="BorderWidth" Value="1"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="MinimumHeightRequest" Value="48"/>
+        <Setter Property="MinimumWidthRequest" Value="48"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{StaticResource TextMuted}"/>
+                            <Setter Property="BackgroundColor" Value="{StaticResource AbyssBorder}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Scale" Value="0.97"/>
+                            <Setter Property="BackgroundColor" Value="#4A2A96"/>
+                            <Setter Property="BorderColor" Value="{StaticResource AbyssGoldLight}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="#6F4BD0"/>
+                            <Setter Property="BorderColor" Value="{StaticResource AbyssPurpleLight}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- ปุ่มทอง: ใช้กับ confirm action สำคัญ -->
+    <Style x:Key="GoldButton" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource TextOnGold}"/>
+        <Setter Property="Background" Value="{StaticResource AbyssGoldGradient}"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="BorderColor" Value="{StaticResource AbyssGoldLight}"/>
+        <Setter Property="BorderWidth" Value="1"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Padding" Value="20,14"/>
+        <Setter Property="MinimumHeightRequest" Value="52"/>
+        <Setter Property="Shadow">
+            <Shadow Brush="#22000000"
+                    Offset="0,5"
+                    Radius="10"
+                    Opacity="0.45"/>
+        </Setter>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{StaticResource TextMuted}"/>
+                            <Setter Property="BackgroundColor" Value="{StaticResource AbyssBorder}"/>
+                            <Setter Property="BorderColor" Value="{StaticResource AbyssBorder}"/>
+                            <Setter Property="Opacity" Value="0.65"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Scale" Value="0.98"/>
+                            <Setter Property="BackgroundColor" Value="#B8860B"/>
+                            <Setter Property="BorderColor" Value="{StaticResource AbyssGold}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource AbyssGoldLight}"/>
+                            <Setter Property="BorderColor" Value="#FFF1A8"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- ปุ่มแดง: ใช้กับ Danger action (delete, attack) -->
+    <Style x:Key="DangerButton" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource TextOnPrimary}"/>
+        <Setter Property="Background" Value="{StaticResource AbyssBloodGradient}"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="BorderColor" Value="#D64545"/>
+        <Setter Property="BorderWidth" Value="1"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="MinimumHeightRequest" Value="48"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="0.55"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Scale" Value="0.97"/>
+                            <Setter Property="BackgroundColor" Value="#5A0808"/>
+                            <Setter Property="BorderColor" Value="{StaticResource AbyssBloodLight}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="#A40F0F"/>
+                            <Setter Property="BorderColor" Value="{StaticResource AbyssBloodLight}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- ปุ่มโปร่งใสมีขอบ: ใช้กับ Secondary action -->
+    <Style x:Key="OutlineButton" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource AbyssGold}"/>
+        <Setter Property="BackgroundColor" Value="#251532"/>
+        <Setter Property="BorderColor" Value="{StaticResource AbyssGold}"/>
+        <Setter Property="BorderWidth" Value="1.5"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="MinimumHeightRequest" Value="48"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{StaticResource TextMuted}"/>
+                            <Setter Property="BorderColor" Value="{StaticResource AbyssBorder}"/>
+                            <Setter Property="BackgroundColor" Value="#1B1428"/>
+                            <Setter Property="Opacity" Value="0.6"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Scale" Value="0.97"/>
+                            <Setter Property="TextColor" Value="{StaticResource TextOnGold}"/>
+                            <Setter Property="BackgroundColor" Value="{StaticResource AbyssGold}"/>
+                            <Setter Property="BorderColor" Value="{StaticResource AbyssGoldLight}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{StaticResource AbyssGoldLight}"/>
+                            <Setter Property="BackgroundColor" Value="#332044"/>
+                            <Setter Property="BorderColor" Value="{StaticResource AbyssGoldLight}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- ปุ่ม Choice ของ Story: ใหญ่ อ่านง่าย -->
+    <Style x:Key="ChoiceButton" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource AbyssSurfaceElevated}"/>
+        <Setter Property="BorderColor" Value="{StaticResource AbyssBorder}"/>
+        <Setter Property="BorderWidth" Value="1"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Padding" Value="18,14"/>
+        <Setter Property="MinimumHeightRequest" Value="56"/>
+        <Setter Property="HorizontalOptions" Value="Fill"/>
+        <Setter Property="LineBreakMode" Value="WordWrap"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="0.4"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                            <Setter Property="BorderColor" Value="{StaticResource AbyssGold}"/>
+                            <Setter Property="Scale" Value="0.98"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- ปุ่ม Chip: filter เล็กๆ (ใช้กับ Inventory/Journal filter) -->
+    <Style x:Key="ChipButton" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource AbyssSurfaceElevated}"/>
+        <Setter Property="BorderColor" Value="{StaticResource AbyssBorder}"/>
+        <Setter Property="BorderWidth" Value="1"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="CornerRadius" Value="18"/>
+        <Setter Property="Padding" Value="14,4"/>
+        <Setter Property="MinimumHeightRequest" Value="34"/>
+        <Setter Property="HeightRequest" Value="34"/>
+    </Style>
+
+    <!-- ปุ่ม Tab: ใช้กับ Tabs ของ Journal -->
+    <Style x:Key="TabButton" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource TextSecondary}"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="BorderColor" Value="Transparent"/>
+        <Setter Property="BorderWidth" Value="0"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="Padding" Value="12,8"/>
+    </Style>
+
+    <Style x:Key="TabButtonActive" TargetType="Button" BasedOn="{StaticResource TabButton}">
+        <Setter Property="TextColor" Value="{StaticResource AbyssGold}"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
+    <!-- ============== Typography ============== -->
+
+    <!-- หัวข้อใหญ่ (เกียรติยศหอคอย) -->
+    <Style x:Key="AbyssTitle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource AbyssGold}"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="CharacterSpacing" Value="2"/>
+    </Style>
+
+    <Style x:Key="AbyssSubtitle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextSecondary}"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="FontAttributes" Value="Italic"/>
+    </Style>
+
+    <Style x:Key="AbyssSectionHeader" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource AbyssGold}"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
+    <Style x:Key="AbyssBody" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="LineHeight" Value="1.5"/>
+    </Style>
+
+    <Style x:Key="AbyssStoryText" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="LineHeight" Value="1.6"/>
+        <Setter Property="HorizontalTextAlignment" Value="Start"/>
+    </Style>
+
+    <Style x:Key="AbyssCaption" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextMuted}"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <Style x:Key="AbyssError" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource DangerColor}"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="13"/>
+    </Style>
+
+    <!-- ============== Cards / Containers ============== -->
+
+    <!-- Card หลัก: ใช้กับเนื้อหาทั่วไป -->
+    <Style x:Key="AbyssCard" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource AbyssCardGradient}"/>
+        <Setter Property="Stroke" Value="{StaticResource AbyssBorder}"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="StrokeShape">
+            <RoundRectangle CornerRadius="14"/>
+        </Setter>
+    </Style>
+
+    <!-- Card ที่มีขอบเรืองแสง: ใช้กับ Selected / Highlighted -->
+    <Style x:Key="AbyssCardGlow" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource AbyssCardGradient}"/>
+        <Setter Property="Stroke" Value="{StaticResource AbyssGold}"/>
+        <Setter Property="StrokeThickness" Value="2"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="StrokeShape">
+            <RoundRectangle CornerRadius="14"/>
+        </Setter>
+    </Style>
+
+    <!-- Card ของ Story Page (ขนาดใหญ่) -->
+    <Style x:Key="AbyssStoryCard" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource AbyssSurface}"/>
+        <Setter Property="Stroke" Value="{StaticResource AbyssBorder}"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="Padding" Value="20"/>
+        <Setter Property="StrokeShape">
+            <RoundRectangle CornerRadius="16"/>
+        </Setter>
+    </Style>
+
+    <!-- ============== Form ============== -->
+
+    <Style TargetType="Entry">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource TextMuted}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource AbyssSurface}"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="MinimumHeightRequest" Value="48"/>
+    </Style>
+
+    <Style TargetType="Editor">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource TextMuted}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource AbyssSurface}"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="AutoSize" Value="TextChanges"/>
+    </Style>
+
+    <Style TargetType="SearchBar">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource TextMuted}"/>
+        <Setter Property="CancelButtonColor" Value="{StaticResource AbyssGold}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource AbyssSurface}"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+
+    <!-- Entry แบบมี frame ครอบ (ใช้กับ Login/Register) -->
+    <Style x:Key="AbyssEntry" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource AbyssSurface}"/>
+        <Setter Property="Stroke" Value="{StaticResource AbyssBorder}"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="Padding" Value="14,4"/>
+        <Setter Property="StrokeShape">
+            <RoundRectangle CornerRadius="10"/>
+        </Setter>
+    </Style>
+
+    <!-- ============== Stat Bars ============== -->
+
+    <!-- HP Bar (แดงเลือด) -->
+    <Style x:Key="HpProgressBar" TargetType="ProgressBar">
+        <Setter Property="ProgressColor" Value="{StaticResource HpColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource HpBackground}"/>
+        <Setter Property="HeightRequest" Value="10"/>
+    </Style>
+
+    <!-- Activity / Loading -->
+    <Style x:Key="AbyssActivityIndicator" TargetType="ActivityIndicator">
+        <Setter Property="Color" Value="{StaticResource AbyssGold}"/>
+        <Setter Property="HeightRequest" Value="48"/>
+        <Setter Property="WidthRequest" Value="48"/>
+    </Style>
+
+    <!-- Shell theming: ใช้กับ AppShell หลัก -->
+    <Style TargetType="Shell" ApplyToDerivedTypes="True">
+        <Setter Property="Shell.BackgroundColor" Value="{StaticResource AbyssBackground}"/>
+        <Setter Property="Shell.ForegroundColor" Value="{StaticResource AbyssGold}"/>
+        <Setter Property="Shell.TitleColor" Value="{StaticResource AbyssGold}"/>
+        <Setter Property="Shell.DisabledColor" Value="{StaticResource AbyssMist}"/>
+        <Setter Property="Shell.UnselectedColor" Value="{StaticResource TextSecondary}"/>
+        <Setter Property="Shell.NavBarHasShadow" Value="False"/>
+        <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource AbyssSurface}"/>
+        <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource AbyssGold}"/>
+        <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource AbyssGold}"/>
+        <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource TextMuted}"/>
+    </Style>
+
+</ResourceDictionary>

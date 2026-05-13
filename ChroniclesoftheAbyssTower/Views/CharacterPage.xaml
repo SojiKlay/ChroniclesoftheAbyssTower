@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ChroniclesoftheAbyssTower.ViewModels"
+             x:Class="ChroniclesoftheAbyssTower.Views.CharacterPage"
+             x:DataType="vm:CharacterViewModel"
+             Title="ตัวละคร"
+             Background="{StaticResource AbyssBackgroundGradient}">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="True"/>
+    </Shell.BackButtonBehavior>
+
+    <ScrollView>
+        <Grid Padding="20,16,20,24" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="16">
+
+            <!-- ============== Top Back Button ============== -->
+            <Button Grid.Row="0"
+                    Text="← กลับ"
+                    Command="{Binding BackCommand}"
+                    Style="{StaticResource ChipButton}"
+                    WidthRequest="72"
+                    HeightRequest="34"
+                    Padding="8,0"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"/>
+
+            <!-- ============== Avatar + Name ============== -->
+            <VerticalStackLayout Grid.Row="1" Spacing="6" HorizontalOptions="Center" Margin="0,8,0,0">
+                <Border WidthRequest="120"
+                        HeightRequest="120"
+                        Stroke="{StaticResource AbyssGold}"
+                        StrokeThickness="2"
+                        BackgroundColor="{StaticResource AbyssSurface}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="60"/>
+                    </Border.StrokeShape>
+                    <Image Source="player_arin.png"
+                           Aspect="AspectFit"
+                           WidthRequest="108"
+                           HeightRequest="108"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                </Border>
+
+                <Label Text="{Binding Player.PlayerName}"
+                       Style="{StaticResource AbyssSectionHeader}"
+                       FontSize="22"
+                       HorizontalTextAlignment="Center"
+                       Margin="0,8,0,0"/>
+                <Label Text="The Cursed Knight"
+                       Style="{StaticResource AbyssSubtitle}"
+                       FontSize="13"/>
+            </VerticalStackLayout>
+
+            <!-- ============== HP / Floor / EXP Bars ============== -->
+            <Border Grid.Row="2" Style="{StaticResource AbyssCard}">
+                <VerticalStackLayout Spacing="14">
+
+                    <!-- HP -->
+                    <VerticalStackLayout Spacing="4">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Label Grid.Column="0" Text="❤️ HP" FontSize="13" TextColor="{StaticResource HpColor}" FontAttributes="Bold"/>
+                            <Label Grid.Column="2" Text="{Binding HpDisplay}" FontSize="13" TextColor="{StaticResource TextPrimary}"/>
+                        </Grid>
+                        <ProgressBar Progress="{Binding HpRatio}"
+                                     Style="{StaticResource HpProgressBar}"/>
+                    </VerticalStackLayout>
+
+                    <!-- Floor -->
+                    <VerticalStackLayout Spacing="4">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Label Grid.Column="0" Text="🏰 ชั้น" FontSize="13" TextColor="{StaticResource AbyssGold}" FontAttributes="Bold"/>
+                            <Label Grid.Column="2" Text="{Binding FloorDisplay}" FontSize="13" TextColor="{StaticResource TextPrimary}"/>
+                        </Grid>
+                        <ProgressBar Progress="{Binding FloorProgress}"
+                                     ProgressColor="{StaticResource AbyssGold}"
+                                     BackgroundColor="{StaticResource AbyssBorder}"
+                                     HeightRequest="10"/>
+                    </VerticalStackLayout>
+
+                    <!-- EXP -->
+                    <VerticalStackLayout Spacing="4">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Label Grid.Column="0" Text="✨ EXP" FontSize="13" TextColor="{StaticResource LevelColor}" FontAttributes="Bold"/>
+                            <Label Grid.Column="2" Text="{Binding ExpDisplay}" FontSize="13" TextColor="{StaticResource TextPrimary}"/>
+                        </Grid>
+                        <ProgressBar Progress="{Binding ExpProgress}"
+                                     ProgressColor="{StaticResource LevelColor}"
+                                     BackgroundColor="{StaticResource AbyssBorder}"
+                                     HeightRequest="10"/>
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ============== Stats Grid ============== -->
+            <Grid Grid.Row="3" ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto" RowSpacing="12" ColumnSpacing="12">
+
+                <!-- Level -->
+                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource AbyssCard}" Padding="12">
+                    <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                        <Label Text="🎚️" FontSize="20" HorizontalOptions="Center"/>
+                        <Label Text="LEVEL" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
+                        <Label Text="{Binding Player.Level}"
+                               TextColor="{StaticResource LevelColor}"
+                               FontAttributes="Bold"
+                               FontSize="20"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- ATK -->
+                <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource AbyssCard}" Padding="12">
+                    <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                        <Label Text="⚔️" FontSize="20" HorizontalOptions="Center"/>
+                        <Label Text="ATTACK" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
+                        <Label Text="{Binding Player.Attack}"
+                               TextColor="{StaticResource AttackColor}"
+                               FontAttributes="Bold"
+                               FontSize="20"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- DEF -->
+                <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource AbyssCard}" Padding="12">
+                    <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                        <Label Text="🛡️" FontSize="20" HorizontalOptions="Center"/>
+                        <Label Text="DEFENSE" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
+                        <Label Text="{Binding Player.Defense}"
+                               TextColor="{StaticResource DefenseColor}"
+                               FontAttributes="Bold"
+                               FontSize="20"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Gold -->
+                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource AbyssCard}" Padding="12">
+                    <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                        <Label Text="💰" FontSize="20" HorizontalOptions="Center"/>
+                        <Label Text="GOLD" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
+                        <Label Text="{Binding Player.Gold}"
+                               TextColor="{StaticResource GoldColor}"
+                               FontAttributes="Bold"
+                               FontSize="20"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Highest Floor -->
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource AbyssCard}" Padding="12">
+                    <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                        <Label Text="🏆" FontSize="20" HorizontalOptions="Center"/>
+                        <Label Text="HIGHEST" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
+                        <Label Text="{Binding Player.HighestFloor}"
+                               TextColor="{StaticResource AbyssGold}"
+                               FontAttributes="Bold"
+                               FontSize="20"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Choices Made -->
+                <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource AbyssCard}" Padding="12">
+                    <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                        <Label Text="🎲" FontSize="20" HorizontalOptions="Center"/>
+                        <Label Text="CHOICES" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
+                        <Label Text="{Binding Player.TotalChoicesMade}"
+                               TextColor="{StaticResource AbyssPurpleLight}"
+                               FontAttributes="Bold"
+                               FontSize="20"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+            </Grid>
+
+            <!-- ============== Lore ============== -->
+            <Border Grid.Row="4" Style="{StaticResource AbyssCard}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="ความเป็นมา"
+                           Style="{StaticResource AbyssSectionHeader}"
+                           FontSize="14"/>
+                    <Label Text="อดีตอัศวินแห่งราชวงศ์ ผู้ถูกกล่าวหาว่าเป็นต้นเหตุของหมอกอเวจี เนรเทศจากเมืองหลวงและออกตามหาเอลีน่า น้องสาวที่หายไป ในหอคอยอเวจี"
+                           Style="{StaticResource AbyssBody}"
+                           FontSize="13"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ============== Action Buttons ============== -->
+            <VerticalStackLayout Grid.Row="5" Spacing="10" Margin="0,8,0,0">
+                <Button Text="🌌  เข้าสู่หอคอย"
+                        Style="{StaticResource GoldButton}"
+                        Command="{Binding EnterTowerCommand}"
+                        HeightRequest="54"/>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <Button Grid.Column="0"
+                            Text="🎒  Inventory"
+                            Style="{StaticResource OutlineButton}"
+                            Command="{Binding GoToInventoryCommand}"/>
+                    <Button Grid.Column="1"
+                            Text="📖  Journal"
+                            Style="{StaticResource OutlineButton}"
+                            Command="{Binding GoToJournalCommand}"/>
+                </Grid>
+            </VerticalStackLayout>
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,110 @@
+[
+  {
+    "ItemName": "Health Potion",
+    "ItemType": 0,
+    "Description": "โพชั่นฟื้นฟูพลังชีวิตพื้นฐาน HP +20",
+    "EffectValue": 20,
+    "IconKey": "🧪",
+    "ShopPrice": 20,
+    "IsConsumable": true
+  },
+  {
+    "ItemName": "Greater Potion",
+    "ItemType": 0,
+    "Description": "โพชั่นฟื้นฟูระดับสูง HP +50",
+    "EffectValue": 50,
+    "IconKey": "🍶",
+    "ShopPrice": 60,
+    "IsConsumable": true
+  },
+  {
+    "ItemName": "Dark Water",
+    "ItemType": 0,
+    "Description": "น้ำจากหอคอยอเวจี HP +10",
+    "EffectValue": 10,
+    "IconKey": "💧",
+    "ShopPrice": 0,
+    "IsConsumable": true
+  },
+  {
+    "ItemName": "Rune Key",
+    "ItemType": 2,
+    "Description": "กุญแจรูนโบราณของหอคอย ใช้เปิดประตู",
+    "EffectValue": 0,
+    "IconKey": "🗝️",
+    "ShopPrice": 15,
+    "IsConsumable": true
+  },
+  {
+    "ItemName": "Old Note",
+    "ItemType": 1,
+    "Description": "กระดาษบันทึกเก่า เป็น Hint สำหรับเนื้อเรื่อง",
+    "EffectValue": 0,
+    "IconKey": "📜",
+    "ShopPrice": 0,
+    "IsConsumable": false
+  },
+  {
+    "ItemName": "Broken Pendant",
+    "ItemType": 1,
+    "Description": "จี้ที่แตกหักของเอลีน่า เชื่อมโยงกับน้องสาว",
+    "EffectValue": 0,
+    "IconKey": "💎",
+    "ShopPrice": 0,
+    "IsConsumable": false
+  },
+  {
+    "ItemName": "Tower Map",
+    "ItemType": 2,
+    "Description": "แผนที่บางส่วนของหอคอย เปิดเส้นทางลับ",
+    "EffectValue": 0,
+    "IconKey": "🗺️",
+    "ShopPrice": 0,
+    "IsConsumable": false
+  },
+  {
+    "ItemName": "Boss Key",
+    "ItemType": 2,
+    "Description": "กุญแจพิเศษของห้องบอส",
+    "EffectValue": 0,
+    "IconKey": "🔑",
+    "ShopPrice": 0,
+    "IsConsumable": true
+  },
+  {
+    "ItemName": "Mist Crystal",
+    "ItemType": 1,
+    "Description": "ผลึกหมอกอเวจี เก็บพลังของหมอก",
+    "EffectValue": 0,
+    "IconKey": "🔮",
+    "ShopPrice": 0,
+    "IsConsumable": false
+  },
+  {
+    "ItemName": "Knight's Sword",
+    "ItemType": 4,
+    "Description": "ดาบของอัศวินที่ตายในหอคอย ATK +5",
+    "EffectValue": 5,
+    "IconKey": "⚔️",
+    "ShopPrice": 80,
+    "IsConsumable": false
+  },
+  {
+    "ItemName": "Iron Shield",
+    "ItemType": 4,
+    "Description": "โล่เหล็กเก่าแก่ DEF +3",
+    "EffectValue": 3,
+    "IconKey": "🛡️",
+    "ShopPrice": 60,
+    "IsConsumable": false
+  },
+  {
+    "ItemName": "Phoenix Feather",
+    "ItemType": 0,
+    "Description": "ขนนกฟีนิกซ์ ฟื้น HP เต็ม",
+    "EffectValue": 999,
+    "IconKey": "🪶",
+    "ShopPrice": 200,
+    "IsConsumable": true
+  }
+]

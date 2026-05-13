@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ChroniclesoftheAbyssTower.ViewModels"
+             x:Class="ChroniclesoftheAbyssTower.Views.JournalEditorPage"
+             x:DataType="vm:JournalEditorViewModel"
+             Title="บันทึก"
+             Background="{StaticResource AbyssBackgroundGradient}">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="True"/>
+    </Shell.BackButtonBehavior>
+
+    <ScrollView>
+        <Grid Padding="20,16,20,24" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="14">
+
+            <!-- ============== Header ============== -->
+            <VerticalStackLayout Grid.Row="0" Spacing="4">
+                <Label Text="✍️"
+                       FontSize="42"
+                       HorizontalOptions="Center"/>
+                <Label Text="{Binding HeaderText}"
+                       Style="{StaticResource AbyssSectionHeader}"
+                       FontSize="18"
+                       HorizontalTextAlignment="Center"/>
+                <Label Text="{Binding FloorNumber, StringFormat='ชั้นที่ {0}'}"
+                       Style="{StaticResource AbyssCaption}"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <!-- ============== Title Field ============== -->
+            <VerticalStackLayout Grid.Row="1" Spacing="4">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Grid.Column="0"
+                           Text="หัวข้อบันทึก"
+                           Style="{StaticResource AbyssCaption}"
+                           FontSize="12"/>
+                    <Label Grid.Column="1"
+                           Text="{Binding TitleCharCount}"
+                           Style="{StaticResource AbyssCaption}"
+                           FontSize="11"/>
+                </Grid>
+                <Border Style="{StaticResource AbyssEntry}">
+                    <Entry Text="{Binding EntryTitle, Mode=TwoWay}"
+                           Placeholder="เช่น เจอกุญแจที่ลานต้นไม้..."
+                           MaxLength="50"/>
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- ============== Content Field ============== -->
+            <VerticalStackLayout Grid.Row="2" Spacing="4">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Grid.Column="0"
+                           Text="เนื้อหา"
+                           Style="{StaticResource AbyssCaption}"
+                           FontSize="12"/>
+                    <Label Grid.Column="1"
+                           Text="{Binding ContentCharCount}"
+                           Style="{StaticResource AbyssCaption}"
+                           FontSize="11"/>
+                </Grid>
+                <Border Style="{StaticResource AbyssEntry}" Padding="14,8">
+                    <Editor Text="{Binding EntryContent, Mode=TwoWay}"
+                            Placeholder="บันทึกความทรงจำของเจ้าในการผจญภัย..."
+                            MaxLength="500"
+                            HeightRequest="180"
+                            AutoSize="TextChanges"/>
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- ============== Tips Card ============== -->
+            <Border Grid.Row="3" Style="{StaticResource AbyssCard}" Padding="14">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="💡 คำแนะนำ"
+                           TextColor="{StaticResource AbyssGold}"
+                           FontAttributes="Bold"
+                           FontSize="12"/>
+                    <Label Text="• บันทึกเหตุการณ์สำคัญที่พบในแต่ละชั้น&#10;• ใช้จดเบาะแสและตัวเลือกที่ตัดสินใจ&#10;• สามารถแก้ไขหรือลบได้ทีหลัง"
+                           Style="{StaticResource AbyssCaption}"
+                           FontSize="11"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ============== Error ============== -->
+            <Label Grid.Row="4"
+                   Text="{Binding ErrorMessage}"
+                   Style="{StaticResource AbyssError}"
+                   IsVisible="{Binding HasError}"
+                   HorizontalTextAlignment="Center"/>
+
+            <!-- ============== Actions ============== -->
+            <VerticalStackLayout Grid.Row="5" Spacing="10" Margin="0,8,0,0">
+                <Button Text="{Binding SaveButtonText}"
+                        Style="{StaticResource GoldButton}"
+                        Command="{Binding SaveCommand}"
+                        IsEnabled="{Binding IsNotBusy}"
+                        HeightRequest="52"/>
+
+                <Button Text="🗑️  ลบบันทึก"
+                        Style="{StaticResource DangerButton}"
+                        Command="{Binding DeleteCommand}"
+                        IsVisible="{Binding CanDelete}"
+                        HeightRequest="48"/>
+
+                <Button Text="ยกเลิก"
+                        Style="{StaticResource OutlineButton}"
+                        Command="{Binding CancelCommand}"
+                        HeightRequest="48"/>
+            </VerticalStackLayout>
+
+            <!-- ============== Loading Indicator ============== -->
+            <ActivityIndicator Grid.Row="6"
+                               IsVisible="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               Style="{StaticResource AbyssActivityIndicator}"
+                               HorizontalOptions="Center"
+                               Margin="0,8,0,0"/>
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

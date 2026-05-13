@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!--
+        ============================================================
+        Chronicles of the Abyss Tower - Dark Fantasy Palette
+        ============================================================
+        ใช้ key เดิมของ MAUI (Primary/Secondary/...) เพื่อให้ Styles.xaml
+        ของ default template ยังทำงานได้
+        เพิ่ม key ใหม่กลุ่ม "Abyss" สำหรับสไตล์เฉพาะของเกม
+        ============================================================
+    -->
+
+    <!-- ============== Brand / Accent ============== -->
+    <Color x:Key="Primary">#6B46C1</Color>
+    <!-- ม่วงเวทมนตร์ใช้เป็นสีหลักของแอป -->
+    <Color x:Key="PrimaryDark">#4C2A9E</Color>
+    <Color x:Key="PrimaryDarkText">#F5E9D7</Color>
+    <Color x:Key="Secondary">#D4AF37</Color>
+    <!-- ทองโบราณ - ใช้เน้น choice / item พิเศษ -->
+    <Color x:Key="SecondaryDarkText">#1A1A2E</Color>
+    <Color x:Key="Tertiary">#8B0000</Color>
+    <!-- แดงเลือด - ใช้กับ HP / Boss / Danger -->
+
+    <!-- ============== Abyss Background Layers ============== -->
+    <Color x:Key="AbyssBackground">#0F0F1A</Color>
+    <!-- สีพื้นหลังหลัก (เกือบดำ มีโทนม่วงนิดๆ) -->
+    <Color x:Key="AbyssSurface">#1A1A2E</Color>
+    <!-- สีพื้นของ Card / Frame -->
+    <Color x:Key="AbyssSurfaceElevated">#252540</Color>
+    <!-- ใช้กับ Card ที่ลอยขึ้นมา (Modal / Dialog) -->
+    <Color x:Key="AbyssBorder">#3A3A5C</Color>
+    <!-- เส้นขอบทั่วไป -->
+    <Color x:Key="AbyssBorderGlow">#6B46C1</Color>
+    <!-- เส้นขอบเรืองแสง (Selected / Hover) -->
+
+    <!-- ============== Abyss Accent ============== -->
+    <Color x:Key="AbyssGold">#D4AF37</Color>
+    <Color x:Key="AbyssGoldLight">#F0D770</Color>
+    <Color x:Key="AbyssPurple">#6B46C1</Color>
+    <Color x:Key="AbyssPurpleLight">#9F7AEA</Color>
+    <Color x:Key="AbyssBlood">#8B0000</Color>
+    <Color x:Key="AbyssBloodLight">#C53030</Color>
+    <Color x:Key="AbyssMist">#7A7A9C</Color>
+    <!-- โทนหมอกใช้กับ disabled / placeholder -->
+
+    <!-- ============== Game Stat Colors ============== -->
+    <Color x:Key="HpColor">#C53030</Color>
+    <!-- HP Bar -->
+    <Color x:Key="HpBackground">#3A1010</Color>
+    <Color x:Key="GoldColor">#D4AF37</Color>
+    <!-- Gold -->
+    <Color x:Key="AttackColor">#E53E3E</Color>
+    <Color x:Key="DefenseColor">#3182CE</Color>
+    <Color x:Key="LevelColor">#9F7AEA</Color>
+
+    <!-- ============== Semantic ============== -->
+    <Color x:Key="SuccessColor">#48BB78</Color>
+    <Color x:Key="WarningColor">#ED8936</Color>
+    <Color x:Key="DangerColor">#E53E3E</Color>
+    <Color x:Key="InfoColor">#4299E1</Color>
+
+    <!-- ============== Text ============== -->
+    <Color x:Key="TextPrimary">#F5E9D7</Color>
+    <!-- ครีมทอง อ่านง่ายบนพื้นดำ -->
+    <Color x:Key="TextSecondary">#B8B8D1</Color>
+    <Color x:Key="TextMuted">#7A7A9C</Color>
+    <Color x:Key="TextOnPrimary">#FFFFFF</Color>
+    <Color x:Key="TextOnGold">#1A1A2E</Color>
+
+    <!-- ============== Original keys (จำเป็นสำหรับ Styles.xaml default) ============== -->
+    <Color x:Key="White">White</Color>
+    <Color x:Key="Black">#0F0F1A</Color>
+    <Color x:Key="Magenta">#D600AA</Color>
+    <Color x:Key="MidnightBlue">#190649</Color>
+    <Color x:Key="OffBlack">#1A1A2E</Color>
+
+    <Color x:Key="Gray100">#F5E9D7</Color>
+    <Color x:Key="Gray200">#D9D9E8</Color>
+    <Color x:Key="Gray300">#B8B8D1</Color>
+    <Color x:Key="Gray400">#9090A8</Color>
+    <Color x:Key="Gray500">#7A7A9C</Color>
+    <Color x:Key="Gray600">#5A5A78</Color>
+    <Color x:Key="Gray900">#1A1A2E</Color>
+    <Color x:Key="Gray950">#0F0F1A</Color>
+
+    <!-- ============== Brushes ============== -->
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
+    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
+    <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
+    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
+    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
+
+    <SolidColorBrush x:Key="AbyssBackgroundBrush" Color="{StaticResource AbyssBackground}"/>
+    <SolidColorBrush x:Key="AbyssSurfaceBrush" Color="{StaticResource AbyssSurface}"/>
+    <SolidColorBrush x:Key="AbyssSurfaceElevatedBrush" Color="{StaticResource AbyssSurfaceElevated}"/>
+    <SolidColorBrush x:Key="AbyssBorderBrush" Color="{StaticResource AbyssBorder}"/>
+    <SolidColorBrush x:Key="AbyssGoldBrush" Color="{StaticResource AbyssGold}"/>
+    <SolidColorBrush x:Key="AbyssPurpleBrush" Color="{StaticResource AbyssPurple}"/>
+    <SolidColorBrush x:Key="AbyssBloodBrush" Color="{StaticResource AbyssBlood}"/>
+
+    <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
+    <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>
+    <SolidColorBrush x:Key="Gray300Brush" Color="{StaticResource Gray300}"/>
+    <SolidColorBrush x:Key="Gray400Brush" Color="{StaticResource Gray400}"/>
+    <SolidColorBrush x:Key="Gray500Brush" Color="{StaticResource Gray500}"/>
+    <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
+    <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
+    <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+    <!-- ============== Gradients (ใช้กับ Page background) ============== -->
+    <LinearGradientBrush x:Key="AbyssBackgroundGradient" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0.0" Color="{StaticResource AbyssBackground}"/>
+        <GradientStop Offset="1.0" Color="#1A0A2E"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="AbyssCardGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Offset="0.0" Color="#1A1A2E"/>
+        <GradientStop Offset="1.0" Color="#252540"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="AbyssGoldGradient" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Offset="0.0" Color="#B8860B"/>
+        <GradientStop Offset="0.5" Color="#D4AF37"/>
+        <GradientStop Offset="1.0" Color="#F0D770"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="AbyssBloodGradient" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Offset="0.0" Color="#3A1010"/>
+        <GradientStop Offset="1.0" Color="#C53030"/>
+    </LinearGradientBrush>
+
+</ResourceDictionary>

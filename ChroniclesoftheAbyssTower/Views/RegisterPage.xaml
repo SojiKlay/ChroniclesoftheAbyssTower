@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ChroniclesoftheAbyssTower.ViewModels"
+             x:Class="ChroniclesoftheAbyssTower.Views.RegisterPage"
+             x:DataType="vm:RegisterViewModel"
+             Shell.NavBarIsVisible="False"
+             Background="{StaticResource AbyssBackgroundGradient}">
+
+    <Grid>
+        <Image Source="auth_background.jpg"
+               Aspect="AspectFill"
+               Opacity="0.72"/>
+        <BoxView Color="#12061F"
+                 Opacity="0.58"/>
+
+        <ScrollView>
+        <Grid Padding="28,40" RowSpacing="0">
+            <VerticalStackLayout Spacing="20" VerticalOptions="Center">
+
+                <!-- ============== Branding Header ============== -->
+                
+
+                <Label Text="ABYSS TOWER"
+                       Style="{StaticResource AbyssTitle}"
+                       FontSize="24"/>
+
+                <BoxView HeightRequest="2"
+                         Color="{StaticResource AbyssGold}"
+                         WidthRequest="80"
+                         HorizontalOptions="Center"
+                         Margin="0,4,0,4"/>
+
+                <Label Text="สร้างบัญชีนักผจญภัยใหม่"
+                       Style="{StaticResource AbyssSubtitle}"
+                       FontSize="13"
+                       Margin="0,0,0,24"/>
+
+                <!-- ============== Form Card ============== -->
+                <Border Style="{StaticResource AbyssCard}" Padding="24">
+                    <VerticalStackLayout Spacing="16">
+
+                        <Label Text="สมัครสมาชิก"
+                               Style="{StaticResource AbyssSectionHeader}"
+                               HorizontalOptions="Center"/>
+
+                        <!-- Username -->
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="ชื่อผู้ใช้ (4-20 ตัวอักษร)"
+                                   Style="{StaticResource AbyssCaption}"
+                                   TextColor="{StaticResource TextSecondary}"/>
+                            <Border Style="{StaticResource AbyssEntry}">
+                                <Entry Placeholder="a-z, A-Z, 0-9, _"
+                                       Text="{Binding Username}"
+                                       MaxLength="20"
+                                       ReturnType="Next"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Password -->
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="รหัสผ่าน (อย่างน้อย 6 ตัวอักษร)"
+                                   Style="{StaticResource AbyssCaption}"
+                                   TextColor="{StaticResource TextSecondary}"/>
+                            <Border Style="{StaticResource AbyssEntry}">
+                                <Entry Placeholder="ต้องมีตัวอักษรและตัวเลข"
+                                       Text="{Binding Password}"
+                                       IsPassword="True"
+                                       MaxLength="50"
+                                       ReturnType="Next"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Confirm Password -->
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="ยืนยันรหัสผ่าน"
+                                   Style="{StaticResource AbyssCaption}"
+                                   TextColor="{StaticResource TextSecondary}"/>
+                            <Border Style="{StaticResource AbyssEntry}">
+                                <Entry Placeholder="กรอกรหัสผ่านอีกครั้ง"
+                                       Text="{Binding ConfirmPassword}"
+                                       IsPassword="True"
+                                       MaxLength="50"
+                                       ReturnType="Done"
+                                       ReturnCommand="{Binding RegisterCommand}"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Error Message -->
+                        <Label Text="{Binding ErrorMessage}"
+                               Style="{StaticResource AbyssError}"
+                               IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyConverter}}"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center"/>
+
+                        <!-- Register Button -->
+                        <Button Text="สมัครและเริ่มผจญภัย"
+                                Style="{StaticResource GoldButton}"
+                                Command="{Binding RegisterCommand}"
+                                IsEnabled="{Binding IsNotBusy}"
+                                Margin="0,8,0,0"/>
+
+                        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                           IsVisible="{Binding IsBusy}"
+                                           Style="{StaticResource AbyssActivityIndicator}"
+                                           HorizontalOptions="Center"/>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- ============== Login Link ============== -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="6" Margin="0,16,0,0">
+                    <Label Text="มีบัญชีแล้ว?"
+                           Style="{StaticResource AbyssCaption}"
+                           VerticalOptions="Center"/>
+                    <Label Text="เข้าสู่ระบบ"
+                           TextColor="{StaticResource AbyssGold}"
+                           FontAttributes="Bold"
+                           FontSize="13"
+                           VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToLoginCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </Grid>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

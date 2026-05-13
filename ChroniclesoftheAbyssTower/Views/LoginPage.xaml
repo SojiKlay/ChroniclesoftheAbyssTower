@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ChroniclesoftheAbyssTower.ViewModels"
+             x:Class="ChroniclesoftheAbyssTower.Views.LoginPage"
+             x:DataType="vm:LoginViewModel"
+             Shell.NavBarIsVisible="False"
+             Background="{StaticResource AbyssBackgroundGradient}">
+
+    <Grid>
+        <Image Source="auth_background.jpg"
+               Aspect="AspectFill"
+               Opacity="0.72"/>
+        <BoxView Color="#12061F"
+                 Opacity="0.58"/>
+
+        <ScrollView>
+        <Grid Padding="28,40" RowSpacing="0">
+            <VerticalStackLayout Spacing="20" VerticalOptions="Center">
+
+                <!-- ============== Branding Header ============== -->
+              
+
+                <Label Text="Chronicles of the"
+                       Style="{StaticResource AbyssSubtitle}"
+                       FontSize="14"/>
+
+                <Label Text="ABYSS TOWER"
+                       Style="{StaticResource AbyssTitle}"
+                       FontSize="28"
+                       Margin="0,-8,0,0"/>
+
+                <BoxView HeightRequest="2"
+                         Color="{StaticResource AbyssGold}"
+                         WidthRequest="80"
+                         HorizontalOptions="Center"
+                         Margin="0,4,0,4"/>
+
+                <Label Text="เข้าสู่หอคอยอเวจี"
+                       Style="{StaticResource AbyssSubtitle}"
+                       FontSize="13"
+                       Margin="0,0,0,24"/>
+
+                <!-- ============== Form Card ============== -->
+                <Border Style="{StaticResource AbyssCard}" Padding="24">
+                    <VerticalStackLayout Spacing="16">
+
+                        <Label Text="เข้าสู่ระบบ"
+                               Style="{StaticResource AbyssSectionHeader}"
+                               HorizontalOptions="Center"/>
+
+                        <!-- Username -->
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="ชื่อผู้ใช้"
+                                   Style="{StaticResource AbyssCaption}"
+                                   TextColor="{StaticResource TextSecondary}"/>
+                            <Border Style="{StaticResource AbyssEntry}">
+                                <Entry Placeholder="กรอกชื่อผู้ใช้"
+                                       Text="{Binding Username}"
+                                       MaxLength="20"
+                                       ReturnType="Next"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Password -->
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="รหัสผ่าน"
+                                   Style="{StaticResource AbyssCaption}"
+                                   TextColor="{StaticResource TextSecondary}"/>
+                            <Border Style="{StaticResource AbyssEntry}">
+                                <Entry Placeholder="กรอกรหัสผ่าน"
+                                       Text="{Binding Password}"
+                                       IsPassword="True"
+                                       MaxLength="50"
+                                       ReturnType="Done"
+                                       ReturnCommand="{Binding LoginCommand}"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Error Message -->
+                        <Label Text="{Binding ErrorMessage}"
+                               Style="{StaticResource AbyssError}"
+                               IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyConverter}}"
+                               HorizontalOptions="Center"/>
+
+                        <!-- Login Button -->
+                        <Button Text="เข้าสู่ระบบ"
+                                Style="{StaticResource GoldButton}"
+                                Command="{Binding LoginCommand}"
+                                IsEnabled="{Binding IsNotBusy}"
+                                Margin="0,8,0,0"/>
+
+                        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                           IsVisible="{Binding IsBusy}"
+                                           Style="{StaticResource AbyssActivityIndicator}"
+                                           HorizontalOptions="Center"/>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- ============== Register Link ============== -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="6" Margin="0,16,0,0">
+                    <Label Text="ยังไม่มีบัญชี?"
+                           Style="{StaticResource AbyssCaption}"
+                           VerticalOptions="Center"/>
+                    <Label Text="สมัครสมาชิก"
+                           TextColor="{StaticResource AbyssGold}"
+                           FontAttributes="Bold"
+                           FontSize="13"
+                           VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToRegisterCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+
+                <!-- ============== Footer ============== -->
+                <Label Text="v1.0 · Dark Fantasy Text RPG"
+                       Style="{StaticResource AbyssCaption}"
+                       HorizontalOptions="Center"
+                       Margin="0,40,0,0"/>
+
+            </VerticalStackLayout>
+        </Grid>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

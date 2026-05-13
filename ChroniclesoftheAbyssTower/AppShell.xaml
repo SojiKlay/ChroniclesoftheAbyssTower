@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ChroniclesoftheAbyssTower.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ChroniclesoftheAbyssTower"
+    xmlns:views="clr-namespace:ChroniclesoftheAbyssTower.Views"
+    Title="Chronicles of the Abyss Tower"
+    FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False">
+
+    <!--
+        Routes ทั้งหมดของแอป
+        ใช้ //route เพื่อ navigate แบบ absolute (reset stack)
+        Phase 2: login, register, main
+        Phase 3-7: จะเพิ่ม story, character, inventory, journal, ฯลฯ
+    -->
+
+    <ShellContent Title="Login"
+                  Route="login"
+                  ContentTemplate="{DataTemplate views:LoginPage}"/>
+
+    <ShellContent Title="Register"
+                  Route="register"
+                  ContentTemplate="{DataTemplate views:RegisterPage}"/>
+
+    <ShellContent Title="Main"
+                  Route="main"
+                  ContentTemplate="{DataTemplate views:MainMenuPage}"/>
+
+</Shell>
+
