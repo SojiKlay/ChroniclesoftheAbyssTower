@@ -120,7 +120,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                 Choices.Add(new ChoiceItemVm
                 {
                     Index = i,
-                    Text = choice.Text,
+                    Text = await _storyService.TranslateItemNamesAsync(choice.Text),
                     IsEnabled = canSelect,
                     LockReason = canSelect
                         ? null

@@ -1,4 +1,5 @@
 using ChroniclesoftheAbyssTower.Models;
+using ChroniclesoftheAbyssTower.Helpers;
 
 namespace ChroniclesoftheAbyssTower.Services
 {
@@ -7,6 +8,16 @@ namespace ChroniclesoftheAbyssTower.Services
     /// </summary>
     public class InventoryService
     {
+        private static readonly HashSet<string> UniqueStoryItems = new(StringComparer.OrdinalIgnoreCase)
+        {
+            "Broken Pendant",
+            "Tower Map",
+            "Boss Key",
+            "Mist Crystal",
+            "Knight's Sword",
+            "Iron Shield"
+        };
+
         private readonly DatabaseService _databaseService;
 
         public InventoryService(DatabaseService databaseService)
@@ -76,6 +87,11 @@ namespace ChroniclesoftheAbyssTower.Services
             return item != null && item.Quantity > 0;
         }
 
+        public static bool IsUniqueStoryItem(string itemName)
+        {
+            return UniqueStoryItems.Contains(itemName);
+        }
+
         // ============== Create ==============
 
         /// <summary>
@@ -102,11 +118,23 @@ namespace ChroniclesoftheAbyssTower.Services
 
             if (existing != null)
             {
+                if (IsUniqueStoryItem(itemName) && existing.Quantity > 0)
+                {
+                    existing.ItemData = item;
+                    return existing;
+                }
+
                 existing.Quantity += quantity;
                 await conn.UpdateAsync(existing);
                 existing.ItemData = item;
                 return existing;
             }
+
+            var currentItemCount = await conn.Table<InventoryItem>()
+                .Where(i => i.PlayerId == playerId && i.Quantity > 0)
+                .CountAsync();
+            if (currentItemCount >= AppConstants.MaxInventorySize)
+                throw new InvalidOperationException($"Inventory เต็มแล้ว (สูงสุด {AppConstants.MaxInventorySize} ชนิด)");
 
             // ถ้ายังไม่มี → insert ใหม่
             var newItem = new InventoryItem

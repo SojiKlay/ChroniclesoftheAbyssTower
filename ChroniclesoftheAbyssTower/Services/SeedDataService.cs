@@ -77,12 +77,38 @@ namespace ChroniclesoftheAbyssTower.Services
         public async Task SeedItemsAsync()
         {
             var conn = await _databaseService.GetConnectionAsync();
-            var existing = await conn.Table<Item>().CountAsync();
-            if (existing > 0) return; // มี item อยู่แล้ว ข้าม
-
             var json = await LoadRawFileAsync("items.json");
             var items = JsonConvert.DeserializeObject<List<Item>>(json);
             if (items == null || items.Count == 0) return;
+
+            var existing = await conn.Table<Item>().CountAsync();
+            if (existing > 0)
+            {
+                foreach (var item in items)
+                {
+                    await conn.ExecuteAsync(
+                        """
+                        UPDATE Items
+                        SET ThaiName = ?,
+                            ItemType = ?,
+                            Description = ?,
+                            EffectValue = ?,
+                            IconKey = ?,
+                            ShopPrice = ?,
+                            IsConsumable = ?
+                        WHERE ItemName = ?
+                        """,
+                        item.ThaiName,
+                        item.ItemType,
+                        item.Description,
+                        item.EffectValue,
+                        item.IconKey,
+                        item.ShopPrice,
+                        item.IsConsumable,
+                        item.ItemName);
+                }
+                return; // มี item อยู่แล้ว ข้าม
+            }
 
             await conn.InsertAllAsync(items);
         }

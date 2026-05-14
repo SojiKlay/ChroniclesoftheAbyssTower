@@ -32,7 +32,9 @@ namespace ChroniclesoftheAbyssTower.Models
         /// ชื่อ item (สำหรับแสดงใน UI)
         /// </summary>
         [Ignore]
-        public string DisplayName => ItemData?.ItemName ?? "Unknown Item";
+        public string DisplayName => !string.IsNullOrWhiteSpace(ItemData?.ThaiName)
+            ? ItemData.ThaiName
+            : ItemData?.ItemName ?? "Unknown Item";
 
         /// <summary>
         /// คำอธิบาย (สำหรับแสดงใน UI)
@@ -47,7 +49,7 @@ namespace ChroniclesoftheAbyssTower.Models
         public string DisplayIcon => ItemData?.IconKey ?? "📦";
 
         [Ignore]
-        public string DisplayImage => DisplayName switch
+        public string DisplayImage => ItemData?.ItemName switch
         {
             "Health Potion" => "health_potion.png",
             "Greater Potion" => "greater_potion.png",

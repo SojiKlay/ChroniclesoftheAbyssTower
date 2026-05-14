@@ -201,5 +201,17 @@ namespace ChroniclesoftheAbyssTower.Services
         {
             return _databaseService.DeleteAsync(player);
         }
+
+        /// <summary>
+        /// ลบ player พร้อมข้อมูลที่ผูกกับ player ทั้งหมด
+        /// </summary>
+        public async Task DeleteWithRelatedDataAsync(Player player)
+        {
+            var conn = await _databaseService.GetConnectionAsync();
+            await conn.ExecuteAsync("DELETE FROM InventoryItems WHERE PlayerId = ?", player.PlayerId);
+            await conn.ExecuteAsync("DELETE FROM Journals WHERE PlayerId = ?", player.PlayerId);
+            await conn.ExecuteAsync("DELETE FROM StoryProgress WHERE PlayerId = ?", player.PlayerId);
+            await conn.DeleteAsync(player);
+        }
     }
 }

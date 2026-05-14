@@ -42,6 +42,7 @@ namespace ChroniclesoftheAbyssTower.Services
         private readonly PlayerService _playerService;
         private readonly InventoryService _inventoryService;
         private readonly JournalService _journalService;
+        private Dictionary<string, string>? _itemDisplayNames;
 
         public StoryService(
             DatabaseService databaseService,
@@ -67,6 +68,42 @@ namespace ChroniclesoftheAbyssTower.Services
             return _seedDataService.GetFloorAsync(player.CurrentFloor);
         }
 
+        public async Task<string> TranslateItemNamesAsync(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return text;
+
+            var displayNames = await GetItemDisplayNamesAsync();
+            foreach (var item in displayNames.OrderByDescending(i => i.Key.Length))
+            {
+                text = text.Replace(item.Key, item.Value, StringComparison.OrdinalIgnoreCase);
+            }
+
+            return text;
+        }
+
+        private async Task<string> GetItemDisplayNameAsync(string itemName)
+        {
+            var displayNames = await GetItemDisplayNamesAsync();
+            return displayNames.TryGetValue(itemName, out var displayName)
+                ? displayName
+                : itemName;
+        }
+
+        private async Task<Dictionary<string, string>> GetItemDisplayNamesAsync()
+        {
+            if (_itemDisplayNames != null) return _itemDisplayNames;
+
+            var conn = await _databaseService.GetConnectionAsync();
+            var items = await conn.Table<Item>().ToListAsync();
+
+            _itemDisplayNames = items.ToDictionary(
+                item => item.ItemName,
+                item => string.IsNullOrWhiteSpace(item.ThaiName) ? item.ItemName : item.ThaiName,
+                StringComparer.OrdinalIgnoreCase);
+
+            return _itemDisplayNames;
+        }
+
         // ============== Choice Availability ==============
 
         /// <summary>
@@ -84,14 +121,14 @@ namespace ChroniclesoftheAbyssTower.Services
             {
                 var has = await _inventoryService.HasItemAsync(player.PlayerId, itemName);
                 if (has)
-                    return $"มี '{itemName}' แล้ว";
+                    return $"มี '{await GetItemDisplayNameAsync(itemName)}' แล้ว";
             }
 
             foreach (var itemName in GetRequiredItemNames(choice))
             {
                 var has = await _inventoryService.HasItemAsync(player.PlayerId, itemName);
                 if (!has)
-                    return $"ต้องมี '{itemName}' จึงจะเลือกได้";
+                    return $"ต้องมี '{await GetItemDisplayNameAsync(itemName)}' จึงจะเลือกได้";
             }
 
             if (choice.GoldDelta < 0 && player.Gold < Math.Abs(choice.GoldDelta))
@@ -191,7 +228,7 @@ namespace ChroniclesoftheAbyssTower.Services
             }
 
             outcome.Success = true;
-            outcome.ResultText = isRepeatRewardChoice ? choice.RepeatResultText! : choice.ResultText;
+            outcome.ResultText = await TranslateItemNamesAsync(isRepeatRewardChoice ? choice.RepeatResultText! : choice.ResultText);
             outcome.HpDelta = isRepeatRewardChoice ? 0 : choice.HpDelta;
             outcome.GoldDelta = isRepeatRewardChoice ? 0 : choice.GoldDelta;
             outcome.ExpDelta = isRepeatRewardChoice ? 0 : choice.ExpDelta;
@@ -203,9 +240,14 @@ namespace ChroniclesoftheAbyssTower.Services
             {
                 var consumed = await _inventoryService.ConsumeItemAsync(player.PlayerId, itemName);
                 if (consumed != null)
-                    outcome.ItemConsumed = string.IsNullOrWhiteSpace(outcome.ItemConsumed)
+                {
+                    var consumedName = string.IsNullOrWhiteSpace(consumed.ThaiName)
                         ? consumed.ItemName
-                        : $"{outcome.ItemConsumed}, {consumed.ItemName}";
+                        : consumed.ThaiName;
+                    outcome.ItemConsumed = string.IsNullOrWhiteSpace(outcome.ItemConsumed)
+                        ? consumedName
+                        : $"{outcome.ItemConsumed}, {consumedName}";
+                }
             }
 
             // ========== Apply HP / Gold deltas ==========
@@ -227,9 +269,16 @@ namespace ChroniclesoftheAbyssTower.Services
             {
                 try
                 {
+                    var alreadyHasUniqueItem = InventoryService.IsUniqueStoryItem(choice.ItemReward) &&
+                        await _inventoryService.HasItemAsync(player.PlayerId, choice.ItemReward);
+
                     await _inventoryService.AddItemAsync(player.PlayerId, choice.ItemReward, choice.ItemRewardQuantity);
-                    outcome.ItemAcquired = choice.ItemReward;
-                    outcome.ItemAcquiredQty = choice.ItemRewardQuantity;
+
+                    if (!alreadyHasUniqueItem)
+                    {
+                        outcome.ItemAcquired = await GetItemDisplayNameAsync(choice.ItemReward);
+                        outcome.ItemAcquiredQty = choice.ItemRewardQuantity;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -255,6 +304,14 @@ namespace ChroniclesoftheAbyssTower.Services
             // ========== บันทึก progress ==========
             await SaveProgressAsync(player.PlayerId, storyEvent.FloorNumber, choiceIndex, choice.Text);
 
+            // ========== ตรวจ ending จาก choice ==========
+            if (!string.IsNullOrWhiteSpace(choice.EndingType))
+            {
+                outcome.GameCompleted = true;
+                await _playerService.CompleteGameAsync(player, choice.EndingType);
+                return outcome;
+            }
+
             // ========== ตรวจการตาย ==========
             if (player.Hp <= 0)
             {
@@ -263,14 +320,6 @@ namespace ChroniclesoftheAbyssTower.Services
                 outcome.GameCompleted = true;
                 outcome.EndingType = "Bad";
                 await _playerService.CompleteGameAsync(player, "Bad");
-                return outcome;
-            }
-
-            // ========== ตรวจ ending จาก choice ==========
-            if (!string.IsNullOrWhiteSpace(choice.EndingType))
-            {
-                outcome.GameCompleted = true;
-                await _playerService.CompleteGameAsync(player, choice.EndingType);
                 return outcome;
             }
 

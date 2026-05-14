@@ -199,7 +199,7 @@
       },
       {
         "Text": "ทางขวา - ห้องสมุดเก่า",
-        "ResultText": "ข้าพบ Tower Map และ Old Note",
+        "ResultText": "ข้าพบ Tower Map ซ่อนอยู่ในห้องสมุดเก่า",
         "ItemReward": "Tower Map",
         "ItemRewardQuantity": 1,
         "ExpDelta": 18
@@ -378,7 +378,7 @@
         "ExpDelta": 8
       },
       {
-        "Text": "ใช้ Knight's Sword (ATK +5)",
+        "Text": "ใช้ Knight's Sword ฟันเปิดทาง",
         "ResultText": "ดาบอัศวินตัดผ่านอย่างง่ายดาย\nข้าฟันก็อบลินไม่เสียเหงื่อ\n(HP -8, Gold +50, EXP +35)",
         "HpDelta": -8,
         "GoldDelta": 50,
@@ -396,7 +396,7 @@
     "Choices": [
       {
         "Text": "อ่านหนังสือเรืองแสง",
-        "ResultText": "หนังสือบอกข้าวิธีใช้พลังในกาย\n(EXP +40, MaxHP +10)",
+        "ResultText": "หนังสือบอกข้าวิธีใช้พลังในกาย\n(HP +10, EXP +40)",
         "HpDelta": 10,
         "ExpDelta": 40
       },
@@ -483,7 +483,7 @@
     "Icon": "👻",
     "Choices": [
       {
-        "Text": "แลก HP กับพลัง (HP -20, ATK +3)",
+        "Text": "แลก HP กับ Knight's Sword (HP -20)",
         "ResultText": "วิญญาณดูดเลือดข้า\nและมอบ Knight's Sword ให้",
         "HpDelta": -20,
         "ExpDelta": 30,
@@ -542,7 +542,7 @@
     "Choices": [
       {
         "Text": "เรียกชื่อเอลีน่าดังๆ",
-        "ResultText": "เสียงสะท้อนเป็น Broken Pendant อีกชิ้น\nและพลังบางอย่างเข้ามาในกาย\n(MaxHP +15)",
+        "ResultText": "เสียงสะท้อนนำ Broken Pendant กลับมา\nและพลังบางอย่างเข้ามาในกาย\n(HP +15)",
         "HpDelta": 15,
         "ExpDelta": 35,
         "ItemReward": "Broken Pendant",
@@ -589,7 +589,10 @@
         "ExpDelta": 80,
         "ItemReward": "Iron Shield",
         "ItemRewardQuantity": 1,
-        "RequiresItem": "Knight's Sword"
+        "RequiresItems": [
+          "Boss Key",
+          "Knight's Sword"
+        ]
       },
       {
         "Text": "ใช้ Mist Crystal สื่อสารกับเขา",
@@ -612,7 +615,7 @@
     "Choices": [
       {
         "Text": "ทุบน้ำแข็งเอาดาบ",
-        "ResultText": "ข้าได้ Knight's Sword อีกเล่ม\nแต่ความหนาวกัดกระดูก\n(HP -15)",
+        "ResultText": "ข้าพบ Knight's Sword ในธารน้ำแข็ง\nแต่ความหนาวกัดกระดูก\n(HP -15)",
         "HpDelta": -15,
         "ExpDelta": 25,
         "ItemReward": "Knight's Sword",
@@ -620,7 +623,7 @@
       },
       {
         "Text": "อธิษฐานให้กับศพแล้วเดินผ่าน",
-        "ResultText": "วิญญาณอัศวินขอบคุณ\nและให้พลังเพิ่มแก่ข้า\n(MaxHP +20)",
+        "ResultText": "วิญญาณอัศวินขอบคุณ\nและให้พลังฟื้นฟูแก่ข้า\n(HP +20)",
         "HpDelta": 20,
         "ExpDelta": 35
       },
@@ -707,7 +710,7 @@
       },
       {
         "Text": "เกิดจากบรรพบุรุษของข้า",
-        "ResultText": "ผู้รู้ยิ้ม\n\"เจ้าฉลาดกว่าที่ข้าคิด\"\nข้าได้ Mist Crystal อีกชิ้น และ Greater Potion\n(EXP +50)",
+        "ResultText": "ผู้รู้ยิ้ม\n\"เจ้าฉลาดกว่าที่ข้าคิด\"\nข้าได้ Greater Potion เป็นรางวัล\n(EXP +50)",
         "ExpDelta": 50,
         "ItemReward": "Greater Potion",
         "ItemRewardQuantity": 2
@@ -730,7 +733,7 @@
     "Choices": [
       {
         "Text": "ยอมรับความจริง",
-        "ResultText": "ข้ายอมรับโชคชะตา\nและได้รับพลังของบรรพบุรุษ\n(MaxHP +30, EXP +60)",
+        "ResultText": "ข้ายอมรับโชคชะตา\nและได้รับพลังของบรรพบุรุษ\n(HP +30, EXP +60)",
         "HpDelta": 30,
         "ExpDelta": 60
       },
@@ -759,7 +762,7 @@
     "Choices": [
       {
         "Text": "สู้แบบเต็มที่",
-        "ResultText": "ข้าฟันอัศวินสำเร็จ\nและรับเกราะของเขา\n(HP -30, ATK +3, EXP +50)",
+        "ResultText": "ข้าฟันอัศวินสำเร็จ\nและรับเกราะของเขา\n(HP -30, EXP +50)",
         "HpDelta": -30,
         "ExpDelta": 50,
         "ItemReward": "Iron Shield",
@@ -822,7 +825,7 @@
     "Choices": [
       {
         "Text": "สาบานจะรับหน้าที่ของบรรพบุรุษ",
-        "ResultText": "ห้องเรืองแสงสีทอง\nข้าได้รับมงกุฎและพลังเก่า\n(MaxHP +50, EXP +80)",
+        "ResultText": "ห้องเรืองแสงสีทอง\nข้าได้รับมงกุฎและพลังเก่า\n(HP +50, EXP +80)",
         "HpDelta": 50,
         "ExpDelta": 80
       },
@@ -834,7 +837,7 @@
       },
       {
         "Text": "ทำลายบัลลังก์ด้วย Knight's Sword",
-        "ResultText": "ดาบฟันบัลลังก์ขาดสะบั้น\nข้าได้ Boss Key สำหรับชั้นสุดท้าย\n(HP -10, EXP +60)",
+        "ResultText": "ดาบฟันบัลลังก์ขาดสะบั้น\nข้าได้ Boss Key ที่เคยเป็นตราผนึกของราชา\n(HP -10, EXP +60)",
         "HpDelta": -10,
         "ExpDelta": 60,
         "ItemReward": "Boss Key",

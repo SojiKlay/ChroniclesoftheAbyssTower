@@ -27,6 +27,9 @@ namespace ChroniclesoftheAbyssTower.Models
         [Indexed(Unique = true), MaxLength(50), NotNull]
         public string ItemName { get; set; } = string.Empty;
 
+        [MaxLength(80)]
+        public string ThaiName { get; set; } = string.Empty;
+
         [NotNull]
         public ItemType ItemType { get; set; }
 

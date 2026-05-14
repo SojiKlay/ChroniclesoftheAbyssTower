@@ -43,6 +43,7 @@ namespace ChroniclesoftheAbyssTower.Services
                 await _connection.CreateTableAsync<User>();
                 await _connection.CreateTableAsync<Player>();
                 await _connection.CreateTableAsync<Item>();
+                await EnsureItemThaiNameColumnAsync();
                 await _connection.CreateTableAsync<InventoryItem>();
                 await _connection.CreateTableAsync<Journal>();
                 await _connection.CreateTableAsync<SaveData>();
@@ -53,6 +54,18 @@ namespace ChroniclesoftheAbyssTower.Services
             finally
             {
                 _initLock.Release();
+            }
+        }
+
+        private async Task EnsureItemThaiNameColumnAsync()
+        {
+            try
+            {
+                await _connection!.ExecuteAsync("ALTER TABLE Items ADD COLUMN ThaiName varchar(80)");
+            }
+            catch (SQLiteException ex) when (ex.Message.Contains("duplicate column name", StringComparison.OrdinalIgnoreCase))
+            {
+                // Column already exists from a previous app run.
             }
         }
 

@@ -1,6 +1,7 @@
 [
   {
     "ItemName": "Health Potion",
+    "ThaiName": "น้ำยาชีพคืนเงา",
     "ItemType": 0,
     "Description": "โพชั่นฟื้นฟูพลังชีวิตพื้นฐาน HP +20",
     "EffectValue": 20,
@@ -10,6 +11,7 @@
   },
   {
     "ItemName": "Greater Potion",
+    "ThaiName": "น้ำยาโลหิตอเวจี",
     "ItemType": 0,
     "Description": "โพชั่นฟื้นฟูระดับสูง HP +50",
     "EffectValue": 50,
@@ -19,6 +21,7 @@
   },
   {
     "ItemName": "Dark Water",
+    "ThaiName": "น้ำทมิฬแห่งหอคอย",
     "ItemType": 0,
     "Description": "น้ำจากหอคอยอเวจี HP +10",
     "EffectValue": 10,
@@ -28,6 +31,7 @@
   },
   {
     "ItemName": "Rune Key",
+    "ThaiName": "กุญแจรูนต้องสาป",
     "ItemType": 2,
     "Description": "กุญแจรูนโบราณของหอคอย ใช้เปิดประตู",
     "EffectValue": 0,
@@ -37,6 +41,7 @@
   },
   {
     "ItemName": "Old Note",
+    "ThaiName": "บันทึกซีดจาง",
     "ItemType": 1,
     "Description": "กระดาษบันทึกเก่า เป็น Hint สำหรับเนื้อเรื่อง",
     "EffectValue": 0,
@@ -46,6 +51,7 @@
   },
   {
     "ItemName": "Broken Pendant",
+    "ThaiName": "จี้ร้าวแห่งเอลีน่า",
     "ItemType": 1,
     "Description": "จี้ที่แตกหักของเอลีน่า เชื่อมโยงกับน้องสาว",
     "EffectValue": 0,
@@ -55,6 +61,7 @@
   },
   {
     "ItemName": "Tower Map",
+    "ThaiName": "แผนที่หอคอยมรณะ",
     "ItemType": 2,
     "Description": "แผนที่บางส่วนของหอคอย เปิดเส้นทางลับ",
     "EffectValue": 0,
@@ -64,15 +71,17 @@
   },
   {
     "ItemName": "Boss Key",
+    "ThaiName": "กุญแจห้องจ้าวอสูร",
     "ItemType": 2,
     "Description": "กุญแจพิเศษของห้องบอส",
     "EffectValue": 0,
     "IconKey": "🔑",
     "ShopPrice": 0,
-    "IsConsumable": true
+    "IsConsumable": false
   },
   {
     "ItemName": "Mist Crystal",
+    "ThaiName": "ผลึกหมอกอเวจี",
     "ItemType": 1,
     "Description": "ผลึกหมอกอเวจี เก็บพลังของหมอก",
     "EffectValue": 0,
@@ -82,24 +91,27 @@
   },
   {
     "ItemName": "Knight's Sword",
+    "ThaiName": "ดาบอัศวินผู้ล่วงลับ",
     "ItemType": 4,
-    "Description": "ดาบของอัศวินที่ตายในหอคอย ATK +5",
-    "EffectValue": 5,
+    "Description": "ดาบของอัศวินที่ตายในหอคอย ใช้เปิดทางในบางเหตุการณ์",
+    "EffectValue": 0,
     "IconKey": "⚔️",
     "ShopPrice": 80,
     "IsConsumable": false
   },
   {
     "ItemName": "Iron Shield",
+    "ThaiName": "โล่เหล็กสุสาน",
     "ItemType": 4,
-    "Description": "โล่เหล็กเก่าแก่ DEF +3",
-    "EffectValue": 3,
+    "Description": "โล่เหล็กเก่าแก่ ใช้ป้องกันอันตรายในบางเหตุการณ์",
+    "EffectValue": 0,
     "IconKey": "🛡️",
     "ShopPrice": 60,
     "IsConsumable": false
   },
   {
     "ItemName": "Phoenix Feather",
+    "ThaiName": "ขนนกเพลิงอมตะ",
     "ItemType": 0,
     "Description": "ขนนกฟีนิกซ์ ฟื้น HP เต็ม",
     "EffectValue": 999,

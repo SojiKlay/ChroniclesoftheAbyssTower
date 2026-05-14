@@ -158,7 +158,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                 var player = await _playerService.GetActivePlayerAsync();
                 if (player != null)
                 {
-                    await _playerService.DeleteAsync(player);
+                    await _playerService.DeleteWithRelatedDataAsync(player);
                     SessionManager.ClearActivePlayer();
                 }
                 await Shell.Current.GoToAsync(AppConstants.RouteMainMenu);
