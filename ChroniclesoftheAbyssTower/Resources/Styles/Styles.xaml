@@ -19,7 +19,8 @@
     </Style>
 
     <Style TargetType="BoxView">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+        <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
     </Style>
 
     <!-- Default Button style ถูกย้ายไปอยู่ในส่วน Abyss Custom Styles ด้านล่าง (เพื่อหลีกเลี่ยง duplicate key error) -->

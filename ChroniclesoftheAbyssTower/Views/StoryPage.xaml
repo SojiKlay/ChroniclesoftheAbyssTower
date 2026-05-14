@@ -15,8 +15,8 @@
                 BackgroundColor="{StaticResource AbyssSurface}"
                 Stroke="{StaticResource AbyssBorder}"
                 StrokeThickness="0,0,0,1"
-                Padding="16,12">
-            <Grid RowDefinitions="Auto,Auto" RowSpacing="6">
+                Padding="14,8">
+            <Grid RowDefinitions="Auto,Auto" RowSpacing="4">
 
                 <!-- Row 1: Player + Floor + Quick Buttons -->
                 <Grid Grid.Row="0" ColumnDefinitions="*,Auto,Auto,Auto,Auto">
@@ -100,21 +100,35 @@
         </Border>
 
         <!-- ============== Scrollable Content (Narrative + Choices) ============== -->
-        <ScrollView Grid.Row="1" Padding="20,16,20,24">
-            <VerticalStackLayout Spacing="16">
+        <ScrollView Grid.Row="1" Padding="16,10,16,12">
+            <VerticalStackLayout Spacing="10">
 
                 <!-- Floor Header -->
                 <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
                     <Label Text="{Binding FloorIcon}"
+                           IsVisible="{Binding HasFloorIcon}"
                            FontSize="48"
                            HorizontalOptions="Center"/>
                     <Label Text="{Binding FloorTitle}"
                            Style="{StaticResource AbyssSectionHeader}"
-                           FontSize="20"
+                           FontSize="18"
                            HorizontalTextAlignment="Center"/>
                     <Label Text="{Binding EventType}"
                            Style="{StaticResource AbyssCaption}"
                            HorizontalOptions="Center"/>
+                    <Border IsVisible="{Binding HasFloorImage}"
+                            HeightRequest="200"
+                            Margin="0,6,0,0"
+                            HorizontalOptions="Fill"
+                            Stroke="{StaticResource AbyssBorder}"
+                            StrokeThickness="1"
+                            BackgroundColor="{StaticResource AbyssSurface}">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="14"/>
+                        </Border.StrokeShape>
+                        <Image Source="{Binding FloorImage}"
+                               Aspect="AspectFill"/>
+                    </Border>
                     <BoxView HeightRequest="1"
                              Color="{StaticResource AbyssGold}"
                              WidthRequest="60"
@@ -124,10 +138,49 @@
                 </VerticalStackLayout>
 
                 <!-- Narrative Card -->
-                <Border Style="{StaticResource AbyssStoryCard}">
+                <Border Style="{StaticResource AbyssStoryCard}" Padding="14">
                     <Label Text="{Binding Narrative}"
                            Style="{StaticResource AbyssStoryText}"
-                           LineHeight="1.7"/>
+                           FontSize="15"
+                           LineHeight="1.35"/>
+                </Border>
+
+                <!-- Latest choice feedback -->
+                <Border IsVisible="{Binding HasOutcomeFeedback}"
+                        BackgroundColor="{StaticResource AbyssSurface}"
+                        Stroke="{Binding OutcomeAccentColor}"
+                        StrokeThickness="1"
+                        Padding="0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14"/>
+                    </Border.StrokeShape>
+                    <Grid ColumnDefinitions="5,*">
+                        <BoxView Grid.Column="0"
+                                 Color="{Binding OutcomeAccentColor}"
+                                 VerticalOptions="Fill"/>
+                        <VerticalStackLayout Grid.Column="1" Padding="12,10" Spacing="6">
+                            <Label Text="{Binding OutcomeTitle}"
+                                   TextColor="{Binding OutcomeAccentColor}"
+                                   FontAttributes="Bold"
+                                   FontSize="13"/>
+                            <Label Text="{Binding OutcomeText}"
+                                   Style="{StaticResource AbyssStoryText}"
+                                   FontSize="14"
+                                   LineHeight="1.25"/>
+                            <Label Text="{Binding OutcomeStats}"
+                                   IsVisible="{Binding HasOutcomeStats}"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontAttributes="Bold"
+                                   FontSize="12"
+                                   LineBreakMode="WordWrap"/>
+                            <Label Text="{Binding OutcomeRewards}"
+                                   IsVisible="{Binding HasOutcomeRewards}"
+                                   TextColor="{StaticResource AbyssGold}"
+                                   FontAttributes="Bold"
+                                   FontSize="12"
+                                   LineBreakMode="WordWrap"/>
+                        </VerticalStackLayout>
+                    </Grid>
                 </Border>
 
                 <!-- Error display -->
@@ -137,14 +190,14 @@
                        HorizontalTextAlignment="Center"/>
 
                 <!-- Choices Section Header -->
-                <Label Text="⚡ เลือกการตัดสินใจ"
+                <Label Text="เลือกการตัดสินใจ"
                        Style="{StaticResource AbyssSectionHeader}"
-                       FontSize="15"
+                       FontSize="13"
                        HorizontalTextAlignment="Center"
-                       Margin="0,8,0,0"/>
+                       Margin="0,2,0,0"/>
 
                 <!-- Choices (disable ทั้งหมดเมื่อ IsBusy เพื่อกัน double-tap) -->
-                <VerticalStackLayout Spacing="10"
+                <VerticalStackLayout Spacing="6"
                                      BindableLayout.ItemsSource="{Binding Choices}"
                                      IsEnabled="{Binding IsNotBusy}">
                     <BindableLayout.ItemTemplate>
@@ -152,6 +205,11 @@
                             <VerticalStackLayout Spacing="3">
                                 <Button Text="{Binding Text}"
                                         Style="{StaticResource ChoiceButton}"
+                                        FontSize="13"
+                                        HeightRequest="44"
+                                        MinimumHeightRequest="44"
+                                        Padding="12,6"
+                                        CornerRadius="10"
                                         IsEnabled="{Binding IsEnabled}"
                                         Command="{Binding BindingContext.SelectChoiceCommand, Source={x:Reference StoryRoot}}"
                                         CommandParameter="{Binding .}"/>

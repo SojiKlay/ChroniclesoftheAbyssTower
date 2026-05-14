@@ -31,6 +31,9 @@ namespace ChroniclesoftheAbyssTower.Models
         // emoji หรือ icon สำหรับ floor
         public string Icon { get; set; } = "🗝️";
 
+        // รูปภาพของ floor (optional) เช่น floor_01.jpg
+        public string? ImageFile { get; set; }
+
         // เป็น final floor หรือไม่
         public bool IsFinalFloor { get; set; } = false;
     }

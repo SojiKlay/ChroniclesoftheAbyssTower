@@ -43,12 +43,84 @@ namespace ChroniclesoftheAbyssTower.ViewModels
         [ObservableProperty] private StoryEvent? currentEvent;
         [ObservableProperty] private string floorTitle = "";
         [ObservableProperty] private string narrative = "";
-        [ObservableProperty] private string floorIcon = "🗝️";
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasFloorIcon))]
+        private string floorIcon = "🗝️";
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasFloorImage))]
+        private string floorImage = "";
         [ObservableProperty] private string eventType = "Story";
+
+        public bool HasFloorIcon => !string.IsNullOrWhiteSpace(FloorIcon);
+        public bool HasFloorImage => !string.IsNullOrWhiteSpace(FloorImage);
+
+        // ============== Choice Feedback ==============
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasOutcomeFeedback))]
+        private string outcomeTitle = "";
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasOutcomeFeedback))]
+        private string outcomeText = "";
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasOutcomeStats))]
+        private string outcomeStats = "";
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasOutcomeRewards))]
+        private string outcomeRewards = "";
+
+        [ObservableProperty] private Color outcomeAccentColor = Color.FromArgb("#D4AF37");
+
+        public bool HasOutcomeFeedback =>
+            !string.IsNullOrWhiteSpace(OutcomeTitle) ||
+            !string.IsNullOrWhiteSpace(OutcomeText);
+        public bool HasOutcomeStats => !string.IsNullOrWhiteSpace(OutcomeStats);
+        public bool HasOutcomeRewards => !string.IsNullOrWhiteSpace(OutcomeRewards);
 
         public ObservableCollection<ChoiceItemVm> Choices { get; } = new();
 
         // ============== Lifecycle ==============
+
+        private void ShowOutcome(ChoiceOutcome outcome)
+        {
+            OutcomeTitle = outcome.PlayerDied
+                ? "ผลลัพธ์ร้ายแรง"
+                : outcome.GameCompleted
+                    ? "บทสรุปกำลังเปิดเผย"
+                    : "ผลจากการตัดสินใจล่าสุด";
+
+            OutcomeText = string.IsNullOrWhiteSpace(outcome.ResultText)
+                ? "การตัดสินใจของเจ้าส่งผลต่อเส้นทางในหอคอยแล้ว"
+                : outcome.ResultText;
+
+            var stats = new List<string>();
+            if (outcome.HpDelta != 0) stats.Add($"HP {(outcome.HpDelta > 0 ? "+" : "")}{outcome.HpDelta}");
+            if (outcome.GoldDelta != 0) stats.Add($"Gold {(outcome.GoldDelta > 0 ? "+" : "")}{outcome.GoldDelta}");
+            if (outcome.ExpDelta > 0) stats.Add($"EXP +{outcome.ExpDelta}");
+            if (outcome.LeveledUp) stats.Add("Level UP!");
+            OutcomeStats = stats.Count > 0
+                ? string.Join("  •  ", stats)
+                : "";
+
+            var rewards = new List<string>();
+            if (!string.IsNullOrWhiteSpace(outcome.ItemAcquired))
+                rewards.Add($"ได้รับ {outcome.ItemAcquired} x{outcome.ItemAcquiredQty}");
+            if (!string.IsNullOrWhiteSpace(outcome.ItemConsumed))
+                rewards.Add($"ใช้ {outcome.ItemConsumed}");
+            if (outcome.StoryJournalUnlocked && outcome.UnlockedJournal != null)
+                rewards.Add($"ปลดล็อก Journal: {outcome.UnlockedJournal.Title}");
+            OutcomeRewards = rewards.Count > 0
+                ? string.Join("\n", rewards)
+                : "";
+
+            OutcomeAccentColor = outcome.PlayerDied || outcome.HpDelta < 0
+                ? Color.FromArgb("#C53030")
+                : !string.IsNullOrWhiteSpace(outcome.ItemAcquired) || outcome.GoldDelta > 0 || outcome.StoryJournalUnlocked
+                    ? Color.FromArgb("#D4AF37")
+                    : Color.FromArgb("#9F7AEA");
+        }
 
         /// <summary>
         /// เรียกตอน OnAppearing ของหน้า — load player + floor
@@ -107,6 +179,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             FloorTitle = CurrentEvent.Title;
             Narrative = CurrentEvent.Narrative;
             FloorIcon = CurrentEvent.Icon;
+            FloorImage = CurrentEvent.ImageFile ?? "";
             EventType = CurrentEvent.EventType;
 
             // setup 3 choices (ตรวจ requires item)
@@ -208,7 +281,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                     return;
                 }
 
-                await ShowOutcomeAsync(outcome);
+                ShowOutcome(outcome);
 
                 if (outcome.PlayerDied)
                 {
