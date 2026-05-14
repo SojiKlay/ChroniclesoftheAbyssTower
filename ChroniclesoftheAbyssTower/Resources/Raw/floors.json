@@ -9,13 +9,13 @@
     "StoryJournalKey": "JR-001",
     "Choices": [
       {
-        "Text": "พังประตูด้วยกำลัง",
+        "Text": "กระแทกประตูที่สลักชื่อเจ้าไว้",
         "ResultText": "ข้าใช้ไหล่กระแทกประตูสุดแรง\nประตูเปิดออก แต่ข้าได้รับบาดเจ็บ\n(HP -10)",
         "HpDelta": -10,
         "ExpDelta": 5
       },
       {
-        "Text": "ค้นหารอบๆ เพื่อหากุญแจ",
+        "Text": "ลูบกำแพงเย็นเฉียบหารอยซ่อน",
         "ResultText": "ข้าพบ Rune Key ซ่อนอยู่ในซอกหิน\nเครื่องหมายรูนตรงประตูสว่างขึ้น",
         "RepeatResultText": "ข้าค้นหารอบๆ อีกครั้ง\nแต่ไม่มีอะไรเหลืออยู่ในซอกหินแล้ว",
         "ItemReward": "Rune Key",
@@ -24,7 +24,7 @@
         "AdvanceFloor": false
       },
       {
-        "Text": "ใช้ Rune Key เปิดประตู",
+        "Text": "แนบ Rune Key เข้ากับรอยผนึก",
         "ResultText": "ประตูเปิดออกอย่างนุ่มนวล\nไม่มีบาดแผล ไม่มีเสียง",
         "RequiresItem": "Rune Key",
         "RequiredItem": "Rune Key",
@@ -42,7 +42,7 @@
     "StoryJournalKey": "JR-002",
     "Choices": [
       {
-        "Text": "เปิดหีบทันที",
+        "Text": "วางมือลงบนฝาหีบที่เย็นผิดปกติ",
         "ResultText": "ข้าได้ Health Potion 1 ขวด\nแต่กับดักเข็มเล็กๆ ทิ่มมือ\n(HP -5)",
         "HpDelta": -5,
         "ItemReward": "Health Potion",
@@ -50,14 +50,14 @@
         "ExpDelta": 8
       },
       {
-        "Text": "ตรวจสอบหีบให้รอบคอบ",
+        "Text": "ก้มมองรอยขีดข่วนรอบหีบ",
         "ResultText": "ข้าพบ Old Note ซ่อนอยู่ใต้หีบ\nและปลดกับดักก่อนเปิดอย่างปลอดภัย",
         "ItemReward": "Old Note",
         "ItemRewardQuantity": 1,
         "ExpDelta": 12
       },
       {
-        "Text": "เดินผ่านไป ไม่แตะหีบ",
+        "Text": "ปล่อยให้หีบนั้นหลับต่อไปในความมืด",
         "ResultText": "ข้าเดินผ่านไป\nเสียงกระซิบจากในหีบเริ่มจางลง...",
         "ExpDelta": 3
       }
@@ -72,20 +72,20 @@
     "ImageFile": "floor_03.jpg",
     "Choices": [
       {
-        "Text": "สู้กับเงา",
+        "Text": "ยกดาบขึ้นท่ามกลางเงาที่คืบคลาน",
         "ResultText": "ข้าฟันเงาด้วยกำลังทั้งหมด\nมันสลายเป็นหมอก พร้อมทิ้งเหรียญทอง\n(HP -15, Gold +20, EXP +20)",
         "HpDelta": -15,
         "GoldDelta": 20,
         "ExpDelta": 20
       },
       {
-        "Text": "หลบหนี",
+        "Text": "ถอยหายเข้าไปในมุมที่ไร้แสง",
         "ResultText": "ข้าวิ่งหนีอย่างรวดเร็ว\nเงาตามมาแต่ไม่ทัน\n(HP -5)",
         "HpDelta": -5,
         "ExpDelta": 5
       },
       {
-        "Text": "ใช้ Health Potion ก่อนสู้",
+        "Text": "ดื่ม Health Potion ก่อนก้าวสู่เงา",
         "ResultText": "ข้าฟื้น HP แล้วฟันเงาอย่างมั่นใจ\n(HP +20 -10 = +10, EXP +25)",
         "HpDelta": 10,
         "ExpDelta": 25,
@@ -103,18 +103,18 @@
     "ImageFile": "floor_04.jpg",
     "Choices": [
       {
-        "Text": "วิ่งข้ามให้เร็วที่สุด",
+        "Text": "พุ่งข้ามพื้นร้าวก่อนมันจะทรุดตัว",
         "ResultText": "พื้นยุบลงตอนข้ากำลังวิ่ง\nข้ารอดมาได้แต่ขาเจ็บ\n(HP -10)",
         "HpDelta": -10,
         "ExpDelta": 8
       },
       {
-        "Text": "เดินช้าๆ อย่างระมัดระวัง",
+        "Text": "นับจังหวะรอยร้าวใต้ฝ่าเท้า",
         "ResultText": "ข้าเดินด้วยความระมัดระวังสุดขีด\nและถึงอีกฝั่งอย่างปลอดภัย",
         "ExpDelta": 12
       },
       {
-        "Text": "ใช้ Rune Key เปิดทางลับ",
+        "Text": "ใช้ Rune Key กับรอยสลักบนพื้นหิน",
         "ResultText": "ข้าพบทางลับใต้พื้น มีถุงทองรอข้าอยู่\n(Gold +25)",
         "GoldDelta": 25,
         "ExpDelta": 18,
@@ -133,20 +133,20 @@
     "StoryJournalKey": "JR-003",
     "Choices": [
       {
-        "Text": "ดื่มน้ำจากน้ำพุ",
+        "Text": "แตะริมฝีปากกับน้ำที่สะท้อนดวงตาเจ้า",
         "ResultText": "น้ำเย็นเยียบลงไปในกาย\nแผลหายอย่างรวดเร็ว\n(HP +20)",
         "HpDelta": 20,
         "ExpDelta": 10
       },
       {
-        "Text": "เก็บน้ำใส่ขวด",
+        "Text": "รองน้ำไว้ก่อนที่เงาสะท้อนจะขยับ",
         "ResultText": "ข้าได้ Dark Water สำหรับเดินทางต่อ",
         "ItemReward": "Dark Water",
         "ItemRewardQuantity": 2,
         "ExpDelta": 8
       },
       {
-        "Text": "เดินผ่านไป ไม่แตะน้ำ",
+        "Text": "เดินผ่านเสียงหยดน้ำที่เรียกชื่อเจ้า",
         "ResultText": "ข้าเดินผ่านไป\nรู้สึกเหมือนน้ำกำลังจ้องข้าอยู่...",
         "ExpDelta": 3
       }
@@ -162,7 +162,7 @@
     "StoryJournalKey": "JR-004",
     "Choices": [
       {
-        "Text": "ซื้อ Health Potion (Gold -20)",
+        "Text": "รับขวดสีแดงจากมือที่ซ่อนในผ้าคลุม",
         "ResultText": "พ่อค้ายื่นโพชั่นให้ พร้อมรอยยิ้มประหลาด",
         "GoldDelta": -20,
         "ItemReward": "Health Potion",
@@ -170,7 +170,7 @@
         "ExpDelta": 5
       },
       {
-        "Text": "ซื้อ Rune Key (Gold -15)",
+        "Text": "แลกทองกับกุญแจที่อุ่นเหมือนเลือด",
         "ResultText": "ข้าได้ Rune Key อีกอัน เผื่อใช้",
         "GoldDelta": -15,
         "ItemReward": "Rune Key",
@@ -178,7 +178,7 @@
         "ExpDelta": 5
       },
       {
-        "Text": "ปฏิเสธและเดินผ่านไป",
+        "Text": "เมินรอยยิ้มของพ่อค้าแล้วก้าวต่อ",
         "ResultText": "พ่อค้าหัวเราะเบาๆ\n\"แล้วเจอกันใหม่... ถ้าเจ้ายังมีชีวิตอยู่\"",
         "ExpDelta": 3
       }
@@ -193,19 +193,19 @@
     "ImageFile": "floor_07.jpg",
     "Choices": [
       {
-        "Text": "ทางซ้าย - ห้องทรัพย์สมบัติ",
+        "Text": "เลี้ยวสู่ประตูที่กลิ่นทองลอยออกมา",
         "ResultText": "ข้าพบทองคำกระจัดกระจาย\n(Gold +30)",
         "GoldDelta": 30,
         "ExpDelta": 12
       },
       {
-        "Text": "ทางกลาง - ห้องการต่อสู้",
+        "Text": "ก้าวเข้าช่องกลางที่มีเสียงโลหะครูด",
         "ResultText": "ข้าเจอมอนสเตอร์และต่อสู้อย่างดุเดือด\n(HP -20, EXP +30)",
         "HpDelta": -20,
         "ExpDelta": 30
       },
       {
-        "Text": "ทางขวา - ห้องสมุดเก่า",
+        "Text": "ผลักประตูขวาที่กระซิบด้วยกระดาษเก่า",
         "ResultText": "ข้าพบ Tower Map ซ่อนอยู่ในห้องสมุดเก่า",
         "ItemReward": "Tower Map",
         "ItemRewardQuantity": 1,
@@ -223,19 +223,19 @@
     "StoryJournalKey": "JR-005",
     "Choices": [
       {
-        "Text": "อ่านบันทึกอย่างละเอียด",
+        "Text": "อ่านตัวอักษรที่เหมือนเพิ่งถูกเขียน",
         "ResultText": "ข้าได้ความรู้เกี่ยวกับหอคอย\nและปลดล็อก Journal System\n(EXP +20)",
         "ExpDelta": 20
       },
       {
-        "Text": "ฉีกหน้าเก็บไว้ เผื่อใช้งาน",
+        "Text": "พับหน้ากระดาษเก่าเก็บไว้ในเสื้อคลุม",
         "ResultText": "ข้าได้ Old Note อีกแผ่น",
         "ItemReward": "Old Note",
         "ItemRewardQuantity": 1,
         "ExpDelta": 10
       },
       {
-        "Text": "เดินผ่านไป",
+        "Text": "ปล่อยถ้อยคำเหล่านั้นไว้กับฝุ่น",
         "ResultText": "ข้าเลือกที่จะไม่รับรู้อะไรเพิ่ม...",
         "ExpDelta": 3
       }
@@ -250,7 +250,7 @@
     "ImageFile": "floor_09.jpg",
     "Choices": [
       {
-        "Text": "หยิบเศษกระจกที่สะท้อนเอลีน่า",
+        "Text": "เอื้อมหาเศษกระจกที่มีเสียงของเอลีน่า",
         "ResultText": "เศษกระจกเรืองแสง แล้วกลายเป็น Broken Pendant\n(หัวใจของข้าเจ็บ)",
         "HpDelta": -5,
         "ItemReward": "Broken Pendant",
@@ -258,13 +258,13 @@
         "ExpDelta": 25
       },
       {
-        "Text": "ทุบกระจกทั้งหมดด้วยกำลัง",
+        "Text": "ฟาดใส่เงาสะท้อนก่อนมันจะยิ้ม",
         "ResultText": "ข้าทุบกระจกพังพินาศ\nเลือดไหลจากแขน แต่ใจเบาขึ้น\n(HP -15, EXP +15)",
         "HpDelta": -15,
         "ExpDelta": 15
       },
       {
-        "Text": "หลีกเลี่ยงและเดินผ่าน",
+        "Text": "หลบสายตาของกระจกแล้วเดินผ่าน",
         "ResultText": "ข้าหลับตาแล้วเดินตรงผ่านไป\nเสียงกระจกเริ่มจางหายไปด้านหลัง",
         "ExpDelta": 8
       }
@@ -283,7 +283,7 @@
     "StoryJournalKey": "JR-006",
     "Choices": [
       {
-        "Text": "สู้กับ Gatekeeper",
+        "Text": "เผชิญหน้าผู้เฝ้าประตูที่ไม่กะพริบตา",
         "ResultText": "ข้าฟาดดาบกับ Gatekeeper อย่างดุเดือด\nสุดท้าย ข้าฟันเขาสำเร็จ\nได้ Boss Key และทอง\n(HP -25, Gold +50, EXP +50)",
         "HpDelta": -25,
         "GoldDelta": 50,
@@ -292,7 +292,7 @@
         "ItemRewardQuantity": 1
       },
       {
-        "Text": "ใช้ Greater Potion ก่อนสู้",
+        "Text": "ดื่ม Greater Potion ใต้เงาของ Gatekeeper",
         "ResultText": "ข้าฟื้น HP แล้วฟัน Gatekeeper อย่างมั่นใจ\n(HP +50 -25 = +25, Gold +50)",
         "HpDelta": 25,
         "GoldDelta": 50,
@@ -303,7 +303,7 @@
         "RequiredItem": "Greater Potion"
       },
       {
-        "Text": "พยายามหาทางเลี่ยง",
+        "Text": "มองหาช่องว่างหลังเกราะของมัน",
         "ResultText": "ไม่มีทางเลี่ยง! Gatekeeper ขวางเอาไว้\nข้าต้องสู้แบบไม่เตรียมตัว\n(HP -35, EXP +20)",
         "HpDelta": -35,
         "ExpDelta": 20,
@@ -321,19 +321,19 @@
     "ImageFile": "floor_11.jpg",
     "Choices": [
       {
-        "Text": "เดินตรงไปไม่สนใจเสียง",
+        "Text": "เดินตรงไปทั้งที่เสียงนั้นรู้จักชื่อเจ้า",
         "ResultText": "ข้าผ่านไปได้\nแต่หัวข้าเริ่มเจ็บ\n(HP -8)",
         "HpDelta": -8,
         "ExpDelta": 12
       },
       {
-        "Text": "หยุดฟังเสียงกระซิบ",
+        "Text": "หยุดฟังถ้อยคำที่เล็ดลอดจากกำแพง",
         "ResultText": "ข้าได้ยินเรื่องราวเก่าของหอคอย\nและรู้สึกถึงพลังบางอย่าง\n(EXP +25)",
         "HpDelta": -3,
         "ExpDelta": 25
       },
       {
-        "Text": "ใช้ Old Note ป้องกันจิตใจ",
+        "Text": "กาง Old Note ต่อหน้าความทรงจำที่ไม่ใช่ของเจ้า",
         "ResultText": "บันทึกเก่ามีคำอธิษฐานป้องกันจิต\nเสียงกระซิบเงียบลง",
         "ExpDelta": 18,
         "RequiresItem": "Old Note"
@@ -349,20 +349,20 @@
     "ImageFile": "floor_12.jpg",
     "Choices": [
       {
-        "Text": "สู้กับเงาในกระจก",
+        "Text": "จ้องเงาในกระจกแล้วชักดาบ",
         "ResultText": "ข้าทุบกระจกและสู้กับเงา\nมันเหมือนสู้กับตัวเอง\n(HP -25, EXP +35)",
         "HpDelta": -25,
         "ExpDelta": 35
       },
       {
-        "Text": "พูดคุยกับเงาตัวเอง",
+        "Text": "ถามเงานั้นว่ามันรอเจ้ามานานแค่ไหน",
         "ResultText": "เงาเล่าเรื่องของบรรพบุรุษ\nข้าได้ Mist Crystal เป็นหลักฐาน",
         "ItemReward": "Mist Crystal",
         "ItemRewardQuantity": 1,
         "ExpDelta": 25
       },
       {
-        "Text": "ปิดตาแล้วเดินผ่าน",
+        "Text": "ปิดตาแล้วเดินผ่านห้องกระจก",
         "ResultText": "เงาในกระจกหัวเราะเบาๆ\n\"แล้วเจอกันใหม่...\"\n(HP -10)",
         "HpDelta": -10,
         "ExpDelta": 10
@@ -378,20 +378,20 @@
     "ImageFile": "floor_13.jpg",
     "Choices": [
       {
-        "Text": "สู้แบบเต็มที่",
+        "Text": "ชักดาบเข้าสู้กับฝูงก็อบลิน",
         "ResultText": "ข้าฟันก็อบลินทั้งหมด\nพวกมันทิ้งทองและของขัดสน\n(HP -18, Gold +35, EXP +30)",
         "HpDelta": -18,
         "GoldDelta": 35,
         "ExpDelta": 30
       },
       {
-        "Text": "โยนทองเล็กน้อยให้พวกมัน",
+        "Text": "โยนเหรียญให้มือที่โผล่จากความมืด",
         "ResultText": "ก็อบลินคว้าทองแล้วหนี\n(Gold -20, ปลอดภัย)",
         "GoldDelta": -20,
         "ExpDelta": 8
       },
       {
-        "Text": "ใช้ Knight's Sword ฟันเปิดทาง",
+        "Text": "ให้ Knight's Sword วาดทางผ่านฝูงเงา",
         "ResultText": "ดาบอัศวินตัดผ่านอย่างง่ายดาย\nข้าฟันก็อบลินไม่เสียเหงื่อ\n(HP -8, Gold +50, EXP +35)",
         "HpDelta": -8,
         "GoldDelta": 50,
@@ -409,20 +409,20 @@
     "ImageFile": "floor_14.jpg",
     "Choices": [
       {
-        "Text": "อ่านหนังสือเรืองแสง",
+        "Text": "เปิดหนังสือที่เรืองแสงสีม่วงจางๆ",
         "ResultText": "หนังสือบอกข้าวิธีใช้พลังในกาย\n(HP +10, EXP +40)",
         "HpDelta": 10,
         "ExpDelta": 40
       },
       {
-        "Text": "ค้นหาของมีค่า",
+        "Text": "คลำหาสิ่งที่ยังไม่ถูกกาลเวลากลืน",
         "ResultText": "ข้าพบ Greater Potion ซ่อนอยู่ในชั้นหนังสือ",
         "ItemReward": "Greater Potion",
         "ItemRewardQuantity": 1,
         "ExpDelta": 15
       },
       {
-        "Text": "เผาห้องสมุดทิ้ง",
+        "Text": "จุดไฟเผาหนังสือต้องห้าม",
         "ResultText": "ไฟลุกลามอย่างรวดเร็ว\nข้าหนีออกมาทัน แต่หายใจเอาควัน\n(HP -15, EXP +5)",
         "HpDelta": -15,
         "ExpDelta": 5
@@ -439,7 +439,7 @@
     "StoryJournalKey": "JR-007",
     "Choices": [
       {
-        "Text": "ใช้ Health Potion ช่วยเขา",
+        "Text": "ยื่น Health Potion ให้กับชายชรา",
         "ResultText": "พ่อค้ารอด เขาเล่าความจริงเรื่องหมอก\nและให้ Tower Map พร้อมทอง\n(Gold +50, EXP +40)",
         "GoldDelta": 50,
         "ExpDelta": 40,
@@ -449,13 +449,13 @@
         "RequiredItem": "Health Potion"
       },
       {
-        "Text": "ขโมยของจากเขา",
+        "Text": "ค้นเสื้อคลุมของชายชราที่ยังไม่หลับสนิท",
         "ResultText": "ข้าเอาทองและของจากกระเป๋าเขา\nก่อนเขาจะตายลงโดยไม่ได้พูดอะไร\n(Gold +30, EXP +10)",
         "GoldDelta": 30,
         "ExpDelta": 10
       },
       {
-        "Text": "ปล่อยให้เขาตายแล้วเดินผ่าน",
+        "Text": "เดินผ่านคำขอสุดท้ายที่แผ่วลง",
         "ResultText": "ข้าเดินผ่านไปไม่หันหลัง\nเสียงครางของเขาตามมา...",
         "HpDelta": -5,
         "ExpDelta": 3
@@ -471,18 +471,18 @@
     "ImageFile": "floor_16.jpg",
     "Choices": [
       {
-        "Text": "พยายามเดินผ่านเงียบๆ",
+        "Text": "ค่อยๆ เดินลอดใต้ใยโดยไม่ให้แมงมุมตื่น",
         "ResultText": "ข้าเดินผ่านได้สำเร็จ\nแมงมุมไม่ตื่น",
         "ExpDelta": 25
       },
       {
-        "Text": "เผาใยแมงมุมด้วยไฟ",
+        "Text": "จุดไฟเผาใยแมงมุมที่ขวางทาง",
         "ResultText": "ใยแมงมุมไหม้ลุกลาม แมงมุมตื่นและโจมตี\nแต่ข้าหนีทันก่อนตาย\n(HP -20, EXP +25)",
         "HpDelta": -20,
         "ExpDelta": 25
       },
       {
-        "Text": "ใช้ Rune Key เปิดทางลับ",
+        "Text": "ใช้ Rune Key เปิดช่องลับใต้พื้น",
         "ResultText": "ข้าพบทางลับใต้พื้น เลี่ยงแมงมุมไปได้\nและเก็บไข่แมงมุมขายได้เงิน\n(Gold +40)",
         "GoldDelta": 40,
         "ExpDelta": 30,
@@ -500,7 +500,7 @@
     "ImageFile": "floor_17.jpg",
     "Choices": [
       {
-        "Text": "แลก HP กับ Knight's Sword (HP -20)",
+        "Text": "กรีดเลือดลงบนดาบที่เรียกหาเจ้าของ",
         "ResultText": "วิญญาณดูดเลือดข้า\nและมอบ Knight's Sword ให้",
         "HpDelta": -20,
         "ExpDelta": 30,
@@ -508,7 +508,7 @@
         "ItemRewardQuantity": 1
       },
       {
-        "Text": "แลก Gold กับ Phoenix Feather",
+        "Text": "วางทองต่อหน้าขนนกที่ไม่ยอมไหม้",
         "ResultText": "วิญญาณยิ้มและรับทอง\nมอบขนนกฟีนิกซ์อันล้ำค่าให้\n(Gold -100)",
         "GoldDelta": -100,
         "ExpDelta": 25,
@@ -516,7 +516,7 @@
         "ItemRewardQuantity": 1
       },
       {
-        "Text": "ปฏิเสธทุกข้อเสนอ",
+        "Text": "ปิดหูจากข้อเสนอที่หวานเกินจริง",
         "ResultText": "วิญญาณหายไปอย่างผิดหวัง\n\"เจ้าจะเสียใจในวันใดวันหนึ่ง...\"",
         "ExpDelta": 10
       }
@@ -531,19 +531,19 @@
     "ImageFile": "floor_18.jpg",
     "Choices": [
       {
-        "Text": "วิ่งข้ามให้เร็วที่สุด",
+        "Text": "วิ่งข้ามสะพานกระดูกที่กำลังสั่น",
         "ResultText": "สะพานพังลงตอนข้าวิ่ง\nข้ารอดมาได้แต่บาดเจ็บหนัก\n(HP -25)",
         "HpDelta": -25,
         "ExpDelta": 20
       },
       {
-        "Text": "ค่อยๆ เดินทีละก้าว",
+        "Text": "ค่อยๆ ก้าวข้ามสะพานกระดูก",
         "ResultText": "ข้าเดินช้ามาก แต่ปลอดภัย\n(HP -5, EXP +25)",
         "HpDelta": -5,
         "ExpDelta": 25
       },
       {
-        "Text": "ใช้ Tower Map หาทางเลี่ยง",
+        "Text": "คลี่ Tower Map ใต้แสงที่ไม่มีที่มา",
         "ResultText": "แผนที่บอกข้ามีทางลับด้านล่าง\nข้าผ่านได้อย่างง่ายดาย\n(EXP +30, Gold +20)",
         "GoldDelta": 20,
         "ExpDelta": 30,
@@ -560,7 +560,7 @@
     "ImageFile": "floor_19.jpg",
     "Choices": [
       {
-        "Text": "เรียกชื่อเอลีน่าดังๆ",
+        "Text": "เรียกชื่อเอลีน่าให้ก้องในห้องว่าง",
         "ResultText": "เสียงสะท้อนนำ Broken Pendant กลับมา\nและพลังบางอย่างเข้ามาในกาย\n(HP +15)",
         "HpDelta": 15,
         "ExpDelta": 35,
@@ -568,13 +568,13 @@
         "ItemRewardQuantity": 1
       },
       {
-        "Text": "ฟังเสียงสะท้อนเงียบๆ",
+        "Text": "ปล่อยให้เสียงสะท้อนพูดจนจบ",
         "ResultText": "ข้าได้ยินเสียงเอลีน่าร้องไห้\nหัวใจข้าเจ็บปวด\n(HP -10, EXP +25)",
         "HpDelta": -10,
         "ExpDelta": 25
       },
       {
-        "Text": "ออกจากห้องอย่างรวดเร็ว",
+        "Text": "ออกจากห้องก่อนเสียงนั้นจะใกล้เกินไป",
         "ResultText": "ข้าหนีออกมา\nแต่เสียงเอลีน่าตามมาในความฝัน",
         "ExpDelta": 8
       }
@@ -593,7 +593,7 @@
     "StoryJournalKey": "JR-008",
     "Choices": [
       {
-        "Text": "สู้กับ Wraith King",
+        "Text": "เผชิญหน้า Wraith King ใต้เงามงกุฎ",
         "ResultText": "การต่อสู้ดุเดือด ข้าฟันราชาสำเร็จ\nได้มงกุฎและทองมหาศาล\n(HP -35, Gold +100, EXP +60)",
         "HpDelta": -35,
         "GoldDelta": 100,
@@ -602,7 +602,7 @@
         "ItemRewardQuantity": 1
       },
       {
-        "Text": "ใช้ Boss Key + Knight's Sword",
+        "Text": "ประสาน Boss Key กับ Knight's Sword",
         "ResultText": "อาวุธทั้งสองทำลายราชาในครั้งเดียว!\n(HP -15, Gold +150, EXP +80)",
         "HpDelta": -15,
         "GoldDelta": 150,
@@ -615,7 +615,7 @@
         ]
       },
       {
-        "Text": "ใช้ Mist Crystal สื่อสารกับเขา",
+        "Text": "ยก Mist Crystal ให้หมอกมองผ่านเจ้า",
         "ResultText": "ราชาฟังคำของข้า\nและยอมให้ผ่าน พร้อมมอบของขวัญ\n(HP -10, Gold +80, EXP +70)",
         "HpDelta": -10,
         "GoldDelta": 80,
@@ -635,7 +635,7 @@
     "ImageFile": "floor_21.jpg",
     "Choices": [
       {
-        "Text": "ทุบน้ำแข็งเอาดาบ",
+        "Text": "ฟาดน้ำแข็งที่กักเสียงดาบไว้",
         "ResultText": "ข้าพบ Knight's Sword ในธารน้ำแข็ง\nแต่ความหนาวกัดกระดูก\n(HP -15)",
         "HpDelta": -15,
         "ExpDelta": 25,
@@ -643,13 +643,13 @@
         "ItemRewardQuantity": 1
       },
       {
-        "Text": "อธิษฐานให้กับศพแล้วเดินผ่าน",
+        "Text": "กระซิบคำอธิษฐานให้ร่างไร้นาม",
         "ResultText": "วิญญาณอัศวินขอบคุณ\nและให้พลังฟื้นฟูแก่ข้า\n(HP +20)",
         "HpDelta": 20,
         "ExpDelta": 35
       },
       {
-        "Text": "ค้นหาในห้องอย่างละเอียด",
+        "Text": "ค้นหาทั่วสุสานน้ำแข็งอย่างระมัดระวัง",
         "ResultText": "ข้าพบ Greater Potion 2 ขวด\nและทองสะสม",
         "GoldDelta": 30,
         "ExpDelta": 20,
@@ -667,13 +667,13 @@
     "ImageFile": "floor_22.jpg",
     "Choices": [
       {
-        "Text": "วิ่งผ่านไฟ",
+        "Text": "ฝ่าเปลวไฟที่โค้งเข้าหาเจ้า",
         "ResultText": "ข้าวิ่งผ่านไป แต่ผิวไหม้\n(HP -25)",
         "HpDelta": -25,
         "ExpDelta": 18
       },
       {
-        "Text": "ใช้ Dark Water ดับไฟรอบตัว",
+        "Text": "โปรย Dark Water ลงบนเปลวที่มีเงา",
         "ResultText": "น้ำหมอกแผ่ออก\nไฟดับลงบางส่วน ข้าผ่านอย่างปลอดภัย\n(HP -5)",
         "HpDelta": -5,
         "ExpDelta": 30,
@@ -681,7 +681,7 @@
         "RequiredItem": "Dark Water"
       },
       {
-        "Text": "ใช้ Iron Shield ปกป้อง",
+        "Text": "ยก Iron Shield รับเสียงคำรามของไฟ",
         "ResultText": "โล่ปกป้องข้าจากไฟ\nข้าผ่านได้อย่างปลอดภัย\n(EXP +35)",
         "ExpDelta": 35,
         "RequiresItem": "Iron Shield"
@@ -697,20 +697,20 @@
     "ImageFile": "floor_23.jpg",
     "Choices": [
       {
-        "Text": "เข้าไปกอดแม่",
+        "Text": "ก้าวสู่อ้อมแขนที่อบอุ่นเกินจริง",
         "ResultText": "เป็นภาพลวงตา! เป็นกับดักของหอคอย!\n(HP -20, EXP +20)",
         "HpDelta": -20,
         "ExpDelta": 20
       },
       {
-        "Text": "ปฏิเสธและเดินผ่าน",
+        "Text": "ถอยจากใบหน้าที่หัวใจอยากเชื่อ",
         "ResultText": "ข้ารู้ว่ามันไม่ใช่แม่จริง\nแต่หัวใจยังเจ็บ\n(HP -5, EXP +35)",
         "HpDelta": -5,
         "ExpDelta": 35
       },
       {
-        "Text": "ใช้ Broken Pendant พิสูจน์",
-        "ResultText": "Pendant เรืองแสง\nและภาพลวงตาก็แตกสลาย\nข้าได้พลังกลับคืน\n(HP +25, EXP +40)",
+        "Text": "ชูจี้ร้าวแห่งเอลีน่าต่อหน้าความทรงจำ",
+        "ResultText": "จี้ร้าวแห่งเอลีน่าเรืองแสง\nและภาพลวงตาก็แตกสลาย\nข้าได้พลังกลับคืน\n(HP +25, EXP +40)",
         "HpDelta": 25,
         "ExpDelta": 40,
         "RequiresItem": "Broken Pendant"
@@ -726,21 +726,21 @@
     "ImageFile": "floor_24.jpg",
     "Choices": [
       {
-        "Text": "เกิดจากความโลภของมนุษย์",
+        "Text": "กล่าวโทษความอยากที่ไม่เคยอิ่ม",
         "ResultText": "ผู้รู้พยักหน้า\n\"ครึ่งจริง...\"\n(HP -10, Gold +30, EXP +25)",
         "HpDelta": -10,
         "GoldDelta": 30,
         "ExpDelta": 25
       },
       {
-        "Text": "เกิดจากบรรพบุรุษของข้า",
+        "Text": "เอ่ยชื่อสายเลือดที่ฝังอยู่ในบาป",
         "ResultText": "ผู้รู้ยิ้ม\n\"เจ้าฉลาดกว่าที่ข้าคิด\"\nข้าได้ Greater Potion เป็นรางวัล\n(EXP +50)",
         "ExpDelta": 50,
         "ItemReward": "Greater Potion",
         "ItemRewardQuantity": 2
       },
       {
-        "Text": "เกิดจากปีศาจ",
+        "Text": "ชี้ไปยังปีศาจที่ซ่อนในเงา",
         "ResultText": "ผู้รู้ส่ายหน้า\n\"ผิด...\"\nและสาปข้าด้วยคำ\n(HP -30)",
         "HpDelta": -30,
         "ExpDelta": 5
@@ -757,19 +757,19 @@
     "StoryJournalKey": "JR-009",
     "Choices": [
       {
-        "Text": "ยอมรับความจริง",
+        "Text": "มองความจริงโดยไม่หลบตา",
         "ResultText": "ข้ายอมรับโชคชะตา\nและได้รับพลังของบรรพบุรุษ\n(HP +30, EXP +60)",
         "HpDelta": 30,
         "ExpDelta": 60
       },
       {
-        "Text": "ปฏิเสธและทุบกระจก",
+        "Text": "ทำลายภาพสะท้อนก่อนมันพูดจบ",
         "ResultText": "กระจกแตกร้าว\nและข้าได้รับบาดแผลจากเศษกระจก\n(HP -25, EXP +30)",
         "HpDelta": -25,
         "ExpDelta": 30
       },
       {
-        "Text": "ใช้ Mist Crystal ดูความจริงเพิ่ม",
+        "Text": "มองผ่าน Mist Crystal อีกครั้ง",
         "ResultText": "ผลึกเรืองแสงและเปิดเผยทุกอย่าง\nข้าได้ Phoenix Feather เป็นรางวัล\n(EXP +70)",
         "ExpDelta": 70,
         "ItemReward": "Phoenix Feather",
@@ -787,7 +787,7 @@
     "ImageFile": "floor_26.jpg",
     "Choices": [
       {
-        "Text": "สู้แบบเต็มที่",
+        "Text": "สู้ราวกับนี่คือดาบสุดท้ายในโลก",
         "ResultText": "ข้าฟันอัศวินสำเร็จ\nและรับเกราะของเขา\n(HP -30, EXP +50)",
         "HpDelta": -30,
         "ExpDelta": 50,
@@ -795,14 +795,14 @@
         "ItemRewardQuantity": 1
       },
       {
-        "Text": "พูดคุยและพยายามเข้าใจ",
+        "Text": "วางดาบลงแล้วฟังความเจ็บปวดของเขา",
         "ResultText": "อัศวินสลายไปอย่างสงบ\nและทิ้ง Knight's Sword ให้ข้า\n(EXP +40)",
         "ExpDelta": 40,
         "ItemReward": "Knight's Sword",
         "ItemRewardQuantity": 1
       },
       {
-        "Text": "ใช้ Phoenix Feather ฟื้นเขา",
+        "Text": "ปล่อย Phoenix Feather ร่วงลงบนหน้าอกเขา",
         "ResultText": "ขนนกเรืองแสง\nอัศวินกลับเป็นมนุษย์ และให้พรแก่ข้า\n(HP +50, EXP +60)",
         "HpDelta": 50,
         "ExpDelta": 60,
@@ -820,7 +820,7 @@
     "ImageFile": "floor_27.jpg",
     "Choices": [
       {
-        "Text": "ซื้อ Greater Potion x3 (Gold -150)",
+        "Text": "รับขวดแก้วสามใบจากพ่อค้าผู้ไม่แก่",
         "ResultText": "พ่อค้ายื่นโพชั่น 3 ขวด พร้อมรอยยิ้ม",
         "GoldDelta": -150,
         "ExpDelta": 10,
@@ -828,7 +828,7 @@
         "ItemRewardQuantity": 3
       },
       {
-        "Text": "ซื้อ Phoenix Feather (Gold -200)",
+        "Text": "ซื้อขนนกที่ยังอุ่นเหมือนเพิ่งหลุดจากปีก",
         "ResultText": "พ่อค้ามอบขนนกฟีนิกซ์อันล้ำค่า",
         "GoldDelta": -200,
         "ExpDelta": 15,
@@ -836,7 +836,7 @@
         "ItemRewardQuantity": 1
       },
       {
-        "Text": "ปฏิเสธและเดินผ่าน",
+        "Text": "เดินผ่านแผงขายของที่ไม่ควรอยู่ที่นี่",
         "ResultText": "พ่อค้าหายไปในหมอก\nไม่มีโอกาสกลับมาอีก",
         "ExpDelta": 5
       }
@@ -852,19 +852,19 @@
     "StoryJournalKey": "JR-010",
     "Choices": [
       {
-        "Text": "สาบานจะรับหน้าที่ของบรรพบุรุษ",
+        "Text": "วางมือบนตราบรรพบุรุษและกล่าวคำสาบาน",
         "ResultText": "ห้องเรืองแสงสีทอง\nข้าได้รับมงกุฎและพลังเก่า\n(HP +50, EXP +80)",
         "HpDelta": 50,
         "ExpDelta": 80
       },
       {
-        "Text": "ปฏิเสธและเดินผ่าน",
+        "Text": "ปล่อยคำสาบานนั้นให้จมในฝุ่น",
         "ResultText": "บัลลังก์เริ่มสั่นสะเทือน\nและพังทลายลง\n(HP -20, EXP +40)",
         "HpDelta": -20,
         "ExpDelta": 40
       },
       {
-        "Text": "ทำลายบัลลังก์ด้วย Knight's Sword",
+        "Text": "ยก Knight's Sword เหนือบัลลังก์ที่รอเลือด",
         "ResultText": "ดาบฟันบัลลังก์ขาดสะบั้น\nข้าได้ Boss Key ที่เคยเป็นตราผนึกของราชา\n(HP -10, EXP +60)",
         "HpDelta": -10,
         "ExpDelta": 60,
@@ -884,19 +884,19 @@
     "StoryJournalKey": "JR-011",
     "Choices": [
       {
-        "Text": "เลือกประตูทอง",
+        "Text": "แตะประตูทองที่สะท้อนใบหน้าคนตาย",
         "ResultText": "ข้าก้าวเข้าสู่เส้นทางของผู้ช่วยโลก\nความหวังเรืองแสงในใจ\n(HP +20, EXP +50)",
         "HpDelta": 20,
         "ExpDelta": 50
       },
       {
-        "Text": "เลือกประตูดำ",
+        "Text": "ผลักประตูดำที่ไม่มีเงาของเจ้า",
         "ResultText": "ข้าก้าวเข้าสู่เส้นทางมืด\nความเย็นเฉียบเข้ามาในกาย\n(HP -10, EXP +50)",
         "HpDelta": -10,
         "ExpDelta": 50
       },
       {
-        "Text": "ทุบประตูทั้งสอง",
+        "Text": "ฟาดใส่ประตูทั้งสองพร้อมคำสาป",
         "ResultText": "ทั้งสองประตูพังลง!\nและทางลับปรากฏขึ้น\n(HP -25, EXP +70)",
         "HpDelta": -25,
         "ExpDelta": 70
@@ -916,7 +916,7 @@
     "IsFinalFloor": true,
     "Choices": [
       {
-        "Text": "ทำลายหมอก ช่วยทุกคน",
+        "Text": "ยกดาบขึ้นสู่หัวใจของหมอก",
         "ResultText": "ข้าฟันบรรพบุรุษด้วยพลังของผู้ช่วยโลก\nหมอกอเวจีสลาย\nและเอลีน่ากลับคืนมาในที่สุด\n\n*** GOOD ENDING ***",
         "HpDelta": -50,
         "ExpDelta": 100,
@@ -924,14 +924,14 @@
         "AdvanceFloor": false
       },
       {
-        "Text": "ยอมรับชะตา กลายเป็นราชาหมอก",
+        "Text": "ก้าวขึ้นบัลลังก์ที่เรียกชื่อเจ้า",
         "ResultText": "ข้ายอมรับชะตา\nและกลายเป็นราชาหมอกคนใหม่\nหอคอยกลืนกินทุกสิ่ง\n\n*** BAD ENDING ***",
         "HpDelta": 0,
         "EndingType": "Bad",
         "AdvanceFloor": false
       },
       {
-        "Text": "ใช้ Phoenix Feather + Broken Pendant",
+        "Text": "ให้ Phoenix Feather สัมผัส Broken Pendant",
         "ResultText": "ขนนกและจี้รวมพลัง\nบรรพบุรุษได้พ้นจากคำสาป\nหมอกสลายและเอลีน่ากลับคืน\nข้าและเอลีน่าออกจากหอคอยด้วยกัน\n\n*** TRUE ENDING ***",
         "HpDelta": 30,
         "ExpDelta": 200,

@@ -40,7 +40,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
         [ObservableProperty] private string endingTitle = "";
         [ObservableProperty] private string endingSubtitle = "";
         [ObservableProperty] private string endingNarrative = "";
-        [ObservableProperty] private string endingIcon = "🌌";
+        [ObservableProperty] private string endingImage = "";
         [ObservableProperty] private Color endingColor = Colors.White;
 
         // Stats สรุปเกม
@@ -85,7 +85,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             switch (EndingType)
             {
                 case "Bad":
-                    EndingIcon = "💀";
+                    EndingImage = "ending_bad.jpg";
                     EndingTitle = "บทสรุปแห่งความมืด";
                     EndingSubtitle = "Bad Ending";
                     EndingColor = Color.FromArgb("#C53030"); // AbyssBlood
@@ -100,7 +100,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                     break;
 
                 case "TrueGood":
-                    EndingIcon = "✨";
+                    EndingImage = "ending_true_good.jpg";
                     EndingTitle = "บทสรุปที่แท้จริง";
                     EndingSubtitle = "True Good Ending";
                     EndingColor = Color.FromArgb("#D4AF37"); // AbyssGold
@@ -119,7 +119,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
 
                 case "Good":
                 default:
-                    EndingIcon = "🗡️";
+                    EndingImage = "ending_good.jpg";
                     EndingTitle = "บทสรุปแห่งวีรบุรุษ";
                     EndingSubtitle = "Good Ending";
                     EndingColor = Color.FromArgb("#9F7AEA"); // AbyssPurpleLight

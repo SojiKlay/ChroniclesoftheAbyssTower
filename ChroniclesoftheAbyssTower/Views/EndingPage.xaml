@@ -12,9 +12,18 @@
 
             <!-- ============== Header ============== -->
             <VerticalStackLayout Grid.Row="0" Spacing="6" HorizontalOptions="Center">
-                <Label Text="{Binding EndingIcon}"
-                       FontSize="92"
-                       HorizontalOptions="Center"/>
+                <Border HeightRequest="210"
+                        WidthRequest="342"
+                        HorizontalOptions="Center"
+                        Stroke="{Binding EndingColor}"
+                        StrokeThickness="1"
+                        BackgroundColor="{StaticResource AbyssSurface}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16"/>
+                    </Border.StrokeShape>
+                    <Image Source="{Binding EndingImage}"
+                           Aspect="AspectFill"/>
+                </Border>
                 <Label Text="{Binding EndingTitle}"
                        Style="{StaticResource AbyssTitle}"
                        FontSize="26"
