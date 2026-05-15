@@ -1,3 +1,4 @@
+using ChroniclesoftheAbyssTower.Services;
 using ChroniclesoftheAbyssTower.ViewModels;
 
 namespace ChroniclesoftheAbyssTower.Views
@@ -9,15 +10,22 @@ namespace ChroniclesoftheAbyssTower.Views
     /// </summary>
     public partial class MainMenuPage : ContentPage
     {
-        public MainMenuPage(MainMenuViewModel viewModel)
+        private readonly AudioService _audioService;
+
+        public MainMenuPage(MainMenuViewModel viewModel, AudioService audioService)
         {
             InitializeComponent();
             BindingContext = viewModel;
+            _audioService = audioService;
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            await _audioService.PlayBgmAsync(
+                "Audio/Bgm/main_menu_login_register.mp3",
+                "Audio/Bgm/main_menu_login_register_02.mp3");
+
             if (BindingContext is MainMenuViewModel vm)
             {
                 await vm.OnAppearingAsync();

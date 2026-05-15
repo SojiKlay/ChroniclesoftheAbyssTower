@@ -28,6 +28,7 @@ namespace ChroniclesoftheAbyssTower
             // Phase 3: Player + Settings
             builder.Services.AddSingleton<PlayerService>();
             builder.Services.AddSingleton<SettingsService>();
+            builder.Services.AddSingleton<AudioService>();
 
             // Phase 4: Inventory + Journal + Story (data layer)
             builder.Services.AddSingleton<InventoryService>();
@@ -102,4 +103,3 @@ namespace ChroniclesoftheAbyssTower
         }
     }
 }
-
