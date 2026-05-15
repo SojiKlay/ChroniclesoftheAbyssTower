@@ -1,173 +1,103 @@
-# Chronicles of the Abyss Tower
+﻿# Chronicles of the Abyss Tower
 
-==================================================
-Overview
-==================================================
+Chronicles of the Abyss Tower เป็นเกม Text-based RPG / Decision-based Adventure แนว Dark Fantasy พัฒนาด้วย .NET MAUI, C#, SQLite และ MVVM
 
-Chronicles of the Abyss Tower เป็นเกมแนว
-Text-based RPG และ Decision-based Adventure
-ที่พัฒนาด้วย .NET MAUI
+ผู้เล่นรับบทเป็น Arin อดีตอัศวินที่ต้องขึ้นหอคอย Abyss Tower เพื่อค้นหาความจริง ตามหา Eleanor และเอาชีวิตรอดจากหมอกอเวจี
 
-ผู้เล่นจะรับบทเป็น “อาริน”
-อดีตอัศวินที่ถูกกล่าวหาว่าเป็นต้นเหตุของ “หมอกอเวจี”
+## Current Project Status
 
-เป้าหมายของผู้เล่นคือ:
-- ปีนหอคอยอเวจี
-- ค้นหาความจริง
-- ตามหาเอลีน่า
-- เอาชีวิตรอด
+อ่านสถานะล่าสุดที่ `PROJECT_STATUS.md`
 
-==================================================
-Genre
-==================================================
+สถานะโดยย่อ:
+- โปรเจกต์ .NET MAUI 10
+- รองรับ Android และ Windows target
+- ใช้ SQLite local database
+- ใช้ MVVM + Shell Navigation
+- มีระบบ Login/Register
+- มี story data 30 floors
+- มี item seed 12 รายการ
+- มี story journal seed 11 รายการ
+- มี Inventory CRUD
+- มี Journal CRUD
+- มี Save/Load 3 slots
+- มี Backup export/import JSON
+- มี Settings และ AudioService
 
-- Text-based RPG
-- Decision-based Adventure
-- Dark Fantasy
+## Main Systems
 
-==================================================
-Technology
-==================================================
+1. Auth System
+- Register
+- Login
+- Session
 
-Framework:
-- .NET MAUI
+2. Story Choice System
+- โหลด floor event จาก `Resources/Raw/floors.json`
+- ตัวเลือกมีผลต่อ HP, Gold, EXP, Item, Journal และ Ending
 
-Language:
+3. Inventory CRUD
+- เพิ่ม item
+- แสดง inventory
+- ใช้ item / ปรับจำนวน
+- ลบ item
+
+4. Journal CRUD
+- Story Journal จากเนื้อเรื่อง
+- Player Journal ที่ผู้เล่นสร้างเอง
+
+5. Save / Load
+- 3 save slots ต่อ user
+- Save snapshot เป็น JSON
+
+6. Backup
+- Export/import ข้อมูลเป็น JSON file
+
+## Main Screens
+
+- LoginPage
+- RegisterPage
+- MainMenuPage
+- IntroStoryPage
+- StoryPage
+- CharacterPage
+- InventoryPage
+- JournalPage
+- JournalEditorPage
+- SaveLoadPage
+- BackupPage
+- SettingsPage
+- EndingPage
+
+## Project Structure
+
+```text
+ChroniclesoftheAbyssTower/
+  Helpers/
+  Models/
+  Services/
+  ViewModels/
+  Views/
+  Resources/
+    Images/
+    Raw/
+      floors.json
+      items.json
+      story_journals.json
+```
+
+## Technology
+
+- .NET MAUI 10
 - C#
-
-Architecture:
-- MVVM
-
-Database:
+- XAML
 - SQLite
-
-==================================================
-Core Systems
-==================================================
-
-1. Story Choice System
-- ผู้เล่นเลือกตัวเลือกในแต่ละ Event
-- ทางเลือกส่งผลต่อ HP และ Item
-
---------------------------------------------------
-
-2. HP / Gold System
-- HP ใช้สำหรับเอาชีวิตรอด
-- Gold ใช้ซื้อ Item
-
---------------------------------------------------
-
-3. Inventory System
-ผู้เล่นสามารถ:
-- เก็บ Item
-- ใช้ Item
-- ทิ้ง Item
-
-รองรับ CRUD:
-- Create
-- Read
-- Update
-- Delete
-
---------------------------------------------------
-
-4. Journal System
-ใช้สำหรับ:
-- บันทึกเนื้อเรื่อง
-- จด Hint
-- จดข้อมูลสำคัญ
-
-รองรับ CRUD:
-- Create
-- Read
-- Update
-- Delete
-
---------------------------------------------------
-
-5. Save / Load System
-- Save Progress
-- Continue Game
-- Delete Save
-
-==================================================
-Main Screens
-==================================================
-
-- Main Menu
-- Story Screen
-- Character Screen
-- Inventory Screen
-- Journal Screen
-- Ending Screen
-
-==================================================
-Project Structure
-==================================================
-
-Models/
-- Player.cs
-- InventoryItem.cs
-- Journal.cs
-- SaveData.cs
-
-ViewModels/
-- StoryViewModel.cs
-- InventoryViewModel.cs
-- JournalViewModel.cs
-
-Views/
-- MainMenuPage.xaml
-- StoryPage.xaml
-- InventoryPage.xaml
-- JournalPage.xaml
-
-Services/
-- DatabaseService.cs
-- SaveService.cs
-- InventoryService.cs
-- JournalService.cs
-
-==================================================
-Recommended NuGet Packages
-==================================================
-
 - CommunityToolkit.Mvvm
 - sqlite-net-pcl
 - SQLitePCLRaw.bundle_green
+- Newtonsoft.Json
+- Plugin.Maui.Audio
 
-==================================================
-Project Goal
-==================================================
+## Run Notes
 
-โปรเจคนี้ออกแบบเพื่อ:
-- ใช้ส่งอาจารย์
-- รองรับ CRUD จริง
-- ใช้ Multi-page Application
-- ใช้ SQLite จริง
-- พัฒนาได้จริงในมือถือ
-- ไม่ซับซ้อนเกินไป
+เปิด solution ด้วย Visual Studio แล้วเลือก Android emulator เช่น Pixel API 36 จากนั้นกด Run
 
-==================================================
-Game Flow
-==================================================
-
-Main Menu
-→ New Game
-→ Intro Story
-→ Enter Tower
-→ Story Events
-→ Boss Event
-→ Ending
-
-==================================================
-Possible Endings
-==================================================
-
-Good Ending
-- ช่วยโลกสำเร็จ
-
-Bad Ending
-- ถูกหมอกกลืนกิน
-
-==================================================
+ถ้า Visual Studio แสดงไอคอน lock ใน Solution Explorer โดยทั่วไปเป็นสถานะ Git/source control ไม่ใช่ error และไม่กระทบการรันแอป

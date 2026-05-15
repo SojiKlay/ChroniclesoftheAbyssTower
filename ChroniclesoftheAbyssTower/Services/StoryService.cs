@@ -147,6 +147,9 @@ namespace ChroniclesoftheAbyssTower.Services
             if (choice.RequiresItems != null)
                 itemNames.AddRange(choice.RequiresItems.Where(name => !string.IsNullOrWhiteSpace(name)));
 
+            if (!string.IsNullOrWhiteSpace(choice.RequiredItemNoConsume))
+                itemNames.Add(choice.RequiredItemNoConsume);
+
             return itemNames
                 .Distinct(StringComparer.OrdinalIgnoreCase)
                 .ToList();

@@ -1,223 +1,81 @@
-# Item System
+﻿# Item System
 
-==================================================
-Item Overview
-==================================================
+## Overview
 
-ระบบ Item ใช้สำหรับ:
-- ฟื้น HP
-- ใช้เปิด Event
-- ใช้ในเนื้อเรื่อง
-- ใช้กับ Inventory CRUD
+Item system supports story rewards, healing, key items, inventory CRUD and shop-like story events.
 
-==================================================
-Inventory CRUD
-==================================================
+Current raw seed file:
+- `ChroniclesoftheAbyssTower/Resources/Raw/items.json`
 
-Create
-- ได้รับ Item ใหม่
+Current seed count:
+- 12 items
 
-Read
-- เปิดดู Inventory
+## Main Models
 
-Update
-- ใช้ Item
-- เปลี่ยนจำนวน Item
+`Item.cs`
+- Master data of each item
+- Seeded into SQLite table `Items`
 
-Delete
-- ทิ้ง Item
+`InventoryItem.cs`
+- Player-owned item instance
+- Stores `PlayerId`, `ItemId`, `Quantity`, `AcquiredAt`
 
-==================================================
-Item Categories
-==================================================
+## Item Fields
 
-1. Healing Items
-2. Story Items
-3. Key Items
-4. Currency
+- `ItemId`
+- `ItemName`
+- `ThaiName`
+- `ItemType`
+- `Description`
+- `EffectValue`
+- `IconKey`
+- `ShopPrice`
+- `IsConsumable`
 
-==================================================
-Healing Items
-==================================================
+## Inventory CRUD
 
---------------------------------------------------
-Health Potion
---------------------------------------------------
+Service: `InventoryService.cs`
 
-Type:
-Healing
+Create:
+- Add item reward to player inventory
+- Stack quantity if same item already exists
 
-Effect:
-HP +20
+Read:
+- Get inventory by player
+- Search item
+- Filter by item type
 
-Description:
-โพชั่นฟื้นฟูพลังชีวิตพื้นฐาน
+Update:
+- Update quantity
+- Consume item
 
-Obtained From:
-- Treasure Chest
-- Shop
-- Reward
+Delete:
+- Delete inventory item
+- Remove item when quantity reaches 0
 
-==================================================
+## Story Integration
 
---------------------------------------------------
-Greater Potion
---------------------------------------------------
+Story choices in `floors.json` can use:
+- `ItemReward`
+- `ItemRewardQuantity`
+- `RequiredItem`
+- `RequiredItems`
+- `RequiredItemNoConsume`
+- `RequiresItem`
+- `RequiresItems`
+- `BlockedByItem`
+- `BlockedByItems`
 
-Type:
-Healing
+## UI
 
-Effect:
-HP +50
+Main page:
+- `InventoryPage.xaml`
 
-Description:
-โพชั่นฟื้นฟูระดับสูง
+ViewModel:
+- `InventoryViewModel.cs`
 
-Obtained From:
-- Boss Reward
-- Rare Chest
-
-==================================================
-
---------------------------------------------------
-Dark Water
---------------------------------------------------
-
-Type:
-Healing
-
-Effect:
-HP +10
-
-Description:
-น้ำจากหอคอยอเวจี
-
-Obtained From:
-- Floor 5
-
-==================================================
-Story Items
-==================================================
-
---------------------------------------------------
-Rune Key
---------------------------------------------------
-
-Type:
-Story Item
-
-Effect:
-ใช้เปิดประตู
-
-Description:
-กุญแจรูนโบราณของหอคอย
-
-Obtained From:
-- Floor 1
-
-==================================================
-
---------------------------------------------------
-Old Note
---------------------------------------------------
-
-Type:
-Story Item
-
-Effect:
-ใช้เป็น Hint
-
-Description:
-กระดาษบันทึกเก่า
-
-Obtained From:
-- Floor 2
-
-==================================================
-
---------------------------------------------------
-Broken Pendant
---------------------------------------------------
-
-Type:
-Story Item
-
-Effect:
-เชื่อมโยงกับเอลีน่า
-
-Description:
-จี้ที่แตกหักของเอลีน่า
-
-Obtained From:
-- Story Event
-
-==================================================
-Key Items
-==================================================
-
---------------------------------------------------
-Tower Map
---------------------------------------------------
-
-Type:
-Key Item
-
-Effect:
-เปิดเส้นทางลับ
-
-Description:
-แผนที่บางส่วนของหอคอย
-
-==================================================
-
---------------------------------------------------
-Boss Key
---------------------------------------------------
-
-Type:
-Key Item
-
-Effect:
-ใช้เปิดห้อง Boss
-
-Description:
-กุญแจพิเศษของห้องบอส
-
-==================================================
-Currency
-==================================================
-
---------------------------------------------------
-Gold
---------------------------------------------------
-
-Type:
-Currency
-
-Effect:
-ใช้ซื้อ Item
-
-Description:
-เงินที่ใช้ภายในหอคอย
-
-==================================================
-Recommended Database Fields
-==================================================
-
-- ItemId
-- ItemName
-- ItemType
-- Description
-- EffectValue
-- Quantity
-
-==================================================
-Related Systems
-==================================================
-
-- Inventory Screen
-- Database Structure
-- Story Events
-- Shop System
-
-==================================================
+Expected demo:
+- Gain item from story
+- View item in inventory
+- Use item if consumable
+- Delete item

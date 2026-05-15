@@ -54,7 +54,7 @@
                 <!-- Continue Game (แสดงเมื่อมี save) -->
                 <Border Style="{StaticResource AbyssCardGlow}"
                         Padding="0"
-                        IsVisible="{Binding HasSavedGame}">
+                        IsVisible="{Binding HasContinueGame}">
                     <VerticalStackLayout Spacing="0">
                         <Button Text="เล่นต่อ"
                                 Style="{StaticResource GoldButton}"
@@ -78,14 +78,14 @@
                 <Button Text="ดูตัวละคร"
                         Style="{StaticResource OutlineButton}"
                         Command="{Binding GoToCharacterCommand}"
-                        IsVisible="{Binding HasSavedGame}"
+                        IsVisible="{Binding HasContinueGame}"
                         HeightRequest="48"/>
 
                 <!-- Save/Load (แสดงเมื่อมี save) -->
                 <Button Text="เซฟ / โหลดเกม"
                         Style="{StaticResource OutlineButton}"
                         Command="{Binding GoToSaveLoadCommand}"
-                        IsVisible="{Binding HasSavedGame}"
+                        IsVisible="{Binding HasSaveLoadMenu}"
                         HeightRequest="48"/>
 
                 <!-- Backup/Restore -->

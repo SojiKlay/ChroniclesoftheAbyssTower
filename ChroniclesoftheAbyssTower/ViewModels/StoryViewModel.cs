@@ -19,11 +19,13 @@ namespace ChroniclesoftheAbyssTower.ViewModels
     {
         private readonly PlayerService _playerService;
         private readonly StoryService _storyService;
+        private readonly AudioService _audioService;
 
-        public StoryViewModel(PlayerService playerService, StoryService storyService)
+        public StoryViewModel(PlayerService playerService, StoryService storyService, AudioService audioService)
         {
             _playerService = playerService;
             _storyService = storyService;
+            _audioService = audioService;
             Title = "หอคอยอเวจี";
         }
 
@@ -236,6 +238,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             if (!choice.IsEnabled || IsBusy) return;
 
             ChoiceOutcome? outcome = null;
+            var selectedStoryChoice = CurrentEvent.Choices[choice.Index];
 
             // ===== Phase 1: apply choice ใน DB =====
             try
@@ -282,6 +285,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                 }
 
                 ShowOutcome(outcome);
+                await PlayOutcomeSfxAsync(outcome, selectedStoryChoice);
 
                 if (outcome.PlayerDied)
                 {
@@ -304,6 +308,50 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"[StoryVM.SelectChoice.Phase2] {ex}");
+            }
+        }
+
+        private async Task PlayOutcomeSfxAsync(ChoiceOutcome outcome, StoryChoice choice)
+        {
+            var choiceText = choice.Text ?? string.Empty;
+            var resultText = choice.ResultText ?? string.Empty;
+            var storyText = $"{choiceText} {resultText}";
+
+            if (!string.IsNullOrWhiteSpace(outcome.ItemConsumed))
+            {
+                if (storyText.Contains("ดื่ม") && storyText.Contains("Potion"))
+                {
+                    await _audioService.PlaySfxAsync(AudioService.ItemHealSfx);
+                    return;
+                }
+
+                if (outcome.ItemConsumed.Contains("Key", StringComparison.OrdinalIgnoreCase))
+                {
+                    await _audioService.PlaySfxAsync(AudioService.ItemKeySfx);
+                    return;
+                }
+
+                if (storyText.Contains("ยื่น") || storyText.Contains("ให้กับ") || storyText.Contains("มอบ"))
+                {
+                    // This is giving an item to someone else, so let reward sounds below carry the moment.
+                }
+                else if (string.IsNullOrWhiteSpace(outcome.ItemAcquired) && outcome.GoldDelta <= 0)
+                {
+                    await _audioService.PlaySfxAsync(AudioService.ItemUseSfx);
+                    return;
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(outcome.ItemAcquired))
+            {
+                await _audioService.PlaySfxAsync(AudioService.ItemGetSfx);
+                return;
+            }
+
+            if (outcome.GoldDelta > 0)
+            {
+                await _audioService.PlaySfxAsync(AudioService.ItemGoldSfx);
+                return;
             }
         }
 

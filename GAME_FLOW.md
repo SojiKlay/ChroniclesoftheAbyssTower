@@ -1,261 +1,82 @@
-# Game Flow System
+﻿# Game Flow System
 
-==================================================
-Main Flow
-==================================================
+## Main Flow
 
-Main Menu
-→ New Game
-→ Intro Story
-→ Enter Tower
-→ Floor Progression
-→ Boss Event
-→ Ending
+```text
+Login/Register
+-> Main Menu
+-> New Game or Continue
+-> Intro Story
+-> StoryPage
+-> Floor Progression
+-> EndingPage
+```
 
-==================================================
-Opening Story
-==================================================
+## App Start
 
-New Game
-→ โลกถูกหมอกอเวจีกลืนกิน
-→ อารินถูกกล่าวหา
-→ เอลีน่าหายตัวไป
-→ หอคอยอเวจีปรากฏ
-→ Enter Tower
-→ Floor 1
+- User opens app
+- App checks session through auth/session logic
+- User goes to Login/Register or Main Menu depending on session
 
-==================================================
-Tutorial Zone (Floor 1-10)
-==================================================
+## New Game Flow
 
---------------------------------------------------
-Floor 1 — The Iron Gate
---------------------------------------------------
+1. User selects New Game
+2. App creates or resets active player data
+3. Player starts with base stats
+4. App navigates to Intro Story
+5. Story starts at floor 1
 
-Event:
-ประตูเหล็กโบราณปิดตาย
+## Story Flow
 
-Choices:
-- พังประตู → HP -10
-- ค้นหา Rune Key → ได้ Rune Key
-- ใช้ Rune Key → ผ่านโดยไม่เสีย HP
+Story data comes from `Resources/Raw/floors.json`.
 
-Rewards:
-- Rune Key
+Current data:
+- 30 floors
+- Floor 1 ถึง Floor 30
+- Each floor has title, narrative, event type, choices and optional image file
 
-Systems:
-- Choice System
-- HP System
-- Item Usage
-
-==================================================
-
---------------------------------------------------
-Floor 2 — First Treasure
---------------------------------------------------
-
-Event:
-พบหีบสมบัติแรก
-
-Choices:
-- เปิดหีบ → ได้ Health Potion
-- ตรวจสอบก่อน → ได้ Old Note
-- เดินผ่าน → ไม่มีผล
-
-Rewards:
-- Health Potion
-- Old Note
-
-Systems:
-- Inventory CRUD
-
-==================================================
-
---------------------------------------------------
-Floor 3 — Shadow Attack
---------------------------------------------------
-
-Event:
-เงาประหลาดโจมตี
-
-Choices:
-- สู้ → HP -15 , Gold +20
-- หนี → HP -5
-- ใช้ Potion → HP +10
-
-Rewards:
+Each choice can affect:
+- HP
 - Gold
+- EXP
+- Item reward
+- Required item checks
+- Blocked item checks
+- Story journal unlock
+- Floor advancement
+- Ending type
 
-Systems:
-- HP / Gold Management
+## Side Pages During Gameplay
 
-==================================================
+From the main game flow, player can open:
+- Character page for stats
+- Inventory page for item CRUD/use/delete
+- Journal page for story/player journals
+- SaveLoad page for save/load slots
+- Backup page for export/import
+- Settings page for preferences/audio
 
---------------------------------------------------
-Floor 4 — Broken Floor Trap
---------------------------------------------------
+## Ending Flow
 
-Event:
-พื้นเริ่มแตก
+Ending depends on story state and final choice/outcome.
 
-Choices:
-- วิ่งข้าม → HP -10
-- เดินช้า ๆ → ปลอดภัย
-- ใช้ Rune Key → เปิดทางลับ
+Current ending model supports:
+- `Good`
+- `Bad`
+- other custom string values if story data uses them
 
-Rewards:
-- Gold +15
+## Demo Flow For Teacher
 
-Systems:
-- Trap Event
+Recommended demo:
 
-==================================================
-
---------------------------------------------------
-Floor 5 — Black Fountain
---------------------------------------------------
-
-Event:
-พบน้ำพุสีดำ
-
-Choices:
-- ดื่ม → HP +20
-- เก็บน้ำ → ได้ Dark Water
-- เดินผ่าน → ไม่มีผล
-
-Rewards:
-- Dark Water
-
-Systems:
-- Item Collection
-
-==================================================
-
---------------------------------------------------
-Floor 6 — Merchant
---------------------------------------------------
-
-Event:
-พ่อค้าเร่ขายของ
-
-Choices:
-- ซื้อ Potion → Gold -20
-- ซื้อ Key → Gold -15
-- ไม่ซื้อ → ไม่มีผล
-
-Rewards:
-- Potion
-- Key
-
-Systems:
-- Shop System
-
-==================================================
-
---------------------------------------------------
-Floor 7 — Three Paths
---------------------------------------------------
-
-Event:
-พบทางแยก
-
-Choices:
-- ทางซ้าย → Gold +15
-- ทางกลาง → HP -15
-- ทางขวา → ได้ Journal Hint
-
-Rewards:
-- Journal Hint
-
-Systems:
-- Choice Consequence
-
-==================================================
-
---------------------------------------------------
-Floor 8 — Traveler Journal
---------------------------------------------------
-
-Event:
-พบบันทึกนักเดินทาง
-
-Choices:
-- อ่าน Journal → ปลดล็อก Journal
-- เขียน Journal → Create Player Journal
-- เดินต่อ → ไม่มีผล
-
-Rewards:
-- Unlock Journal System
-
-Systems:
-- Journal CRUD
-
-==================================================
-
---------------------------------------------------
-Floor 9 — Full Inventory
---------------------------------------------------
-
-Event:
-Inventory เต็ม
-
-Choices:
-- ทิ้ง Item
-- ใช้ Item
-- ไม่ทำอะไร
-
-Systems:
-- Inventory Management
-
-==================================================
-
---------------------------------------------------
-Floor 10 — Gatekeeper
---------------------------------------------------
-
-Event:
-Mini Boss
-
-Choices:
-- สู้
-- ใช้ Potion
-- หนี
-
-Rewards:
-- Gold
-- Unlock Next Floor
-
-Systems:
-- Boss Event
-
-==================================================
-Mid Game
-==================================================
-
-Floor 11-30
-- Story Events
-- Trap Events
-- Shop Events
-- Journal Events
-- Boss Events
-
-==================================================
-Late Game
-==================================================
-
-Floor 31-50
-- Stronger Enemies
-- Hidden Routes
-- Final Boss Preparation
-
-==================================================
-Ending
-==================================================
-
-Good Ending
-- ช่วยโลกสำเร็จ
-
-Bad Ending
-- ถูกหมอกกลืนกิน
-
-==================================================
+1. Register user
+2. Login
+3. Start New Game
+4. Read intro
+5. Choose a floor 1 option
+6. Show HP/Gold/item result
+7. Open Inventory and demonstrate CRUD
+8. Open Journal and create/edit/delete a note
+9. Save to slot
+10. Load save
+11. Show Backup page

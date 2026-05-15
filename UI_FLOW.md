@@ -1,201 +1,93 @@
-# UI FLOW
-Chronicles of the Abyss Tower
+﻿# UI FLOW
 
-==================================================
-Main UI Flow
-==================================================
+## Current Pages
 
-Main Menu
-→ Intro Story
-→ Story Screen
-→ Character Screen
-→ Inventory Screen
-→ Journal Screen
-→ Ending Screen
+The project currently includes these XAML pages:
 
-==================================================
-1. Main Menu
-==================================================
+- `LoginPage.xaml`
+- `RegisterPage.xaml`
+- `MainMenuPage.xaml`
+- `IntroStoryPage.xaml`
+- `StoryPage.xaml`
+- `CharacterPage.xaml`
+- `InventoryPage.xaml`
+- `JournalPage.xaml`
+- `JournalEditorPage.xaml`
+- `SaveLoadPage.xaml`
+- `BackupPage.xaml`
+- `SettingsPage.xaml`
+- `EndingPage.xaml`
+- `MainPage.xaml`
 
-Purpose:
-หน้าหลักของเกม
+## Main Navigation Flow
 
-Features:
+```text
+LoginPage / RegisterPage
+-> MainMenuPage
+-> IntroStoryPage
+-> StoryPage
+-> EndingPage
+```
+
+## Gameplay Navigation
+
+From Main Menu:
 - New Game
 - Continue
-- Delete Save
-- Exit
+- Save/Load
+- Backup
+- Settings
 
-Navigation:
-Main Menu
-→ Intro Story
-→ Load Save
-
-==================================================
-2. Intro Story Screen
-==================================================
-
-Purpose:
-เล่าเนื้อเรื่องเริ่มต้น
-
-Features:
-- Story Text
-- Continue Button
-
-Navigation:
-Intro Story
-→ Floor 1
-
-==================================================
-3. Story Screen
-==================================================
-
-Purpose:
-หน้าหลักของการเล่นเกม
-
-Features:
-- Story Text
-- Player HP
-- Gold
-- Current Floor
-- Choice Buttons
-
-Bottom Navigation:
+From StoryPage:
 - Character
 - Inventory
 - Journal
+- Save/Load
+- Settings
+- Ending when story completes
 
-Navigation:
-Story Screen
-→ Next Event
-→ Boss Event
-→ Ending
+From JournalPage:
+- JournalEditorPage for create/edit player journal
 
-==================================================
-4. Character Screen
-==================================================
+## Routes
 
-Purpose:
-แสดงค่าสถานะตัวละคร
+Routes are defined in `AppConstants.cs` and registered in `AppShell.xaml.cs`.
 
-Features:
-- HP
-- MaxHP
-- Attack
-- Defense
-- Gold
-- Level
+Absolute routes:
+- `//login`
+- `//register`
+- `//main`
 
-Navigation:
-Character Screen
-→ Back to Story
+Relative routes:
+- `introStory`
+- `story`
+- `character`
+- `inventory`
+- `journal`
+- `journalEditor`
+- `saveLoad`
+- `backup`
+- `settings`
+- `ending`
 
-==================================================
-5. Inventory Screen
-==================================================
+## ViewModels
 
-Purpose:
-แสดง Item ทั้งหมด
+- `LoginViewModel`
+- `RegisterViewModel`
+- `MainMenuViewModel`
+- `IntroStoryViewModel`
+- `StoryViewModel`
+- `CharacterViewModel`
+- `InventoryViewModel`
+- `JournalViewModel`
+- `JournalEditorViewModel`
+- `SaveLoadViewModel`
+- `BackupViewModel`
+- `SettingsViewModel`
+- `EndingViewModel`
 
-Features:
-- Use Item
-- Delete Item
-- Item Details
+## UI Notes
 
-CRUD:
-- Create Item
-- Read Item
-- Update Quantity
-- Delete Item
-
-Navigation:
-Inventory
-→ Back to Story
-
-==================================================
-6. Journal Screen
-==================================================
-
-Purpose:
-แสดง Journal ทั้งหมด
-
-Features:
-- Read Journal
-- Create Note
-- Edit Note
-- Delete Note
-
-CRUD:
-- Create Journal
-- Read Journal
-- Update Journal
-- Delete Journal
-
-Navigation:
-Journal
-→ Back to Story
-
-==================================================
-7. Ending Screen
-==================================================
-
-Purpose:
-แสดง Ending ของเกม
-
-Possible Endings:
-- Good Ending
-- Bad Ending
-
-Features:
-- Ending Text
-- Restart Button
-- Return to Menu
-
-==================================================
-Recommended Navigation Structure
-==================================================
-
-AppShell
-│
-├── MainMenuPage
-├── IntroStoryPage
-├── StoryPage
-├── CharacterPage
-├── InventoryPage
-├── JournalPage
-└── EndingPage
-
-==================================================
-Recommended ViewModels
-==================================================
-
-ViewModels/
-- MainMenuViewModel
-- StoryViewModel
-- CharacterViewModel
-- InventoryViewModel
-- JournalViewModel
-
-==================================================
-Recommended Services
-==================================================
-
-Services/
-- NavigationService
-- DatabaseService
-- SaveService
-- InventoryService
-- JournalService
-
-==================================================
-Recommended .NET MAUI Features
-==================================================
-
-- NavigationPage
-- Shell Navigation
-- CollectionView
-- SQLite
-- MVVM
-- Data Binding
-
-==================================================
+- Keep UI beginner-friendly
+- Keep XAML pages connected to ViewModels through existing DI pattern
+- Avoid adding new pages without registering route, ViewModel and page in `MauiProgram.Registrations.cs`

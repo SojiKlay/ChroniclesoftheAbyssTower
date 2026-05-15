@@ -1,3 +1,4 @@
+using ChroniclesoftheAbyssTower.Services;
 using ChroniclesoftheAbyssTower.ViewModels;
 
 namespace ChroniclesoftheAbyssTower.Views
@@ -7,10 +8,13 @@ namespace ChroniclesoftheAbyssTower.Views
     /// </summary>
     public partial class EndingPage : ContentPage
     {
-        public EndingPage(EndingViewModel viewModel)
+        private readonly AudioService _audioService;
+
+        public EndingPage(EndingViewModel viewModel, AudioService audioService)
         {
             InitializeComponent();
             BindingContext = viewModel;
+            _audioService = audioService;
         }
 
         protected override async void OnAppearing()
@@ -19,7 +23,20 @@ namespace ChroniclesoftheAbyssTower.Views
             if (BindingContext is EndingViewModel vm)
             {
                 await vm.OnAppearingAsync();
+                await PlayEndingBgmAsync(vm.EndingType);
             }
+        }
+
+        private Task PlayEndingBgmAsync(string endingType)
+        {
+            return endingType switch
+            {
+                "Bad" => _audioService.PlayBgmAsync(
+                    "Audio/Bgm/bad_ending.wav",
+                    "Audio/Bgm/bad_ending_02.wav"),
+                "TrueGood" => _audioService.PlayBgmAsync("Audio/Bgm/true_good_ending.mp3"),
+                _ => _audioService.PlayBgmAsync("Audio/Bgm/good_ending.mp3")
+            };
         }
     }
 }

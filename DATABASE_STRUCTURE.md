@@ -1,204 +1,174 @@
-# DATABASE STRUCTURE
-Chronicles of the Abyss Tower
+﻿# DATABASE STRUCTURE
 
-==================================================
-Database Overview
-==================================================
+## Database Overview
 
-Database:
-SQLite
+Database: SQLite
 
-Architecture:
-MVVM
+Database file name: `abyss_tower.db3`
+
+Main service: `ChroniclesoftheAbyssTower/Services/DatabaseService.cs`
+
+`DatabaseService.InitializeAsync()` creates the current tables and exposes generic CRUD helpers.
+
+## Current Tables
+
+- `Users`
+- `Players`
+- `Items`
+- `InventoryItems`
+- `Journals`
+- `SaveData`
+- `StoryProgress`
+
+## Users
+
+Model: `User.cs`
 
 Purpose:
-- Save Player Data
-- Save Inventory
-- Save Journal
-- Save Progression
+- เก็บบัญชีผู้ใช้
+- ใช้กับ Login/Register
+- เก็บ password hash และ salt
 
-==================================================
-TABLE: Players
-==================================================
+Important fields:
+- `UserId`
+- `Username`
+- `PasswordHash`
+- `Salt`
+- `CreatedAt`
+- `LastLoginAt`
 
-Description:
-เก็บข้อมูลตัวละคร
+## Players
 
-Fields:
-- PlayerId
-- PlayerName
-- HP
-- MaxHP
-- Attack
-- Defense
-- Gold
-- CurrentFloor
-- Level
+Model: `Player.cs`
 
-CRUD Usage:
+Purpose:
+- เก็บตัวละครของ user
+- ใช้กับ Character, Story, Save/Load
 
-Create
-- สร้างตัวละครใหม่
+Important fields:
+- `PlayerId`
+- `UserId`
+- `PlayerName`
+- `Hp`, `MaxHp`
+- `Attack`, `Defense`
+- `Gold`, `Level`, `Experience`
+- `CurrentFloor`, `HighestFloor`
+- `TotalChoicesMade`
+- `IsGameCompleted`, `EndingType`
+- `CreatedAt`, `UpdatedAt`
 
-Read
-- โหลดข้อมูลตัวละคร
+## Items
 
-Update
-- อัปเดต HP
-- อัปเดต Gold
-- อัปเดต Level
+Model: `Item.cs`
 
-Delete
-- ลบ Save Game
+Purpose:
+- Master data ของ item ทั้งหมด
+- Seed จาก `Resources/Raw/items.json`
 
-==================================================
-TABLE: SaveData
-==================================================
+Important fields:
+- `ItemId`
+- `ItemName`
+- `ThaiName`
+- `ItemType`
+- `Description`
+- `EffectValue`
+- `IconKey`
+- `ShopPrice`
+- `IsConsumable`
 
-Description:
-เก็บข้อมูลเซฟเกม
+## InventoryItems
 
-Fields:
-- SaveId
-- PlayerId
-- SaveSlot
-- SaveDate
+Model: `InventoryItem.cs`
 
-CRUD Usage:
+Purpose:
+- เก็บ item ที่ player ถืออยู่
 
-Create
-- สร้าง Save ใหม่
+Important fields:
+- `InventoryId`
+- `PlayerId`
+- `ItemId`
+- `Quantity`
+- `AcquiredAt`
 
-Read
-- โหลด Save
+Runtime helper:
+- `ItemData` เป็น ignored/navigation property สำหรับข้อมูล item master
 
-Update
-- Auto Save
+## Journals
 
-Delete
-- ลบ Save Slot
+Model: `Journal.cs`
 
-==================================================
-TABLE: InventoryItems
-==================================================
+Purpose:
+- เก็บ Story Journal และ Player Journal
 
-Description:
-เก็บ Item ของผู้เล่น
+Important fields:
+- `JournalId`
+- `PlayerId`
+- `JournalType`
+- `FloorNumber`
+- `Title`
+- `Content`
+- `StoryKey`
+- `CreatedAt`
+- `UpdatedAt`
 
-Fields:
-- InventoryId
-- PlayerId
-- ItemName
-- ItemType
-- Quantity
+## SaveData
 
-CRUD Usage:
+Model: `SaveData.cs`
 
-Create
-- ได้รับ Item ใหม่
+Purpose:
+- เก็บ save slot 3 ช่องต่อ user
+- ใช้ snapshot JSON สำหรับ load state กลับมา
 
-Read
-- เปิด Inventory
+Important fields:
+- `SaveId`
+- `UserId`
+- `SaveSlot`
+- `SaveName`
+- `SaveDate`
+- `PlayerSnapshot`
+- `InventorySnapshot`
+- `JournalSnapshot`
+- `ProgressSnapshot`
+- `PlayerName`
+- `CurrentFloor`
+- `Hp`
+- `Level`
+- `PlayTimeSeconds`
 
-Update
-- ใช้ Item
-- เปลี่ยนจำนวน Item
+## StoryProgress
 
-Delete
-- ทิ้ง Item
+Model: `StoryProgress.cs`
 
-==================================================
-TABLE: PlayerJournals
-==================================================
+Purpose:
+- บันทึก floor ที่ผ่านแล้วและ choice ที่เลือก
 
-Description:
-เก็บ Journal ของผู้เล่น
+Important fields:
+- `ProgressId`
+- `PlayerId`
+- `FloorNumber`
+- `IsCompleted`
+- `ChoiceMade`
+- `ChoiceText`
+- `CompletedAt`
 
-Fields:
-- JournalId
-- PlayerId
-- FloorNumber
-- Title
-- Content
-- CreatedAt
+## Seed Data
 
-CRUD Usage:
+Service: `SeedDataService.cs`
 
-Create
-- เขียน Journal ใหม่
+Raw files:
+- `floors.json`: 30 floors
+- `items.json`: 12 items
+- `story_journals.json`: 11 story journal seeds
 
-Read
-- อ่าน Journal
+`SeedAllAsync()` initializes database and seeds item master data.
 
-Update
-- แก้ไข Journal
+## Relationships
 
-Delete
-- ลบ Journal
-
-==================================================
-Relationships
-==================================================
-
-Players
-→ SaveData
-→ InventoryItems
-→ PlayerJournals
-
-==================================================
-Recommended Folder Structure
-==================================================
-
-Models/
-- Player.cs
-- InventoryItem.cs
-- Journal.cs
-- SaveData.cs
-
-Services/
-- DatabaseService.cs
-- SaveService.cs
-- InventoryService.cs
-- JournalService.cs
-
-ViewModels/
-- PlayerViewModel.cs
-- InventoryViewModel.cs
-- JournalViewModel.cs
-
-Views/
-- MainMenuPage.xaml
-- StoryPage.xaml
-- InventoryPage.xaml
-- JournalPage.xaml
-
-==================================================
-Recommended NuGet Packages
-==================================================
-
-- CommunityToolkit.Mvvm
-- sqlite-net-pcl
-- SQLitePCLRaw.bundle_green
-
-==================================================
-Database Flow
-==================================================
-
-New Game
-→ Create Player
-→ Create SaveData
-→ Enter Floor
-
-Get Item
-→ Create Inventory Item
-
-Use Item
-→ Update Quantity
-
-Write Journal
-→ Create Journal
-
-Delete Save
-→ Delete SaveData
-
-==================================================
+```text
+User 1 -> many Players
+User 1 -> up to 3 SaveData slots
+Player 1 -> many InventoryItems
+InventoryItem many -> 1 Item
+Player 1 -> many Journals
+Player 1 -> many StoryProgress rows
+```

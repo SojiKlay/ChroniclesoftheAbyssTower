@@ -1,134 +1,61 @@
-# PROJECT OVERVIEW
-Chronicles of the Abyss Tower
+﻿# PROJECT OVERVIEW
 
-==================================================
-Project Overview
-==================================================
+## Overview
 
-Chronicles of the Abyss Tower เป็นเกมแนว:
-- Text-based RPG
-- Decision-based Adventure
-- Dark Fantasy
+Chronicles of the Abyss Tower เป็นแอปเกม Text-based Dark Fantasy RPG ที่เน้นการตัดสินใจของผู้เล่น พัฒนาด้วย .NET MAUI และ SQLite เพื่อแสดง CRUD, multi-page navigation และ MVVM สำหรับงานส่งอาจารย์
 
-พัฒนาด้วย:
-- .NET MAUI
-- C#
-- SQLite
-- MVVM Architecture
+## Player Role
 
-==================================================
-Main Objective
-==================================================
+ผู้เล่นรับบทเป็น Arin อดีตอัศวินผู้ถูกกล่าวหาว่าเกี่ยวข้องกับหมอกอเวจี เขาต้องปีน Abyss Tower เพื่อค้นหาความจริงและตามหา Eleanor
 
-ผู้เล่นรับบทเป็น “อาริน”
-อดีตอัศวินที่ถูกกล่าวหาว่าเป็นต้นเหตุของหมอกอเวจี
+## Core Gameplay
 
-เป้าหมายของผู้เล่น:
-- ปีนหอคอยอเวจี
-- ค้นหาความจริง
-- ตามหาเอลีน่า
-- เอาชีวิตรอด
+- อ่านเนื้อเรื่องแต่ละชั้น
+- เลือกตัวเลือกที่มีผลต่อ HP, Gold, EXP, Item และ Ending
+- เก็บและใช้ item
+- อ่าน story journal และเขียน player journal
+- save/load ความคืบหน้า
 
-==================================================
-Core Gameplay
-==================================================
+## Implemented Scope
 
-ระบบหลักของเกม:
-- Story Choices
-- HP Management
-- Gold Management
+- Auth: Login/Register/Session
+- Database: SQLite local database
+- Story: 30 floors จาก `floors.json`
+- Items: 12 seed items จาก `items.json`
+- Journals: 11 story journal seeds จาก `story_journals.json`
 - Inventory CRUD
 - Journal CRUD
-- Save / Load System
+- Save/Load 3 slots
+- Backup export/import
+- Settings and AudioService
 
-==================================================
-Main Systems
-==================================================
+## Design Goals
 
-1. Story System
-- ดำเนินเนื้อเรื่องผ่านข้อความ
-- ผู้เล่นเลือกตัวเลือก
-- ตัวเลือกส่งผลต่อ HP และ Item
+- Beginner friendly
+- โครงสร้างชัดเจนตาม MVVM
+- ใช้งานจริงบนมือถือได้
+- ไม่พึ่ง online server
+- โชว์ CRUD และ navigation ได้ชัดเจน
 
---------------------------------------------------
+## Main Flow
 
-2. Inventory System
+```text
+Login/Register
+-> Main Menu
+-> New Game / Continue
+-> Intro Story
+-> Story Floor Events
+-> Inventory / Journal / Character / Save / Settings
+-> Ending
+```
 
-ผู้เล่นสามารถ:
-- เก็บ Item
-- ใช้ Item
-- ทิ้ง Item
+## Important Files
 
-รองรับ CRUD:
-- Create
-- Read
-- Update
-- Delete
-
---------------------------------------------------
-
-3. Journal System
-
-แบ่งเป็น:
-- Story Journal
-- Player Journal
-
-ใช้สำหรับ:
-- บันทึกเนื้อเรื่อง
-- จด Hint
-- บันทึกข้อมูลสำคัญ
-
-รองรับ CRUD:
-- Create
-- Read
-- Update
-- Delete
-
---------------------------------------------------
-
-4. Save System
-
-ใช้สำหรับ:
-- Save Progress
-- Continue Game
-- Delete Save
-
-==================================================
-Main Character
-==================================================
-
-Name:
-Arin
-
-Background:
-อดีตอัศวินแห่งราชวงศ์
-
-Goal:
-ค้นหาความจริงของหมอกอเวจี
-และตามหาเอลีน่า
-
-==================================================
-Main Gameplay Flow
-==================================================
-
-Main Menu
-→ New Game
-→ Intro Story
-→ Enter Tower
-→ Floor Events
-→ Boss
-→ Ending
-
-==================================================
-Game Design Goals
-==================================================
-
-โปรเจคนี้ออกแบบเพื่อ:
-- ใช้ส่งอาจารย์
-- รองรับ CRUD จริง
-- พัฒนาได้จริงใน .NET MAUI
-- ใช้ Multi-page Application
-- ใช้ SQLite จริง
-- ไม่ซับซ้อนเกินไป
-
-==================================================
+- `AGENTS.md`: กติกาสำหรับ AI และผู้พัฒนา
+- `PROJECT_STATUS.md`: สถานะล่าสุดของโปรเจกต์
+- `ChroniclesoftheAbyssTower/ChroniclesoftheAbyssTower.csproj`: target framework และ NuGet packages
+- `ChroniclesoftheAbyssTower/MauiProgram.Registrations.cs`: DI registration
+- `ChroniclesoftheAbyssTower/AppShell.xaml.cs`: route registration
+- `ChroniclesoftheAbyssTower/Resources/Raw/floors.json`: story floors
+- `ChroniclesoftheAbyssTower/Resources/Raw/items.json`: item master data
+- `ChroniclesoftheAbyssTower/Resources/Raw/story_journals.json`: story journal seed

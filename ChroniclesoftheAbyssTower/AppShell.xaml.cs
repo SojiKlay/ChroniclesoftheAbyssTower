@@ -2,6 +2,8 @@
 using ChroniclesoftheAbyssTower.Services;
 using ChroniclesoftheAbyssTower.Views;
 
+using System.Runtime.CompilerServices;
+
 namespace ChroniclesoftheAbyssTower
 {
     /// <summary>
@@ -12,6 +14,7 @@ namespace ChroniclesoftheAbyssTower
     /// </summary>
     public partial class AppShell : Shell
     {
+        private static readonly ConditionalWeakTable<Button, object?> ButtonSoundHooks = new();
         private bool _initialized;
 
         public AppShell()
@@ -26,6 +29,13 @@ namespace ChroniclesoftheAbyssTower
             // ใช้ Loaded event แทน fire-forget เพื่อรอให้ Shell พร้อมก่อน redirect
             // ป้องกันปัญหาจอดำตอน restart (Shell ยังไม่ render → GoToAsync cancel)
             Loaded += OnShellLoaded;
+            Navigated += OnShellNavigated;
+        }
+
+        private async void OnShellNavigated(object? sender, ShellNavigatedEventArgs e)
+        {
+            await Task.Delay(50);
+            AttachDefaultButtonSounds();
         }
 
         private async void OnShellLoaded(object? sender, EventArgs e)
@@ -33,6 +43,7 @@ namespace ChroniclesoftheAbyssTower
             if (_initialized) return;
             _initialized = true;
             await InitializeAppAsync();
+            AttachDefaultButtonSounds();
         }
 
         /// <summary>
@@ -104,6 +115,35 @@ namespace ChroniclesoftheAbyssTower
                 System.Diagnostics.Debug.WriteLine($"[AppShell.InitializeApp] {ex}");
             }
         }
+
+        private void AttachDefaultButtonSounds()
+        {
+            if (CurrentPage is null || App.Services is null)
+                return;
+
+            var audioService = App.Services.GetService<AudioService>();
+            if (audioService is null)
+                return;
+
+            foreach (var button in FindVisualChildren<Button>(CurrentPage))
+            {
+                if (ButtonSoundHooks.TryGetValue(button, out _))
+                    continue;
+
+                button.Clicked += async (_, _) =>
+                    await audioService.PlaySfxAsync(AudioService.DefaultButtonClickSfx);
+
+                ButtonSoundHooks.Add(button, null);
+            }
+        }
+
+        private static IEnumerable<T> FindVisualChildren<T>(Element parent) where T : Element
+        {
+            foreach (var child in parent.GetVisualTreeDescendants())
+            {
+                if (child is T match)
+                    yield return match;
+            }
+        }
     }
 }
-

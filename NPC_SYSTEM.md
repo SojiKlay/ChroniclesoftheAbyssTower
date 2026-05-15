@@ -1,131 +1,40 @@
-# NPC SYSTEM
-Chronicles of the Abyss Tower
+﻿# NPC SYSTEM
 
-==================================================
-NPC Overview
-==================================================
+## Overview
 
-NPC ใช้สำหรับ:
-- ดำเนินเนื้อเรื่อง
-- ให้ข้อมูลสำคัญ
-- ขาย Item
-- ให้ Hint เกี่ยวกับหอคอย
+NPCs are currently represented inside story events rather than a separate NPC database table. There is no `NPC` model/table in the current codebase.
 
-==================================================
-NPC Categories
-==================================================
+This file documents NPC concepts used by `floors.json` story content.
 
-1. Merchant
-2. Survivor
-3. Boss
+## Current Implementation
 
-==================================================
-Merchant
-==================================================
+NPC-related content is stored in:
+- `Resources/Raw/floors.json`
 
-Name:
-Masked Merchant
+Examples can appear as:
+- floor title
+- narrative text
+- choice text
+- result text
+- boss fields such as `BossName`, `BossHp`, `BossAttack`
 
-Floor:
-6
+## NPC Categories In Story
 
-Role:
-ขาย Item ให้ผู้เล่น
+- Merchant: shop-like choices and item exchange
+- Survivor: lore, hints and moral choices
+- Boss/Gatekeeper: combat or boss event content
+- Eleanor-related memory/vision: story and ending context
 
-Items:
-- Health Potion
-- Rune Key
+## Important Note
 
-Purpose:
-- แนะนำระบบ Shop
-- แนะนำการใช้ Gold
+Do not document or build an `NPCs` SQLite table unless the project explicitly adds an `NPC.cs` model and table creation in `DatabaseService.cs`.
 
-==================================================
-Survivor
-==================================================
+For the current beginner-friendly scope, keeping NPCs as story data is simpler and consistent with the project goal.
 
-Name:
-Lost Survivor
+## Related Systems
 
-Floor:
-15
-
-Role:
-ให้ Hint เกี่ยวกับหอคอย
-
-Choices:
-- ช่วยเหลือ
-- เดินผ่าน
-
-Rewards:
-- Journal Hint
-- Gold
-
-Purpose:
-- เพิ่มเนื้อเรื่อง
-- เพิ่มการตัดสินใจ
-
-==================================================
-Boss
-==================================================
-
-Name:
-Gatekeeper
-
-Floor:
-10
-
-Role:
-Mini Boss ของช่วง Tutorial
-
-Choices:
-- สู้
-- ใช้ Potion
-- หนี
-
-Rewards:
-- Gold
-- Unlock Next Floor
-
-Purpose:
-- แนะนำระบบ Boss Event
-
-==================================================
-NPC Database Fields
-==================================================
-
-Table:
-NPCs
-
-Fields:
-- NPCId
-- NPCName
-- NPCType
-- FloorNumber
-- Dialogue
-
-==================================================
-Recommended Usage in Game
-==================================================
-
-Merchant
-→ ใช้ใน Story Event
-→ ซื้อ Item
-
-Survivor
-→ ใช้เพิ่ม Lore
-→ ให้ Hint
-
-Boss
-→ ใช้เป็น Event สำคัญ
-
-==================================================
-Related Systems
-==================================================
-
-- Story System
-- Inventory System
-- Journal System
-- Database Structure
-
-==================================================
+- `StoryService.cs`
+- `StoryEvent.cs`
+- `StoryChoice.cs`
+- `floors.json`
+- `JournalService.cs`

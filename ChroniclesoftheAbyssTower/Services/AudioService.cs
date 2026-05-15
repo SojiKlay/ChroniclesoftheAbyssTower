@@ -16,6 +16,15 @@ namespace ChroniclesoftheAbyssTower.Services
         private string? _currentMainBgm;
         private string? _currentLayerBgm;
 
+        public const string DefaultButtonClickSfx = "Audio/Sfx/UI/button_click.ogg";
+        public const string ItemDiscardSfx = "Audio/Sfx/Item/item_discard.mp3";
+        public const string ItemGetSfx = "Audio/Sfx/Item/item_get.wav";
+        public const string ItemGoldSfx = "Audio/Sfx/Item/item_gold.wav";
+        public const string ItemHealSfx = "Audio/Sfx/Item/item_heal.wav";
+        public const string ItemKeySfx = "Audio/Sfx/Item/item_key.wav";
+        public const string ItemUseSfx = "Audio/Sfx/Item/item_magic.wav";
+        public const string ItemScrollSfx = "Audio/Sfx/Item/item_scroll.wav";
+
         public AudioService(IAudioManager audioManager, SettingsService settingsService)
         {
             _audioManager = audioManager;
@@ -47,6 +56,40 @@ namespace ChroniclesoftheAbyssTower.Services
         public void StopBgm()
         {
             StopPlayers(clearRequestedFiles: true);
+        }
+
+        public async Task PlaySfxAsync(string fileName, double volumeScale = 1.0)
+        {
+            if (!_settingsService.IsSfxEnabled)
+                return;
+
+            try
+            {
+                var stream = await FileSystem.OpenAppPackageFileAsync(fileName);
+                var player = _audioManager.CreatePlayer(stream);
+                player.Volume = _settingsService.SfxVolume * volumeScale;
+                player.PlaybackEnded += (_, _) => player.Dispose();
+                player.Play();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[AudioService.PlaySfx] {ex.Message}");
+            }
+        }
+
+        public Task PlayItemUseAsync(Models.ItemType itemType)
+        {
+            var fileName = itemType switch
+            {
+                Models.ItemType.Healing => ItemHealSfx,
+                Models.ItemType.Key => ItemKeySfx,
+                Models.ItemType.Currency => ItemGoldSfx,
+                Models.ItemType.Story => ItemScrollSfx,
+                Models.ItemType.Consumable => ItemUseSfx,
+                _ => ItemUseSfx
+            };
+
+            return PlaySfxAsync(fileName);
         }
 
         public async Task ApplySettingsAsync()

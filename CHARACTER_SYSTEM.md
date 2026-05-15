@@ -1,158 +1,75 @@
-# CHARACTER SYSTEM
-Chronicles of the Abyss Tower
+﻿# Character System
 
-==================================================
-Character Overview
-==================================================
+## Overview
 
-ระบบ Character ใช้สำหรับ:
-- เก็บข้อมูลตัวละคร
-- จัดการค่าสถานะ
-- เชื่อมกับ Story
-- ใช้กับ SQLite Database
+Character system stores the player character state in SQLite and exposes it to Story, Character, Save/Load and Ending systems.
 
-==================================================
-Main Character
-==================================================
+Main character:
+- Name: Arin
+- Role: อดีตอัศวินผู้ขึ้น Abyss Tower เพื่อค้นหาความจริงและตามหา Eleanor
 
-Name:
-Arin
+## Starting Stats
 
-Title:
-The Cursed Knight
+Defined in `AppConstants.cs` and `Player.cs` defaults:
 
-Background:
-อดีตอัศวินแห่งราชวงศ์
-ผู้ถูกกล่าวหาว่าเป็นต้นเหตุของหมอกอเวจี
+- HP: 100
+- Max HP: 100
+- Attack: 10
+- Defense: 5
+- Gold: 50
+- Level: 1
+- Current Floor: 1
 
-Goal:
-- ค้นหาความจริง
-- ตามหาเอลีน่า
-- เอาชีวิตรอดจากหอคอย
+## Current Player Fields
 
-==================================================
-Character Stats
-==================================================
+Model: `Player.cs`
 
-Base Stats:
-- HP
-- MaxHP
-- Attack
-- Defense
-- Gold
-- Level
+Important fields:
+- `PlayerId`
+- `UserId`
+- `PlayerName`
+- `Hp`
+- `MaxHp`
+- `Attack`
+- `Defense`
+- `Gold`
+- `Level`
+- `Experience`
+- `CurrentFloor`
+- `HighestFloor`
+- `TotalChoicesMade`
+- `IsGameCompleted`
+- `EndingType`
+- `CreatedAt`
+- `UpdatedAt`
 
-==================================================
-Starting Stats
-==================================================
+## Service
 
-HP:
-100
+`PlayerService.cs` handles:
+- Creating a new player
+- Loading active/latest player
+- Updating HP, Gold, EXP and progress
+- Advancing floor
+- Completing game/ending state
 
-MaxHP:
-100
+## UI
 
-Attack:
-10
+Page:
+- `CharacterPage.xaml`
 
-Defense:
-5
+ViewModel:
+- `CharacterViewModel.cs`
 
-Gold:
-50
+## CRUD Role
 
-Level:
-1
+Create:
+- New game creates player
 
-==================================================
-Level System
-==================================================
+Read:
+- Character page reads player status
 
-Level Up Rewards:
-- HP +10
-- Attack +2
-- Defense +1
+Update:
+- Story choices update HP, Gold, EXP and floor
 
-==================================================
-Gameplay Usage
-==================================================
-
-HP
-- ใช้สำหรับเอาชีวิตรอด
-
-Attack
-- ใช้คำนวณการโจมตี
-
-Defense
-- ลดความเสียหาย
-
-Gold
-- ใช้ซื้อ Item
-
-Level
-- ใช้แสดงความก้าวหน้าของผู้เล่น
-
-==================================================
-Character Database Fields
-==================================================
-
-Table:
-Players
-
-Fields:
-- PlayerId
-- PlayerName
-- HP
-- MaxHP
-- Attack
-- Defense
-- Gold
-- Level
-- CurrentFloor
-
-==================================================
-CRUD Integration
-==================================================
-
-Create
-- Create Character
-
-Read
-- Read Character Status
-
-Update
-- Update HP
-- Update Gold
-- Update Level
-
-Delete
-- Delete Save Data
-
-==================================================
-Character Progression
-==================================================
-
-Early Game:
-- เรียนรู้ระบบเกม
-- เก็บ Item
-- เอาชีวิตรอด
-
-Mid Game:
-- พบ Boss
-- ใช้ Journal
-- จัดการ Resource
-
-Late Game:
-- Final Boss
-- Ending Choice
-
-==================================================
-Related Systems
-==================================================
-
-- Inventory System
-- Story System
-- Database Structure
-- UI Flow
-
-==================================================
+Delete:
+- Save/new game cleanup can remove player-related data when needed

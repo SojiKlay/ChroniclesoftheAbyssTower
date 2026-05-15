@@ -1,168 +1,77 @@
-# Journal System
+﻿# Journal System
 
-==================================================
-Journal Overview
-==================================================
+## Overview
 
-Journal ใช้สำหรับ:
-- บันทึกเนื้อเรื่อง
-- จด Hint
-- บันทึกข้อมูลสำคัญ
-- รองรับ CRUD
+Journal system supports both story journals and player-created notes. It demonstrates CRUD clearly while also connecting to story progression.
 
-==================================================
-Journal Types
-==================================================
+## Current Data
+
+Story journal seed file:
+- `ChroniclesoftheAbyssTower/Resources/Raw/story_journals.json`
+
+Current seed count:
+- 11 story journals
+
+## Journal Types
 
 1. Story Journal
+- Unlocked by story events
+- Usually read-only for the player
+- Uses `StoryKey` to prevent duplicate unlocks
+
 2. Player Journal
+- Created by player
+- Editable
+- Deletable
+- Used to demonstrate CRUD
 
-==================================================
-Story Journal
-==================================================
+## Model
 
-ระบบสร้างให้อัตโนมัติ
+Model file:
+- `Journal.cs`
 
-ใช้สำหรับ:
-- Lore
-- Story
-- Boss Hint
-- Event Hint
+Important fields:
+- `JournalId`
+- `PlayerId`
+- `JournalType`
+- `FloorNumber`
+- `Title`
+- `Content`
+- `StoryKey`
+- `CreatedAt`
+- `UpdatedAt`
 
-ผู้เล่นสามารถ:
-- Read ได้อย่างเดียว
+## CRUD
 
-==================================================
-Player Journal
-==================================================
+Service:
+- `JournalService.cs`
 
-ผู้เล่นสร้างเองได้
+Create:
+- `CreatePlayerJournalAsync`
+- `UnlockStoryJournalAsync`
 
-ใช้สำหรับ:
-- จด Hint
-- จดทางเลือก
-- จดข้อมูลสำคัญ
+Read:
+- Get journals by player
+- Search journals
+- Separate story/player journal views
 
-รองรับ:
-- Create
-- Read
-- Update
-- Delete
+Update:
+- Update player journal
+- Story journals should remain protected/read-only
 
-==================================================
-Journal Database Fields
-==================================================
+Delete:
+- Delete player journal
 
-- JournalId
-- FloorNumber
-- JournalType
-- Title
-- Content
-- CreatedAt
+## UI
 
-==================================================
-Example Journals
-==================================================
+Pages:
+- `JournalPage.xaml`
+- `JournalEditorPage.xaml`
 
---------------------------------------------------
-JR-001
---------------------------------------------------
+ViewModels:
+- `JournalViewModel.cs`
+- `JournalEditorViewModel.cs`
 
-Title:
-The Tower Has Chosen Me
+## Story Integration
 
-Floor:
-1
-
-Type:
-Story Journal
-
-Unlock:
-Enter Floor 1
-
-Content:
-“ประตูเหล็กปิดลงด้านหลังแล้ว
-ไม่มีทางย้อนกลับอีกต่อไป”
-
-==================================================
-
---------------------------------------------------
-JR-008
---------------------------------------------------
-
-Title:
-The First Record
-
-Floor:
-8
-
-Type:
-Story Journal
-
-Unlock:
-Read Traveler Journal
-
-Reward:
-Unlock Journal Menu
-
-Content:
-“หากเจ้าพบบันทึกนี้
-แปลว่าเจ้ากำลังถูกหอคอยเฝ้ามอง”
-
-==================================================
-
---------------------------------------------------
-JR-015
---------------------------------------------------
-
-Title:
-The Dying Merchant
-
-Floor:
-15
-
-Type:
-Story Journal
-
-Unlock:
-Help Merchant
-
-Content:
-“จงระวังชั้นที่อยู่ลึกลงไป…”
-
-==================================================
-Player Journal Example
-==================================================
-
-Title:
-Secret Door Hint
-
-Content:
-“ชั้น 4 ใช้ Rune Key เปิดทางลับได้”
-
-==================================================
-CRUD Integration
-==================================================
-
-Create
-- เขียน Journal ใหม่
-
-Read
-- อ่าน Journal
-
-Update
-- แก้ไข Note
-
-Delete
-- ลบ Note
-
-==================================================
-Related Systems
-==================================================
-
-- Inventory System
-- Story System
-- Database Structure
-- UI Flow
-
-==================================================
+Story events and choices can unlock journal entries through story journal keys from `story_journals.json`.

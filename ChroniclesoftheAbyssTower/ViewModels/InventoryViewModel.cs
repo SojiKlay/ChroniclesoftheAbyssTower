@@ -20,14 +20,16 @@ namespace ChroniclesoftheAbyssTower.ViewModels
     {
         private readonly InventoryService _inventoryService;
         private readonly PlayerService _playerService;
+        private readonly AudioService _audioService;
 
         // เก็บข้อมูลดิบทั้งหมดเอาไว้ทำ filter ใน memory (ลด query)
         private List<InventoryItem> _allItems = new();
 
-        public InventoryViewModel(InventoryService inventoryService, PlayerService playerService)
+        public InventoryViewModel(InventoryService inventoryService, PlayerService playerService, AudioService audioService)
         {
             _inventoryService = inventoryService;
             _playerService = playerService;
+            _audioService = audioService;
             Title = "กระเป๋าของฉัน";
         }
 
@@ -195,6 +197,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                 }
 
                 // ลด quantity
+                await _audioService.PlayItemUseAsync(item.DisplayType);
                 await _inventoryService.UpdateQuantityAsync(item, item.Quantity - 1);
 
                 // refresh list
@@ -235,6 +238,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             try
             {
                 await _inventoryService.DeleteAsync(item);
+                await _audioService.PlaySfxAsync(AudioService.ItemDiscardSfx);
                 _allItems = await _inventoryService.GetByPlayerAsync(Player.PlayerId);
                 ApplyFilterAndSearch();
             }

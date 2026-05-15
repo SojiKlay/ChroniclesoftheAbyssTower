@@ -13,6 +13,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
     {
         private readonly AuthService _authService;
         private readonly PlayerService _playerService;
+        private readonly SaveLoadService _saveLoadService;
 
         [ObservableProperty]
         private string username = string.Empty;
@@ -22,17 +23,24 @@ namespace ChroniclesoftheAbyssTower.ViewModels
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(HasNoSavedGame))]
-        private bool hasSavedGame;
+        [NotifyPropertyChangedFor(nameof(HasSaveLoadMenu))]
+        private bool hasContinueGame;
 
-        public bool HasNoSavedGame => !HasSavedGame;
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasSaveLoadMenu))]
+        private bool hasLoadSlots;
+
+        public bool HasNoSavedGame => !HasContinueGame;
+        public bool HasSaveLoadMenu => HasContinueGame || HasLoadSlots;
 
         [ObservableProperty]
         private string continueInfo = string.Empty;
 
-        public MainMenuViewModel(AuthService authService, PlayerService playerService)
+        public MainMenuViewModel(AuthService authService, PlayerService playerService, SaveLoadService saveLoadService)
         {
             _authService = authService;
             _playerService = playerService;
+            _saveLoadService = saveLoadService;
             Title = "เมนูหลัก";
         }
 
@@ -49,34 +57,33 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                 if (!userId.HasValue)
                     return;
 
+                HasContinueGame = false;
+                HasLoadSlots = false;
+                ContinueInfo = string.Empty;
+
+                var slots = await _saveLoadService.GetAllSlotsAsync(userId.Value);
+                HasLoadSlots = slots.Any(slot => slot != null);
+
                 var active = await _playerService.GetActivePlayerAsync();
                 if (active != null && active.UserId == userId.Value)
                 {
-                    if (active.IsGameCompleted)
+                    if (!active.IsGameCompleted && active.Hp > 0)
                     {
-                        await _playerService.DeleteIncompletePlayersForUserAsync(userId.Value);
-                        SessionManager.ClearActivePlayer();
-                        HasSavedGame = false;
-                        ContinueInfo = string.Empty;
+                        HasContinueGame = true;
+                        ContinueInfo = FormatContinueInfo(active.PlayerName, active.CurrentFloor, active.Hp, active.MaxHp);
                         return;
                     }
 
-                    HasSavedGame = true;
-                    ContinueInfo = FormatContinueInfo(active.PlayerName, active.CurrentFloor, active.Hp, active.MaxHp);
+                    SessionManager.ClearActivePlayer();
                     return;
                 }
 
                 var latest = await _playerService.GetLatestByUserAsync(userId.Value);
-                if (latest != null)
+                if (latest != null && latest.Hp > 0)
                 {
-                    HasSavedGame = true;
+                    HasContinueGame = true;
                     ContinueInfo = FormatContinueInfo(latest.PlayerName, latest.CurrentFloor, latest.Hp, latest.MaxHp);
                     await SessionManager.SetActivePlayerIdAsync(latest.PlayerId);
-                }
-                else
-                {
-                    HasSavedGame = false;
-                    ContinueInfo = string.Empty;
                 }
             }
             catch (Exception ex)
@@ -95,7 +102,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
         {
             if (IsBusy) return;
 
-            if (HasSavedGame)
+            if (HasContinueGame || HasLoadSlots)
             {
                 var confirm = await Shell.Current.DisplayAlert(
                     "เริ่มเกมใหม่?",
@@ -143,7 +150,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
         [RelayCommand]
         private async Task ContinueGameAsync()
         {
-            if (IsBusy || !HasSavedGame) return;
+            if (IsBusy || !HasContinueGame) return;
 
             try
             {
@@ -159,7 +166,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
         [RelayCommand]
         private async Task GoToCharacterAsync()
         {
-            if (!HasSavedGame)
+            if (!HasContinueGame)
             {
                 await Shell.Current.DisplayAlert("ยังไม่มีตัวละคร", "กรุณาเริ่มเกมใหม่ก่อน", "ปิด");
                 return;
