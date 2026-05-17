@@ -19,10 +19,10 @@
 
             <!-- ============== Header ============== -->
             <VerticalStackLayout Grid.Row="0" Spacing="6" HorizontalOptions="Center">
-                <Label Text="Chronicles of the"
+                <Label Text="ตำนานแห่ง"
                        Style="{StaticResource AbyssSubtitle}"
                        FontSize="13"/>
-                <Label Text="ABYSS TOWER"
+                <Label Text="หอคอยอเวจี"
                        Style="{StaticResource AbyssTitle}"
                        FontSize="26"
                        Margin="0,-4,0,0"/>
@@ -118,7 +118,7 @@
                             HeightRequest="44"
                             FontSize="13"/>
                 </Grid>
-                <Label Text="v1.0 · Dark Fantasy Text RPG"
+                <Label Text="v1.0 · เกมผจญภัยข้อความแฟนตาซีมืด"
                        Style="{StaticResource AbyssCaption}"
                        HorizontalOptions="Center"
                        Margin="0,8,0,0"/>

@@ -57,7 +57,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                     FullPath = f,
                     FileName = Path.GetFileName(f),
                     SizeDisplay = FormatFileSize(info.Length),
-                    DateDisplay = info.LastWriteTime.ToString("dd MMM yyyy HH:mm"),
+                    DateDisplay = info.LastWriteTime.ToString("dd/MM/yyyy HH:mm"),
                 });
             }
             BackupCount = files.Count;
@@ -65,9 +65,9 @@ namespace ChroniclesoftheAbyssTower.ViewModels
 
         private static string FormatFileSize(long bytes)
         {
-            if (bytes < 1024) return $"{bytes} B";
-            if (bytes < 1024 * 1024) return $"{bytes / 1024.0:0.0} KB";
-            return $"{bytes / (1024.0 * 1024.0):0.00} MB";
+            if (bytes < 1024) return $"{bytes} ไบต์";
+            if (bytes < 1024 * 1024) return $"{bytes / 1024.0:0.0} กิโลไบต์";
+            return $"{bytes / (1024.0 * 1024.0):0.00} เมกะไบต์";
         }
 
         // ============== Commands ==============
@@ -117,19 +117,19 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             var preview = await _backupService.PreviewFileAsync(file.FullPath);
             if (preview == null)
             {
-                await Shell.Current.DisplayAlert("ไฟล์เสียหาย", "ไม่สามารถอ่านไฟล์ backup ได้", "ปิด");
+                await Shell.Current.DisplayAlert("ไฟล์เสียหาย", "ไม่สามารถอ่านไฟล์ข้อมูลสำรองได้", "ปิด");
                 return;
             }
 
-            var info = $"Schema: {preview.SchemaVersion}\n" +
-                       $"สร้างเมื่อ: {preview.CreatedAt.ToLocalTime():dd MMM yyyy HH:mm}\n" +
+            var info = $"โครงสร้างข้อมูล: {preview.SchemaVersion}\n" +
+                       $"สร้างเมื่อ: {preview.CreatedAt.ToLocalTime():dd/MM/yyyy HH:mm}\n" +
                        $"ตัวละคร: {preview.Players.Count}\n" +
-                       $"Items: {preview.InventoryItems.Count}\n" +
-                       $"Journals: {preview.Journals.Count}\n" +
-                       $"Saves: {preview.SaveData.Count}\n\n" +
+                       $"ไอเท็ม: {preview.InventoryItems.Count}\n" +
+                       $"บันทึก: {preview.Journals.Count}\n" +
+                       $"ช่องเซฟ: {preview.SaveData.Count}\n\n" +
                        "**คำเตือน**: ข้อมูลปัจจุบันของผู้ใช้นี้จะถูกแทนที่ทั้งหมด ดำเนินการต่อหรือไม่?";
 
-            var confirm = await Shell.Current.DisplayAlert("กู้คืน Backup?", info, "กู้คืน", "ยกเลิก");
+            var confirm = await Shell.Current.DisplayAlert("กู้คืนข้อมูลสำรอง?", info, "กู้คืน", "ยกเลิก");
             if (!confirm) return;
 
             try
@@ -139,7 +139,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                 if (!userId.HasValue) return;
 
                 await _backupService.RestoreAsync(userId.Value, preview);
-                await Shell.Current.DisplayAlert("✅ กู้คืนสำเร็จ", "ข้อมูลถูกกู้คืนเรียบร้อย กรุณากลับไปเริ่มเล่นจาก Continue Game", "ตกลง");
+                await Shell.Current.DisplayAlert("✅ กู้คืนสำเร็จ", "ข้อมูลถูกกู้คืนเรียบร้อย กรุณากลับไปเริ่มเล่นต่อจากเมนูหลัก", "ตกลง");
                 await Shell.Current.GoToAsync(AppConstants.RouteMainMenu);
             }
             catch (Exception ex)
@@ -159,7 +159,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             if (file == null) return;
 
             var confirm = await Shell.Current.DisplayAlert(
-                "ลบไฟล์ Backup?",
+                "ลบไฟล์ข้อมูลสำรอง?",
                 $"ต้องการลบ '{file.FileName}' ถาวรหรือไม่?",
                 "ลบ", "ยกเลิก");
             if (!confirm) return;
@@ -183,14 +183,14 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             {
                 await Share.Default.RequestAsync(new ShareFileRequest
                 {
-                    Title = "Share Abyss Tower Backup",
+                    Title = "แชร์ข้อมูลสำรองหอคอยอเวจี",
                     File = new ShareFile(file.FullPath)
                 });
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"[BackupVM.Share] {ex}");
-                await Shell.Current.DisplayAlert("ผิดพลาด", "ไม่สามารถ share ได้: " + ex.Message, "ปิด");
+                await Shell.Current.DisplayAlert("ผิดพลาด", "ไม่สามารถแชร์ได้: " + ex.Message, "ปิด");
             }
         }
 
@@ -201,7 +201,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             {
                 var result = await FilePicker.Default.PickAsync(new PickOptions
                 {
-                    PickerTitle = "เลือกไฟล์ Backup",
+                    PickerTitle = "เลือกไฟล์ข้อมูลสำรอง",
                 });
                 if (result == null) return;
 
@@ -214,7 +214,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                     await src.CopyToAsync(fs);
                 }
                 ReloadFiles();
-                await Shell.Current.DisplayAlert("นำเข้าสำเร็จ", "ไฟล์ถูกนำเข้ารายการ Backup แล้ว แตะ 'กู้คืน' เพื่อใช้งาน", "ตกลง");
+                await Shell.Current.DisplayAlert("นำเข้าสำเร็จ", "ไฟล์ถูกนำเข้ารายการข้อมูลสำรองแล้ว แตะ 'กู้คืน' เพื่อใช้งาน", "ตกลง");
             }
             catch (Exception ex)
             {

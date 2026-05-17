@@ -42,7 +42,7 @@
 
             <!-- ============== Action Buttons ============== -->
             <VerticalStackLayout Grid.Row="2" Spacing="10">
-                <Button Text="📤  ส่งออก Backup ใหม่"
+                <Button Text="📤  ส่งออกข้อมูลสำรองใหม่"
                         Style="{StaticResource GoldButton}"
                         Command="{Binding ExportCommand}"
                         IsEnabled="{Binding IsNotBusy}"
@@ -57,7 +57,7 @@
 
             <!-- ============== Section Header ============== -->
             <Label Grid.Row="3"
-                   Text="📦 ไฟล์ Backup ในเครื่อง"
+                   Text="📦 ไฟล์ข้อมูลสำรองในเครื่อง"
                    Style="{StaticResource AbyssSectionHeader}"
                    FontSize="14"
                    Margin="0,8,0,0"/>
@@ -71,10 +71,10 @@
                     <Label Text="📭"
                            FontSize="42"
                            HorizontalOptions="Center"/>
-                    <Label Text="ยังไม่มีไฟล์ Backup"
+                    <Label Text="ยังไม่มีไฟล์ข้อมูลสำรอง"
                            Style="{StaticResource AbyssCaption}"
                            HorizontalTextAlignment="Center"/>
-                    <Label Text="กด 'ส่งออก Backup ใหม่' เพื่อสร้างไฟล์แรก"
+                    <Label Text="กด 'ส่งออกข้อมูลสำรองใหม่' เพื่อสร้างไฟล์แรก"
                            Style="{StaticResource AbyssCaption}"
                            FontSize="11"
                            HorizontalTextAlignment="Center"/>
@@ -123,7 +123,7 @@
                                             Command="{Binding BindingContext.RestoreCommand, Source={x:Reference BackupRoot}}"
                                             CommandParameter="{Binding .}"/>
                                     <Button Grid.Column="1"
-                                            Text="📤 Share"
+                                            Text="📤 แชร์"
                                             Style="{StaticResource ChipButton}"
                                             FontSize="11"
                                             HeightRequest="38"

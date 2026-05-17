@@ -48,7 +48,7 @@
                        FontSize="22"
                        HorizontalTextAlignment="Center"
                        Margin="0,8,0,0"/>
-                <Label Text="The Cursed Knight"
+                <Label Text="อัศวินต้องสาป"
                        Style="{StaticResource AbyssSubtitle}"
                        FontSize="13"/>
             </VerticalStackLayout>
@@ -60,7 +60,7 @@
                     <!-- HP -->
                     <VerticalStackLayout Spacing="4">
                         <Grid ColumnDefinitions="Auto,*,Auto">
-                            <Label Grid.Column="0" Text="❤️ HP" FontSize="13" TextColor="{StaticResource HpColor}" FontAttributes="Bold"/>
+                            <Label Grid.Column="0" Text="❤️ พลังชีวิต" FontSize="13" TextColor="{StaticResource HpColor}" FontAttributes="Bold"/>
                             <Label Grid.Column="2" Text="{Binding HpDisplay}" FontSize="13" TextColor="{StaticResource TextPrimary}"/>
                         </Grid>
                         <ProgressBar Progress="{Binding HpRatio}"
@@ -82,7 +82,7 @@
                     <!-- EXP -->
                     <VerticalStackLayout Spacing="4">
                         <Grid ColumnDefinitions="Auto,*,Auto">
-                            <Label Grid.Column="0" Text="✨ EXP" FontSize="13" TextColor="{StaticResource LevelColor}" FontAttributes="Bold"/>
+                            <Label Grid.Column="0" Text="✨ ค่าประสบการณ์" FontSize="13" TextColor="{StaticResource LevelColor}" FontAttributes="Bold"/>
                             <Label Grid.Column="2" Text="{Binding ExpDisplay}" FontSize="13" TextColor="{StaticResource TextPrimary}"/>
                         </Grid>
                         <ProgressBar Progress="{Binding ExpProgress}"
@@ -101,7 +101,7 @@
                 <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource AbyssCard}" Padding="12">
                     <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
                         <Label Text="🎚️" FontSize="20" HorizontalOptions="Center"/>
-                        <Label Text="LEVEL" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
+                        <Label Text="เลเวล" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
                         <Label Text="{Binding Player.Level}"
                                TextColor="{StaticResource LevelColor}"
                                FontAttributes="Bold"
@@ -114,7 +114,7 @@
                 <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource AbyssCard}" Padding="12">
                     <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
                         <Label Text="⚔️" FontSize="20" HorizontalOptions="Center"/>
-                        <Label Text="ATTACK" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
+                        <Label Text="โจมตี" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
                         <Label Text="{Binding Player.Attack}"
                                TextColor="{StaticResource AttackColor}"
                                FontAttributes="Bold"
@@ -127,7 +127,7 @@
                 <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource AbyssCard}" Padding="12">
                     <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
                         <Label Text="🛡️" FontSize="20" HorizontalOptions="Center"/>
-                        <Label Text="DEFENSE" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
+                        <Label Text="ป้องกัน" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
                         <Label Text="{Binding Player.Defense}"
                                TextColor="{StaticResource DefenseColor}"
                                FontAttributes="Bold"
@@ -140,7 +140,7 @@
                 <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource AbyssCard}" Padding="12">
                     <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
                         <Label Text="💰" FontSize="20" HorizontalOptions="Center"/>
-                        <Label Text="GOLD" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
+                        <Label Text="ทอง" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
                         <Label Text="{Binding Player.Gold}"
                                TextColor="{StaticResource GoldColor}"
                                FontAttributes="Bold"
@@ -153,7 +153,7 @@
                 <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource AbyssCard}" Padding="12">
                     <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
                         <Label Text="🏆" FontSize="20" HorizontalOptions="Center"/>
-                        <Label Text="HIGHEST" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
+                        <Label Text="ชั้นสูงสุด" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
                         <Label Text="{Binding Player.HighestFloor}"
                                TextColor="{StaticResource AbyssGold}"
                                FontAttributes="Bold"
@@ -166,7 +166,7 @@
                 <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource AbyssCard}" Padding="12">
                     <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
                         <Label Text="🎲" FontSize="20" HorizontalOptions="Center"/>
-                        <Label Text="CHOICES" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
+                        <Label Text="ตัดสินใจ" Style="{StaticResource AbyssCaption}" HorizontalOptions="Center"/>
                         <Label Text="{Binding Player.TotalChoicesMade}"
                                TextColor="{StaticResource AbyssPurpleLight}"
                                FontAttributes="Bold"
@@ -198,11 +198,11 @@
 
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
                     <Button Grid.Column="0"
-                            Text="🎒  Inventory"
+                            Text="🎒  กระเป๋า"
                             Style="{StaticResource OutlineButton}"
                             Command="{Binding GoToInventoryCommand}"/>
                     <Button Grid.Column="1"
-                            Text="📖  Journal"
+                            Text="📖  บันทึก"
                             Style="{StaticResource OutlineButton}"
                             Command="{Binding GoToJournalCommand}"/>
                 </Grid>

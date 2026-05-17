@@ -21,7 +21,7 @@
                 <!-- ============== Branding Header ============== -->
                 
 
-                <Label Text="ABYSS TOWER"
+                <Label Text="หอคอยอเวจี"
                        Style="{StaticResource AbyssTitle}"
                        FontSize="24"/>
 
@@ -50,7 +50,7 @@
                                    Style="{StaticResource AbyssCaption}"
                                    TextColor="{StaticResource TextSecondary}"/>
                             <Border Style="{StaticResource AbyssEntry}">
-                                <Entry Placeholder="a-z, A-Z, 0-9, _"
+                                <Entry Placeholder="ตัวอักษรอังกฤษ ตัวเลข หรือ _"
                                        Text="{Binding Username}"
                                        MaxLength="20"
                                        ReturnType="Next"/>

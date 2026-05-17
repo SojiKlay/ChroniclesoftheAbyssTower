@@ -173,7 +173,7 @@
 
                                 <!-- Date -->
                                 <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                       Text="{Binding UpdatedAt, StringFormat='แก้ไขล่าสุด: {0:dd MMM yyyy HH:mm}'}"
+                                       Text="{Binding UpdatedAt, StringFormat='แก้ไขล่าสุด: {0:dd/MM/yyyy HH:mm}'}"
                                        Style="{StaticResource AbyssCaption}"
                                        FontSize="10"
                                        Margin="0,4,0,0"/>

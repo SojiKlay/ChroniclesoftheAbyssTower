@@ -37,7 +37,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
 
         // ============== About ==============
         public string AppVersion => "1.0.0";
-        public string AppName => "Chronicles of the Abyss Tower";
+        public string AppName => "ตำนานแห่งหอคอยอเวจี";
 
         public SettingsViewModel(SettingsService settingsService, AudioService audioService)
         {

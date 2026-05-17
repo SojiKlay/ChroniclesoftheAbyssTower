@@ -35,7 +35,7 @@
                        Style="{StaticResource AbyssSectionHeader}"
                        FontSize="20"
                        HorizontalTextAlignment="Center"/>
-                <Label Text="3 slot สำหรับบันทึกการผจญภัย"
+                <Label Text="3 ช่องสำหรับบันทึกการผจญภัย"
                        Style="{StaticResource AbyssCaption}"
                        FontSize="12"/>
             </VerticalStackLayout>
@@ -79,7 +79,7 @@
                                                      IsVisible="{Binding IsEmpty}"
                                                      Spacing="2"
                                                      Padding="0,8">
-                                    <Label Text="📭 Slot ว่างเปล่า"
+                                    <Label Text="📭 ช่องบันทึกว่างเปล่า"
                                            Style="{StaticResource AbyssCaption}"
                                            FontSize="13"
                                            HorizontalTextAlignment="Center"/>

@@ -44,7 +44,7 @@
                     <VerticalStackLayout Spacing="10">
                         <Grid ColumnDefinitions="*,Auto">
                             <VerticalStackLayout Grid.Column="0" Spacing="2">
-                                <Label Text="🎵 เพลงประกอบ (BGM)"
+                                <Label Text="🎵 เพลงประกอบ"
                                        FontSize="15"
                                        TextColor="{StaticResource TextPrimary}"
                                        FontAttributes="Bold"/>
@@ -84,7 +84,7 @@
                     <VerticalStackLayout Spacing="10">
                         <Grid ColumnDefinitions="*,Auto">
                             <VerticalStackLayout Grid.Column="0" Spacing="2">
-                                <Label Text="🔊 เสียงเอฟเฟกต์ (SFX)"
+                                <Label Text="🔊 เสียงเอฟเฟกต์"
                                        FontSize="15"
                                        TextColor="{StaticResource TextPrimary}"
                                        FontAttributes="Bold"/>
@@ -147,7 +147,7 @@
 
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Grid.Column="0" Text="ประเภท" Style="{StaticResource AbyssCaption}"/>
-                        <Label Grid.Column="1" Text="Text-based RPG" FontSize="13" TextColor="{StaticResource TextPrimary}"/>
+                        <Label Grid.Column="1" Text="เกมผจญภัยแบบข้อความ" FontSize="13" TextColor="{StaticResource TextPrimary}"/>
                     </Grid>
 
                     <Grid ColumnDefinitions="*,Auto">
@@ -157,7 +157,7 @@
 
                     <BoxView HeightRequest="1" Color="{StaticResource AbyssBorder}" Margin="0,4"/>
 
-                    <Label Text="พัฒนาด้วย .NET MAUI + SQLite + MVVM\nGenre: Dark Fantasy Decision-based Adventure"
+                    <Label Text="พัฒนาด้วย .NET MAUI + SQLite + MVVM&#10;แนวเกม: ผจญภัยตัดสินใจในโลกแฟนตาซีมืด"
                            Style="{StaticResource AbyssCaption}"
                            HorizontalTextAlignment="Center"
                            LineHeight="1.5"/>

@@ -98,10 +98,10 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                 : outcome.ResultText;
 
             var stats = new List<string>();
-            if (outcome.HpDelta != 0) stats.Add($"HP {(outcome.HpDelta > 0 ? "+" : "")}{outcome.HpDelta}");
-            if (outcome.GoldDelta != 0) stats.Add($"Gold {(outcome.GoldDelta > 0 ? "+" : "")}{outcome.GoldDelta}");
-            if (outcome.ExpDelta > 0) stats.Add($"EXP +{outcome.ExpDelta}");
-            if (outcome.LeveledUp) stats.Add("Level UP!");
+            if (outcome.HpDelta != 0) stats.Add($"พลังชีวิต {(outcome.HpDelta > 0 ? "+" : "")}{outcome.HpDelta}");
+            if (outcome.GoldDelta != 0) stats.Add($"ทอง {(outcome.GoldDelta > 0 ? "+" : "")}{outcome.GoldDelta}");
+            if (outcome.ExpDelta > 0) stats.Add($"ค่าประสบการณ์ +{outcome.ExpDelta}");
+            if (outcome.LeveledUp) stats.Add("เลเวลเพิ่มขึ้น!");
             OutcomeStats = stats.Count > 0
                 ? string.Join("  •  ", stats)
                 : "";
@@ -112,7 +112,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             if (!string.IsNullOrWhiteSpace(outcome.ItemConsumed))
                 rewards.Add($"ใช้ {outcome.ItemConsumed}");
             if (outcome.StoryJournalUnlocked && outcome.UnlockedJournal != null)
-                rewards.Add($"ปลดล็อก Journal: {outcome.UnlockedJournal.Title}");
+                rewards.Add($"ปลดล็อกบันทึก: {outcome.UnlockedJournal.Title}");
             OutcomeRewards = rewards.Count > 0
                 ? string.Join("\n", rewards)
                 : "";
@@ -179,10 +179,10 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             }
 
             FloorTitle = CurrentEvent.Title;
-            Narrative = CurrentEvent.Narrative;
+            Narrative = await _storyService.TranslateItemNamesAsync(CurrentEvent.Narrative);
             FloorIcon = CurrentEvent.Icon;
             FloorImage = CurrentEvent.ImageFile ?? "";
-            EventType = CurrentEvent.EventType;
+            EventType = GetEventTypeDisplay(CurrentEvent.EventType);
 
             // setup 3 choices (ตรวจ requires item)
             Choices.Clear();
@@ -355,6 +355,19 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             }
         }
 
+        private static string GetEventTypeDisplay(string eventType)
+        {
+            return eventType switch
+            {
+                "Trap" => "กับดัก",
+                "Combat" => "การต่อสู้",
+                "Boss" => "บอส",
+                "Shop" => "ร้านค้า",
+                "Story" => "เนื้อเรื่อง",
+                _ => eventType
+            };
+        }
+
         /// <summary>
         /// แสดง dialog ผลลัพธ์ของ choice (เน้นข้อความสั้น+ stat changes)
         /// ใช้ MainThread เพื่อให้ DisplayAlert ทำงานบน UI thread แน่นอน
@@ -366,9 +379,9 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                 lines.Add(outcome.ResultText);
 
             var changes = new List<string>();
-            if (outcome.HpDelta != 0) changes.Add($"HP {(outcome.HpDelta > 0 ? "+" : "")}{outcome.HpDelta}");
+            if (outcome.HpDelta != 0) changes.Add($"พลังชีวิต {(outcome.HpDelta > 0 ? "+" : "")}{outcome.HpDelta}");
             if (outcome.GoldDelta != 0) changes.Add($"💰 {(outcome.GoldDelta > 0 ? "+" : "")}{outcome.GoldDelta}");
-            if (outcome.ExpDelta > 0) changes.Add($"✨ EXP +{outcome.ExpDelta}");
+            if (outcome.ExpDelta > 0) changes.Add($"✨ ค่าประสบการณ์ +{outcome.ExpDelta}");
             if (changes.Count > 0)
                 lines.Add(string.Join("  •  ", changes));
 
@@ -377,9 +390,9 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             if (!string.IsNullOrWhiteSpace(outcome.ItemConsumed))
                 lines.Add($"🔥 ใช้: {outcome.ItemConsumed}");
             if (outcome.LeveledUp)
-                lines.Add("⬆️ Level UP!");
+                lines.Add("⬆️ เลเวลเพิ่มขึ้น!");
             if (outcome.StoryJournalUnlocked && outcome.UnlockedJournal != null)
-                lines.Add($"📖 ปลดล็อก Journal: {outcome.UnlockedJournal.Title}");
+                lines.Add($"📖 ปลดล็อกบันทึก: {outcome.UnlockedJournal.Title}");
 
             var message = lines.Count > 0 ? string.Join("\n\n", lines) : "ดำเนินการสำเร็จ";
 

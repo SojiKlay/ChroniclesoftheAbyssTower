@@ -34,13 +34,13 @@ namespace ChroniclesoftheAbyssTower.Models
         [Ignore]
         public string DisplayName => !string.IsNullOrWhiteSpace(ItemData?.ThaiName)
             ? ItemData.ThaiName
-            : ItemData?.ItemName ?? "Unknown Item";
+            : ItemData?.ItemName ?? "ไม่ทราบไอเท็ม";
 
         /// <summary>
         /// คำอธิบาย (สำหรับแสดงใน UI)
         /// </summary>
         [Ignore]
-        public string DisplayDescription => ItemData?.Description ?? string.Empty;
+        public string DisplayDescription => ToThaiDisplayText(ItemData?.Description ?? string.Empty);
 
         /// <summary>
         /// Icon (emoji หรือชื่อ Material Icon)
@@ -77,5 +77,14 @@ namespace ChroniclesoftheAbyssTower.Models
         /// </summary>
         [Ignore]
         public ItemType DisplayType => ItemData?.ItemType ?? ItemType.Consumable;
+
+        private static string ToThaiDisplayText(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return string.Empty;
+
+            return text
+                .Replace("HP", "พลังชีวิต", StringComparison.OrdinalIgnoreCase)
+                .Replace("Hint", "คำใบ้", StringComparison.OrdinalIgnoreCase);
+        }
     }
 }

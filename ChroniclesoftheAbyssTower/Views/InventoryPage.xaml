@@ -38,7 +38,7 @@
                         WidthRequest="72"
                         HeightRequest="34"
                         Padding="8,0"
-                        SemanticProperties.Description="Back to character page"
+                        SemanticProperties.Description="กลับไปหน้าตัวละคร"
                         VerticalOptions="Center"/>
 
                 <VerticalStackLayout Grid.Column="1" Spacing="0">
@@ -46,7 +46,7 @@
                            TextColor="{StaticResource AbyssGold}"
                            FontAttributes="Bold"
                            FontSize="14"/>
-                    <Label Text="{Binding ItemCountDisplay, StringFormat='Item {0}'}"
+                    <Label Text="{Binding ItemCountDisplay, StringFormat='ไอเท็ม {0}'}"
                            Style="{StaticResource AbyssCaption}"/>
                 </VerticalStackLayout>
                 <HorizontalStackLayout Grid.Column="2" Spacing="2" VerticalOptions="Center">
@@ -68,7 +68,7 @@
                 <Label Grid.Column="0" Text="🔍" FontSize="16" VerticalOptions="Center"/>
                 <Entry Grid.Column="1"
                        Text="{Binding SearchText, Mode=TwoWay}"
-                       Placeholder="ค้นหา item..."
+                       Placeholder="ค้นหาไอเท็ม..."
                        ClearButtonVisibility="WhileEditing"/>
             </Grid>
         </Border>
@@ -118,7 +118,7 @@
                        Style="{StaticResource AbyssSectionHeader}"
                        FontSize="16"
                        HorizontalTextAlignment="Center"/>
-                <Label Text="ค้นหา item ในระหว่างผจญภัยในหอคอย"
+                <Label Text="ค้นหาไอเท็มในระหว่างผจญภัยในหอคอย"
                        Style="{StaticResource AbyssCaption}"
                        HorizontalTextAlignment="Center"/>
             </VerticalStackLayout>
@@ -172,7 +172,7 @@
                                        MaxLines="2"
                                        LineBreakMode="TailTruncation"/>
                                 <Label Grid.Row="3"
-                                       Text="{Binding Quantity, StringFormat='x{0}'}"
+                                       Text="{Binding Quantity, StringFormat='จำนวน {0}'}"
                                        TextColor="{StaticResource AbyssPurpleLight}"
                                        FontAttributes="Bold"
                                        FontSize="12"

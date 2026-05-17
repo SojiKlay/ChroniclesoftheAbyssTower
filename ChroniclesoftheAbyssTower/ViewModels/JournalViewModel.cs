@@ -82,7 +82,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"[JournalVM.OnAppearing] {ex}");
-                SetError("ไม่สามารถโหลด journal ได้");
+                SetError("ไม่สามารถโหลดบันทึกได้");
             }
             finally
             {

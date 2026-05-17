@@ -142,11 +142,11 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             {
                 item.DisplayDescription,
                 "",
-                $"ประเภท: {item.DisplayType}",
+                $"ประเภท: {GetItemTypeDisplay(item.DisplayType)}",
                 $"จำนวน: {item.Quantity}",
             };
             if (item.ItemData.EffectValue > 0)
-                lines.Add($"ค่า Effect: {item.ItemData.EffectValue}");
+                lines.Add($"ค่าผลลัพธ์: {item.ItemData.EffectValue}");
             if (item.ItemData.ShopPrice > 0)
                 lines.Add($"ราคา: {item.ItemData.ShopPrice} 💰");
 
@@ -206,14 +206,14 @@ namespace ChroniclesoftheAbyssTower.ViewModels
 
                 // แสดงผล
                 var msg = hpDelta > 0
-                    ? $"ใช้ {item.DisplayName} - ฟื้น HP +{hpDelta}\nHP ปัจจุบัน: {Player.Hp}/{Player.MaxHp}"
+                    ? $"ใช้ {item.DisplayName} - ฟื้นพลังชีวิต +{hpDelta}\nพลังชีวิตปัจจุบัน: {Player.Hp}/{Player.MaxHp}"
                     : $"ใช้ {item.DisplayName} เรียบร้อย";
-                await Shell.Current.DisplayAlert("✨ ใช้ Item สำเร็จ", msg, "ดี");
+                await Shell.Current.DisplayAlert("✨ ใช้ไอเท็มสำเร็จ", msg, "ดี");
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"[InventoryVM.UseItem] {ex}");
-                await Shell.Current.DisplayAlert("ผิดพลาด", "ไม่สามารถใช้ item ได้: " + ex.Message, "ปิด");
+                await Shell.Current.DisplayAlert("ผิดพลาด", "ไม่สามารถใช้ไอเท็มได้: " + ex.Message, "ปิด");
             }
             finally
             {
@@ -230,7 +230,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             if (item == null || Player == null) return;
 
             var confirm = await Shell.Current.DisplayAlert(
-                "ทิ้ง Item?",
+                "ทิ้งไอเท็ม?",
                 $"ต้องการทิ้ง '{item.DisplayName}' ({item.Quantity} ชิ้น) หรือไม่?\nไม่สามารถกู้คืนได้",
                 "ทิ้ง", "ยกเลิก");
             if (!confirm) return;
@@ -252,6 +252,19 @@ namespace ChroniclesoftheAbyssTower.ViewModels
         private async Task BackAsync()
         {
             await Shell.Current.GoToAsync("..");
+        }
+
+        private static string GetItemTypeDisplay(ItemType itemType)
+        {
+            return itemType switch
+            {
+                ItemType.Healing => "ฟื้นพลัง",
+                ItemType.Story => "เนื้อเรื่อง",
+                ItemType.Key => "กุญแจ",
+                ItemType.Currency => "เงิน",
+                ItemType.Consumable => "ใช้แล้วหมด",
+                _ => itemType.ToString()
+            };
         }
     }
 }

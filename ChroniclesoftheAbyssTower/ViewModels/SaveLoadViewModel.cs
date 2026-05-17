@@ -51,7 +51,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                 var activePlayer = await _playerService.GetActivePlayerAsync();
                 HasActivePlayer = activePlayer != null;
                 ActivePlayerInfo = activePlayer != null
-                    ? $"{activePlayer.PlayerName} - ชั้น {activePlayer.CurrentFloor}/{AppConstants.TotalFloors} - HP {activePlayer.Hp}/{activePlayer.MaxHp}"
+                    ? $"{activePlayer.PlayerName} - ชั้น {activePlayer.CurrentFloor}/{AppConstants.TotalFloors} - พลังชีวิต {activePlayer.Hp}/{activePlayer.MaxHp}"
                     : "ยังไม่มีตัวละครที่กำลังเล่นอยู่";
 
                 await ReloadSlotsAsync(userId.Value);
@@ -79,14 +79,14 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                 Slots.Add(new SaveSlotVm
                 {
                     SlotNumber = slotNum,
-                    SlotLabel = $"Slot {slotNum}",
+                    SlotLabel = $"ช่อง {slotNum}",
                     IsEmpty = save == null,
                     SaveName = save?.SaveName ?? "(ว่าง)",
                     PlayerName = save?.PlayerName ?? string.Empty,
                     FloorDisplay = save != null ? $"ชั้น {save.CurrentFloor}" : string.Empty,
-                    HpDisplay = save != null ? $"HP {save.Hp}" : string.Empty,
-                    LevelDisplay = save != null ? $"Lv.{save.Level}" : string.Empty,
-                    DateDisplay = save?.SaveDate.ToLocalTime().ToString("dd MMM yyyy HH:mm") ?? string.Empty,
+                    HpDisplay = save != null ? $"พลังชีวิต {save.Hp}" : string.Empty,
+                    LevelDisplay = save != null ? $"เลเวล {save.Level}" : string.Empty,
+                    DateDisplay = save?.SaveDate.ToLocalTime().ToString("dd/MM/yyyy HH:mm") ?? string.Empty,
                 });
             }
         }
@@ -104,7 +104,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             if (!slot.IsEmpty)
             {
                 var confirm = await Shell.Current.DisplayAlert(
-                    $"เขียนทับ Slot {slot.SlotNumber}?",
+                    $"เขียนทับช่อง {slot.SlotNumber}?",
                     $"จะเขียนทับ '{slot.SaveName}'\nต้องการดำเนินการต่อหรือไม่?",
                     "เขียนทับ",
                     "ยกเลิก");
@@ -119,7 +119,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
 
                 await _saveLoadService.SaveToSlotAsync(userId.Value, slot.SlotNumber);
                 await ReloadSlotsAsync(userId.Value);
-                await Shell.Current.DisplayAlert("บันทึกแล้ว", $"บันทึกเกมลง Slot {slot.SlotNumber} เรียบร้อย", "ตกลง");
+                await Shell.Current.DisplayAlert("บันทึกแล้ว", $"บันทึกเกมลงช่อง {slot.SlotNumber} เรียบร้อย", "ตกลง");
             }
             catch (Exception ex)
             {
@@ -138,7 +138,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             if (slot == null || slot.IsEmpty || IsBusy) return;
 
             var confirm = await Shell.Current.DisplayAlert(
-                $"โหลด Slot {slot.SlotNumber}?",
+                $"โหลดช่อง {slot.SlotNumber}?",
                 $"จะโหลด '{slot.SaveName}'\nตัวละครปัจจุบันจะถูกแทนที่ด้วยข้อมูลจากช่องเซฟนี้",
                 "โหลด",
                 "ยกเลิก");
@@ -171,7 +171,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
             if (slot == null || slot.IsEmpty || IsBusy) return;
 
             var confirm = await Shell.Current.DisplayAlert(
-                $"ลบ Slot {slot.SlotNumber}?",
+                $"ลบช่อง {slot.SlotNumber}?",
                 $"จะลบ '{slot.SaveName}' ถาวร\nไม่สามารถกู้คืนได้",
                 "ลบ",
                 "ยกเลิก");
@@ -207,7 +207,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
     {
         public int SlotNumber { get; set; }
 
-        [ObservableProperty] private string slotLabel = "Slot";
+        [ObservableProperty] private string slotLabel = "ช่อง";
         [ObservableProperty] private bool isEmpty = true;
         [ObservableProperty] private string saveName = string.Empty;
         [ObservableProperty] private string playerName = string.Empty;

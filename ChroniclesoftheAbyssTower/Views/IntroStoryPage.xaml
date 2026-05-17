@@ -42,7 +42,7 @@
 
         <!-- ============== Skip Link ============== -->
         <Label Grid.Row="2"
-               Text="ข้าม Intro Story"
+               Text="ข้ามบทนำ"
                Style="{StaticResource AbyssCaption}"
                TextColor="{StaticResource AbyssGold}"
                HorizontalOptions="Center"

@@ -62,7 +62,7 @@
                         <Label Grid.Row="0" Grid.Column="1" Text="{Binding PlayerNameDisplay}"
                                TextColor="{StaticResource AbyssGold}" FontAttributes="Bold" FontSize="13"/>
 
-                        <Label Grid.Row="1" Grid.Column="0" Text="🎚️ Level สุดท้าย" Style="{StaticResource AbyssCaption}"/>
+                        <Label Grid.Row="1" Grid.Column="0" Text="🎚️ เลเวลสุดท้าย" Style="{StaticResource AbyssCaption}"/>
                         <Label Grid.Row="1" Grid.Column="1" Text="{Binding FinalLevelDisplay}"
                                TextColor="{StaticResource LevelColor}" FontAttributes="Bold" FontSize="13"/>
 
@@ -96,7 +96,7 @@
 
             <!-- ============== Footer ============== -->
             <Label Grid.Row="4"
-                   Text="✦  Chronicles of the Abyss Tower  ✦"
+                   Text="✦  ตำนานแห่งหอคอยอเวจี  ✦"
                    Style="{StaticResource AbyssCaption}"
                    HorizontalOptions="Center"
                    Margin="0,12,0,0"/>

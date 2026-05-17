@@ -14,9 +14,9 @@
             count++;
 
             if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
+                CounterBtn.Text = $"แตะแล้ว {count} ครั้ง";
             else
-                CounterBtn.Text = $"Clicked {count} times";
+                CounterBtn.Text = $"แตะแล้ว {count} ครั้ง";
 
             SemanticScreenReader.Announce(CounterBtn.Text);
         }

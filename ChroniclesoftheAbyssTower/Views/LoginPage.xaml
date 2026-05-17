@@ -21,11 +21,11 @@
                 <!-- ============== Branding Header ============== -->
               
 
-                <Label Text="Chronicles of the"
+                <Label Text="ตำนานแห่ง"
                        Style="{StaticResource AbyssSubtitle}"
                        FontSize="14"/>
 
-                <Label Text="ABYSS TOWER"
+                <Label Text="หอคอยอเวจี"
                        Style="{StaticResource AbyssTitle}"
                        FontSize="28"
                        Margin="0,-8,0,0"/>
@@ -115,7 +115,7 @@
                 </HorizontalStackLayout>
 
                 <!-- ============== Footer ============== -->
-                <Label Text="v1.0 · Dark Fantasy Text RPG"
+                <Label Text="v1.0 · เกมผจญภัยข้อความแฟนตาซีมืด"
                        Style="{StaticResource AbyssCaption}"
                        HorizontalOptions="Center"
                        Margin="0,40,0,0"/>

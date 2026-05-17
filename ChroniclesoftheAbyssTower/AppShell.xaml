@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ChroniclesoftheAbyssTower"
     xmlns:views="clr-namespace:ChroniclesoftheAbyssTower.Views"
-    Title="Chronicles of the Abyss Tower"
+    Title="ตำนานแห่งหอคอยอเวจี"
     FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False">
 
@@ -16,17 +16,16 @@
         Phase 3-7: จะเพิ่ม story, character, inventory, journal, ฯลฯ
     -->
 
-    <ShellContent Title="Login"
+    <ShellContent Title="เข้าสู่ระบบ"
                   Route="login"
                   ContentTemplate="{DataTemplate views:LoginPage}"/>
 
-    <ShellContent Title="Register"
+    <ShellContent Title="สมัครสมาชิก"
                   Route="register"
                   ContentTemplate="{DataTemplate views:RegisterPage}"/>
 
-    <ShellContent Title="Main"
+    <ShellContent Title="เมนูหลัก"
                   Route="main"
                   ContentTemplate="{DataTemplate views:MainMenuPage}"/>
 
 </Shell>
-

@@ -94,7 +94,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
 
         private static string FormatContinueInfo(string playerName, int currentFloor, int hp, int maxHp)
         {
-            return $"{playerName} - ชั้นที่ {currentFloor}/{AppConstants.TotalFloors} - HP {hp}/{maxHp}";
+            return $"{playerName} - ชั้นที่ {currentFloor}/{AppConstants.TotalFloors} - พลังชีวิต {hp}/{maxHp}";
         }
 
         [RelayCommand]

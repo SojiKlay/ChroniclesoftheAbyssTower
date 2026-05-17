@@ -87,7 +87,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                 case "Bad":
                     EndingImage = "ending_bad.jpg";
                     EndingTitle = "บทสรุปแห่งความมืด";
-                    EndingSubtitle = "Bad Ending";
+                    EndingSubtitle = "ฉากจบแห่งความมืด";
                     EndingColor = Color.FromArgb("#C53030"); // AbyssBlood
                     EndingNarrative =
                         "อารินไม่สามารถผ่านพ้นการทดสอบของหอคอยได้\n\n" +
@@ -102,7 +102,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                 case "TrueGood":
                     EndingImage = "ending_true_good.jpg";
                     EndingTitle = "บทสรุปที่แท้จริง";
-                    EndingSubtitle = "True Good Ending";
+                    EndingSubtitle = "ฉากจบที่แท้จริง";
                     EndingColor = Color.FromArgb("#D4AF37"); // AbyssGold
                     EndingNarrative =
                         "อารินค้นพบความจริงทั้งหมด\n\n" +
@@ -121,7 +121,7 @@ namespace ChroniclesoftheAbyssTower.ViewModels
                 default:
                     EndingImage = "ending_good.jpg";
                     EndingTitle = "บทสรุปแห่งวีรบุรุษ";
-                    EndingSubtitle = "Good Ending";
+                    EndingSubtitle = "ฉากจบแห่งวีรบุรุษ";
                     EndingColor = Color.FromArgb("#9F7AEA"); // AbyssPurpleLight
                     EndingNarrative =
                         "อารินขึ้นถึงยอดหอคอยอเวจี\n\n" +

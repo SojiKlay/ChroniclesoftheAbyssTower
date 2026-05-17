@@ -78,6 +78,17 @@ namespace ChroniclesoftheAbyssTower.Services
                 text = text.Replace(item.Key, item.Value, StringComparison.OrdinalIgnoreCase);
             }
 
+            text = text.Replace("Journal System", "ระบบบันทึก", StringComparison.OrdinalIgnoreCase);
+            text = text.Replace("Gatekeeper", "ผู้เฝ้าประตู", StringComparison.OrdinalIgnoreCase);
+            text = text.Replace("Wraith King", "ราชาวิญญาณ", StringComparison.OrdinalIgnoreCase);
+            text = text.Replace("The Mist King", "ราชาหมอก", StringComparison.OrdinalIgnoreCase);
+            text = text.Replace("GOOD ENDING", "ฉากจบแห่งวีรบุรุษ", StringComparison.OrdinalIgnoreCase);
+            text = text.Replace("BAD ENDING", "ฉากจบแห่งความมืด", StringComparison.OrdinalIgnoreCase);
+            text = text.Replace("TRUE ENDING", "ฉากจบที่แท้จริง", StringComparison.OrdinalIgnoreCase);
+            text = text.Replace("HP", "พลังชีวิต", StringComparison.OrdinalIgnoreCase);
+            text = text.Replace("Gold", "ทอง", StringComparison.OrdinalIgnoreCase);
+            text = text.Replace("EXP", "ค่าประสบการณ์", StringComparison.OrdinalIgnoreCase);
+
             return text;
         }
 
